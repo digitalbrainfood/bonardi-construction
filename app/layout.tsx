@@ -3,6 +3,8 @@ import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -68,12 +70,14 @@ export default function RootLayout({
       className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body>
+        <ScrollProgress />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );

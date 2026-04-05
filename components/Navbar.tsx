@@ -5,6 +5,95 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
+/* ─── Category header images (Unsplash) ─── */
+const categoryImages: Record<string, string> = {
+  Residential:
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=200&fit=crop&auto=format&q=80",
+  "Exterior & Site Work":
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80",
+  "Commercial & Specialty":
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop&auto=format&q=80",
+};
+
+const featuredImage =
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop&auto=format&q=80";
+
+/* ─── Category descriptions ─── */
+const categoryDescriptions: Record<string, string> = {
+  Residential: "Full-service residential construction & renovation",
+  "Exterior & Site Work": "Expert exterior, paving & site development",
+  "Commercial & Specialty": "Large-scale commercial & specialty projects",
+};
+
+/* ─── Service descriptions (top 3 per column) ─── */
+const serviceDescriptions: Record<string, string> = {
+  "Home Additions & Extensions": "Custom additions, dormers & extensions",
+  "Roofing Services": "Installation, repair & replacement",
+  "Kitchen Remodeling": "Full-service kitchen renovations",
+  "Asphalt Services": "Paving, milling & sealcoating",
+  "Masonry & Brick Pointing": "Tuckpointing, restoration & repair",
+  "Concrete & Blacktop": "Foundations, driveways & walkways",
+  "Construction Management": "End-to-end project oversight",
+  "Office Buildouts": "Shell to finished workspace",
+  Demolition: "Selective & full-site demolition",
+};
+
+/* ─── Popular services (badge) ─── */
+const popularServices = new Set([
+  "Home Additions & Extensions",
+  "Roofing Services",
+  "Kitchen Remodeling",
+  "Asphalt Services",
+  "Masonry & Brick Pointing",
+  "Hardscaping",
+  "Construction Management",
+  "Demolition",
+]);
+
+/* ─── Top 3 per column (get descriptions) ─── */
+const top3PerColumn: Record<string, string[]> = {
+  Residential: [
+    "Home Additions & Extensions",
+    "Roofing Services",
+    "Kitchen Remodeling",
+  ],
+  "Exterior & Site Work": [
+    "Asphalt Services",
+    "Masonry & Brick Pointing",
+    "Concrete & Blacktop",
+  ],
+  "Commercial & Specialty": [
+    "Construction Management",
+    "Office Buildouts",
+    "Demolition",
+  ],
+};
+
+/* ─── Popular pill services ─── */
+const popularPills = [
+  { name: "Kitchen Remodeling", href: "/services/kitchen-remodeling" },
+  { name: "Roofing", href: "/services/roofing-services" },
+  { name: "Asphalt", href: "/services/asphalt" },
+  { name: "Masonry", href: "/services/masonry-brick-pointing" },
+  { name: "Demolition", href: "/services/demolition" },
+];
+
+/* ─── Hover preview images keyed by service name ─── */
+const hoverPreviewImages: Record<string, string> = {
+  "Home Additions & Extensions":
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&auto=format&q=80",
+  "Roofing Services":
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&auto=format&q=80",
+  "Kitchen Remodeling":
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&auto=format&q=80",
+  "Asphalt Services":
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&auto=format&q=80",
+  "Construction Management":
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&auto=format&q=80",
+  Demolition:
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&auto=format&q=80",
+};
+
 /* ─── Service data for mega menu ─── */
 const serviceColumns = [
   {
@@ -84,6 +173,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [hoveredService, setHoveredService] = useState<string | null>(null);
   const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /* ─── Scroll listener ─── */
@@ -122,6 +212,18 @@ export default function Navbar() {
   const closeMega = () => {
     megaTimeout.current = setTimeout(() => setMegaOpen(false), 150);
   };
+
+  /* ─── Featured image based on hover state ─── */
+  const currentFeaturedImage =
+    hoveredService && hoverPreviewImages[hoveredService]
+      ? hoverPreviewImages[hoveredService]
+      : featuredImage;
+
+  const currentFeaturedTitle =
+    hoveredService || "Commercial Office Renovation";
+
+  const currentFeaturedLocation =
+    hoveredService ? "New York, NY" : "Manhattan, NY";
 
   return (
     <>
@@ -258,7 +360,7 @@ export default function Navbar() {
         </div>
 
         {/* ════════════════════════════════════════════════════════
-            MEGA MENU (desktop)
+            PREMIUM MEGA MENU (desktop)
             ════════════════════════════════════════════════════════ */}
         <div
           className={`absolute left-0 right-0 top-full z-40 transition-all duration-300 ease-out ${
@@ -269,52 +371,185 @@ export default function Navbar() {
           onMouseEnter={openMega}
           onMouseLeave={closeMega}
         >
-          {/* Shadow overlay */}
-          <div className="bg-white border-b border-gray-200 shadow-xl">
+          {/* Top gradient border line */}
+          <div className="h-[2px] bg-gradient-to-r from-brand via-brand to-accent" />
+
+          {/* Frosted glass panel */}
+          <div className="bg-white/[0.97] backdrop-blur-xl shadow-2xl border-b border-gray-200/50">
             <div className="max-w-7xl mx-auto px-6 py-8">
-              {/* Three-column layout */}
-              <div className="grid grid-cols-3 gap-8">
-                {serviceColumns.map((col) => (
-                  <div key={col.heading}>
-                    {/* Column heading */}
-                    <div className="mb-4">
-                      <h3 className="text-sm font-body font-bold text-gray-900 uppercase tracking-wider">
-                        {col.heading}
-                      </h3>
-                      <div className="mt-2 w-10 h-0.5 bg-accent rounded-full" />
+              {/* 4-column layout: 3 service cols + 1 featured/CTA */}
+              <div className="grid grid-cols-4 gap-6">
+                {/* ─── Service Columns (3) ─── */}
+                {serviceColumns.map((col, colIdx) => {
+                  const top3 = top3PerColumn[col.heading] || [];
+                  return (
+                    <div
+                      key={col.heading}
+                      className="transition-all duration-500 ease-out"
+                      style={{
+                        transitionDelay: megaOpen ? `${colIdx * 60}ms` : "0ms",
+                        opacity: megaOpen ? 1 : 0,
+                        transform: megaOpen
+                          ? "translateY(0)"
+                          : "translateY(12px)",
+                      }}
+                    >
+                      {/* Category header image */}
+                      <div className="relative h-[100px] rounded-lg overflow-hidden mb-3 group">
+                        <img
+                          src={categoryImages[col.heading]}
+                          alt={col.heading}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                        <h3 className="absolute bottom-3 left-3 text-white text-sm font-display font-bold tracking-wide">
+                          {col.heading}
+                        </h3>
+                      </div>
+
+                      {/* Category description */}
+                      <p className="text-xs text-gray-500 font-body mb-3 pl-0.5">
+                        {categoryDescriptions[col.heading]}
+                      </p>
+
+                      {/* Service links */}
+                      <ul className="space-y-0.5">
+                        {col.items.map((item) => {
+                          const isTop3 = top3.includes(item.name);
+                          const isPopular = popularServices.has(item.name);
+                          const description = serviceDescriptions[item.name];
+
+                          return (
+                            <li key={item.href}>
+                              <Link
+                                href={item.href}
+                                onClick={() => setMegaOpen(false)}
+                                onMouseEnter={() =>
+                                  setHoveredService(item.name)
+                                }
+                                onMouseLeave={() => setHoveredService(null)}
+                                className={`block border-l-2 border-transparent hover:border-brand hover:bg-brand-50/50 pl-3 -ml-3 py-1.5 rounded-r transition-all duration-200 ${
+                                  isActive(item.href)
+                                    ? "text-brand font-medium border-brand bg-brand-50/30"
+                                    : "text-gray-700 hover:text-brand"
+                                }`}
+                              >
+                                <span className="flex items-center">
+                                  <span className="text-[13px] font-body leading-tight">
+                                    {item.name}
+                                  </span>
+                                  {isPopular && (
+                                    <span className="bg-accent/15 text-amber-700 text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded ml-2 flex-shrink-0">
+                                      Popular
+                                    </span>
+                                  )}
+                                </span>
+                                {isTop3 && description && (
+                                  <span className="block text-xs text-gray-400 font-body mt-0.5 leading-tight">
+                                    {description}
+                                  </span>
+                                )}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
-                    {/* Service links */}
-                    <ul className="space-y-1">
-                      {col.items.map((item) => (
-                        <li key={item.href}>
-                          <Link
-                            href={item.href}
-                            onClick={() => setMegaOpen(false)}
-                            className={`block py-1.5 text-sm font-body transition-colors duration-200 ${
-                              isActive(item.href)
-                                ? "text-brand font-medium"
-                                : "text-gray-600 hover:text-brand"
-                            }`}
-                          >
-                            {item.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                  );
+                })}
+
+                {/* ─── Fourth Column: Featured / CTA ─── */}
+                <div
+                  className="transition-all duration-500 ease-out"
+                  style={{
+                    transitionDelay: megaOpen ? "180ms" : "0ms",
+                    opacity: megaOpen ? 1 : 0,
+                    transform: megaOpen
+                      ? "translateY(0)"
+                      : "translateY(12px)",
+                  }}
+                >
+                  {/* Featured Project header */}
+                  <p className="text-[10px] font-mono font-semibold text-gray-400 uppercase tracking-[0.15em] mb-3">
+                    Featured Project
+                  </p>
+
+                  {/* Featured project card */}
+                  <div className="relative h-[180px] rounded-lg overflow-hidden mb-4 group cursor-pointer">
+                    <img
+                      src={currentFeaturedImage}
+                      alt={currentFeaturedTitle}
+                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                    {/* Location badge */}
+                    <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-mono font-semibold text-gray-700 px-2 py-1 rounded">
+                      {currentFeaturedLocation}
+                    </span>
+
+                    {/* Project title */}
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <h4 className="text-white text-sm font-display font-bold leading-snug">
+                        {currentFeaturedTitle}
+                      </h4>
+                      <p className="text-white/70 text-[11px] font-body mt-0.5">
+                        Full-scale construction project
+                      </p>
+                    </div>
                   </div>
-                ))}
+
+                  {/* Popular Services pills */}
+                  <p className="text-[10px] font-mono font-semibold text-gray-400 uppercase tracking-[0.15em] mb-2">
+                    Popular Services
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {popularPills.map((pill) => (
+                      <Link
+                        key={pill.href}
+                        href={pill.href}
+                        onClick={() => setMegaOpen(false)}
+                        className="text-[11px] font-body font-medium text-brand bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-full transition-colors duration-200"
+                      >
+                        {pill.name}
+                      </Link>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <Link
+                    href="/contact-us"
+                    onClick={() => setMegaOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-black py-3 rounded-lg font-body font-semibold text-sm transition-all duration-300 hover:shadow-lg"
+                  >
+                    Get a Free Quote
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </Link>
+                </div>
               </div>
 
               {/* Bottom row */}
-              <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
+              <div className="mt-6 pt-5 border-t border-gray-100">
                 <Link
                   href="/services"
                   onClick={() => setMegaOpen(false)}
-                  className="inline-flex items-center gap-2 text-brand text-sm font-body font-semibold hover:text-brand-dark transition-colors duration-200"
+                  className="inline-flex items-center gap-2 text-brand text-sm font-body font-semibold hover:text-brand-dark transition-colors duration-200 group"
                 >
                   View All Services
                   <svg
-                    className="w-4 h-4"
+                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -326,13 +561,6 @@ export default function Navbar() {
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
-                </Link>
-                <Link
-                  href="/contact-us"
-                  onClick={() => setMegaOpen(false)}
-                  className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-black px-5 py-2.5 rounded-md text-sm font-body font-semibold transition-all duration-300 hover:shadow-lg"
-                >
-                  Get a Free Quote
                 </Link>
               </div>
             </div>
