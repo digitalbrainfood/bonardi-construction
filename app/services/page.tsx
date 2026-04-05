@@ -1,0 +1,281 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Full list of general contracting services from Bonardi Construction — asphalt, concrete, roofing, masonry, new construction, and 15 more across Queens, Brooklyn, and Long Island.",
+};
+
+type Service = {
+  name: string;
+  slug: string;
+  desc: string;
+  tags: string[];
+};
+
+const categories: { label: string; color: string; services: Service[] }[] = [
+  {
+    label: "Residential",
+    color: "#C9A44A",
+    services: [
+      {
+        name: "Home Additions & Extensions",
+        slug: "home-additions",
+        desc: "Expand your living space with custom additions, dormers, and room extensions built to match your home's existing character.",
+        tags: ["Residential", "Structural"],
+      },
+      {
+        name: "New Construction",
+        slug: "new-construction",
+        desc: "Ground-up custom home builds from foundation to finish, delivered on schedule with transparent communication throughout.",
+        tags: ["Residential", "Commercial"],
+      },
+      {
+        name: "Roofing Services",
+        slug: "roofing",
+        desc: "Expert roof installation, repair, and replacement using premium materials with full labor warranty.",
+        tags: ["Residential", "Commercial"],
+      },
+      {
+        name: "Foundation Repair & Restoration",
+        slug: "foundation-repair",
+        desc: "Structural foundation repair, waterproofing, and crack injection for lasting stability and protection.",
+        tags: ["Structural"],
+      },
+      {
+        name: "Framing",
+        slug: "framing",
+        desc: "Precision structural framing for new builds, additions, and renovations — the backbone of every great structure.",
+        tags: ["Structural"],
+      },
+      {
+        name: "Flooring",
+        slug: "flooring",
+        desc: "Hardwood, engineered, tile, and specialty flooring installed with meticulous attention to detail.",
+        tags: ["Interior"],
+      },
+      {
+        name: "Generac Generators",
+        slug: "generators",
+        desc: "Authorized Generac dealer and certified installer — standby generator systems for homes and businesses.",
+        tags: ["Specialty"],
+      },
+    ],
+  },
+  {
+    label: "Exterior & Site Work",
+    color: "#9E7E32",
+    services: [
+      {
+        name: "Asphalt Services",
+        slug: "asphalt",
+        desc: "Complete asphalt solutions including new paving, milling, pothole repair, and protective sealcoating.",
+        tags: ["Exterior", "Commercial"],
+      },
+      {
+        name: "Asphalt Sealcoating",
+        slug: "asphalt-sealcoating",
+        desc: "Professional sealcoating to protect and extend the life of driveways and parking lots.",
+        tags: ["Exterior"],
+      },
+      {
+        name: "Asphalt Milling",
+        slug: "asphalt-milling",
+        desc: "Cold milling to remove deteriorated asphalt layers in preparation for resurfacing.",
+        tags: ["Commercial", "Exterior"],
+      },
+      {
+        name: "Concrete, Blacktop & Striping",
+        slug: "concrete",
+        desc: "Foundations, driveways, walkways, curbs, and parking lot striping — site-grade concrete and blacktop work.",
+        tags: ["Exterior", "Commercial"],
+      },
+      {
+        name: "Masonry, Brick Pointing & Weatherproofing",
+        slug: "masonry",
+        desc: "Tuckpointing, brick restoration, weatherproofing, and full masonry repair for long-term structural integrity.",
+        tags: ["Exterior", "Restoration"],
+      },
+      {
+        name: "Hardscaping",
+        slug: "hardscaping",
+        desc: "Patios, retaining walls, walkways, and outdoor structures using Cambridge, Nicolock, and Unilock products.",
+        tags: ["Exterior", "Residential"],
+      },
+      {
+        name: "Sidewalks",
+        slug: "sidewalks",
+        desc: "DOT violation repairs, new sidewalk installation, and concrete replacement to city compliance standards.",
+        tags: ["Exterior", "Compliance"],
+      },
+      {
+        name: "Drainage",
+        slug: "drainage",
+        desc: "French drains, catch basins, dry wells, and stormwater management systems.",
+        tags: ["Exterior", "Site"],
+      },
+      {
+        name: "Excavation",
+        slug: "excavation",
+        desc: "Site excavation, grading, and soil removal for residential and commercial projects of all scales.",
+        tags: ["Site Work"],
+      },
+    ],
+  },
+  {
+    label: "Commercial & Specialty",
+    color: "#B04A2A",
+    services: [
+      {
+        name: "Construction Management",
+        slug: "construction-management",
+        desc: "End-to-end project oversight — budgeting, scheduling, subcontractor coordination, and quality control.",
+        tags: ["Commercial", "Residential"],
+      },
+      {
+        name: "Office Buildouts",
+        slug: "office-buildouts",
+        desc: "Commercial interior construction tailored to your business, from shell to fully finished workspace.",
+        tags: ["Commercial"],
+      },
+      {
+        name: "Demolition",
+        slug: "demolition",
+        desc: "Selective and full-site demolition, safely managed with full debris removal and site cleanup.",
+        tags: ["Commercial", "Residential"],
+      },
+      {
+        name: "Fire Damage Restoration",
+        slug: "fire-damage-restoration",
+        desc: "Emergency board-up, debris removal, structural repair, and full restoration after fire damage.",
+        tags: ["Restoration", "Emergency"],
+      },
+      {
+        name: "Water & Mold Restoration",
+        slug: "water-mold-restoration",
+        desc: "Water extraction, mold remediation, structural drying, and complete restoration after water damage.",
+        tags: ["Restoration", "Emergency"],
+      },
+      {
+        name: "Waterproofing",
+        slug: "waterproofing",
+        desc: "Interior and exterior waterproofing systems for basements, foundations, and roofs.",
+        tags: ["Exterior", "Structural"],
+      },
+    ],
+  },
+];
+
+export default function ServicesPage() {
+  return (
+    <>
+      {/* Header */}
+      <section className="pt-16 pb-14 bg-carbon border-b border-slate">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-px bg-gold" />
+            <span className="section-label">What We Do</span>
+          </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-end">
+            <h1 className="font-display font-bold text-display-xl text-ivory">
+              Every Service
+              <br />
+              <em className="italic text-gold">Under One Roof.</em>
+            </h1>
+            <p className="font-body text-ash text-base leading-relaxed">
+              20+ services spanning residential, commercial, exterior, and specialty work.
+              One licensed team. 30 years of experience. The full scope of your project — handled.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Service categories */}
+      <section className="py-20 bg-obsidian">
+        <div className="max-w-7xl mx-auto px-6 space-y-20">
+          {categories.map((cat) => (
+            <div key={cat.label}>
+              {/* Category label */}
+              <div className="flex items-center gap-4 mb-10">
+                <div className="w-2 h-10" style={{ backgroundColor: cat.color }} />
+                <div>
+                  <p className="section-label">{cat.label}</p>
+                  <p className="text-stone text-xs font-body mt-0.5">{cat.services.length} services</p>
+                </div>
+                <div className="flex-1 h-px bg-slate" />
+              </div>
+
+              {/* Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate">
+                {cat.services.map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="group bg-obsidian hover:bg-carbon transition-colors duration-300 p-8 flex flex-col"
+                  >
+                    <div className="flex items-start justify-between mb-5">
+                      <div className="flex flex-wrap gap-1.5">
+                        {service.tags.map((tag) => (
+                          <span key={tag} className="text-[10px] font-mono text-stone border border-slate/60 px-2 py-0.5">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <svg
+                        className="w-4 h-4 text-stone group-hover:text-gold -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex-shrink-0 ml-2 mt-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+
+                    <h3 className="font-body font-semibold text-ivory text-base mb-3 group-hover:text-gold transition-colors duration-300">
+                      {service.name}
+                    </h3>
+                    <p className="font-body text-cement text-sm leading-relaxed flex-1">{service.desc}</p>
+
+                    <div
+                      className="mt-6 h-px w-0 group-hover:w-full transition-all duration-500"
+                      style={{ backgroundColor: cat.color }}
+                    />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA strip */}
+      <section className="py-16 bg-charcoal border-t border-slate">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <h2 className="font-display font-bold text-2xl text-ivory mb-2">
+              Don&apos;t see what you need?
+            </h2>
+            <p className="font-body text-ash">
+              Call us at{" "}
+              <a href="tel:7187623400" className="text-gold hover:text-gold-light transition-colors">
+                718.762.3400
+              </a>{" "}
+              — we handle more than what&apos;s listed.
+            </p>
+          </div>
+          <Link
+            href="/contact"
+            className="flex-shrink-0 flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian px-8 py-4 font-body font-semibold text-base tracking-wide transition-all duration-300"
+          >
+            Request a Free Quote
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}
