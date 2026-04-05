@@ -1,0 +1,66 @@
+// STUB: Supabase middleware helper
+// TODO: Replace with real auth logic when Supabase project is created
+import { createServerClient } from '@supabase/ssr';
+import { NextResponse, type NextRequest } from 'next/server';
+
+export async function updateSession(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({
+    request,
+  });
+
+  // TODO: Uncomment when Supabase project is created
+  // const supabase = createServerClient(
+  //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  //   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  //   {
+  //     cookies: {
+  //       getAll() {
+  //         return request.cookies.getAll();
+  //       },
+  //       setAll(cookiesToSet) {
+  //         cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+  //         supabaseResponse = NextResponse.next({ request });
+  //         cookiesToSet.forEach(({ name, value, options }) =>
+  //           supabaseResponse.cookies.set(name, value, options)
+  //         );
+  //       },
+  //     },
+  //   }
+  // );
+
+  // TODO: Enable auth protection when Supabase is configured
+  // let user = null;
+  // try {
+  //   const { data } = await supabase.auth.getUser();
+  //   user = data?.user ?? null;
+  // } catch (error) {
+  //   console.error('Middleware auth error:', error);
+  // }
+
+  // Protect admin routes
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    // Allow access to login page
+    if (request.nextUrl.pathname === '/admin/login') {
+      // TODO: If already logged in, redirect to admin dashboard
+      // if (user) {
+      //   return NextResponse.redirect(new URL('/admin', request.url));
+      // }
+      return supabaseResponse;
+    }
+
+    // Allow access to reset password page
+    if (request.nextUrl.pathname === '/admin/reset-password') {
+      return supabaseResponse;
+    }
+
+    // TODO: Redirect to login if not authenticated
+    // if (!user) {
+    //   return NextResponse.redirect(new URL('/admin/login', request.url));
+    // }
+
+    // Add noindex header for admin pages
+    supabaseResponse.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  }
+
+  return supabaseResponse;
+}

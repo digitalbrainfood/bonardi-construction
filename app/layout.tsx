@@ -8,6 +8,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import FloatingContact from "@/components/FloatingContact";
 import CookieConsent from "@/components/CookieConsent";
 import SocialProof from "@/components/SocialProof";
+import { ChatWrapper } from "@/components/chat";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -81,6 +82,7 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <BackToTop />
+        <ChatWrapper />
         <FloatingContact />
         <SocialProof />
         <CookieConsent />
