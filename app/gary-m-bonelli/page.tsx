@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { aboutImages } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Gary M. Bonelli — Owner & Principal Contractor",
@@ -32,18 +34,16 @@ export default function GaryBonelliPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
-            {/* Photo placeholder */}
+            {/* Photo */}
             <div className="lg:col-span-4">
-              <div className="aspect-[4/5] bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand/10 to-transparent" />
-                <div className="text-center relative z-10">
-                  <div className="w-20 h-20 border-2 border-brand/40 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="font-display text-3xl text-brand/60">GB</span>
-                  </div>
-                  <p className="text-gray-400 text-xs font-mono tracking-widest">PHOTO COMING SOON</p>
-                </div>
-                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-brand/30" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-brand/30" />
+              <div className="aspect-[4/5] relative rounded-lg overflow-hidden">
+                <Image
+                  src={aboutImages.gary}
+                  alt="Gary M. Bonelli — Owner & Principal Contractor"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
               </div>
             </div>
 

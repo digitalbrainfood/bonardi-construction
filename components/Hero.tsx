@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { heroImages } from "@/lib/images";
 
 const services = [
   "Asphalt & Paving",
@@ -61,6 +63,18 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-white">
+      {/* Background construction image */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Image
+          src={heroImages.main}
+          alt=""
+          fill
+          className="object-cover opacity-[0.06]"
+          priority
+          sizes="100vw"
+        />
+      </div>
+
       {/* Blueprint / architectural background pattern */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Subtle grid */}

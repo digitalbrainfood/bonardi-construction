@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getServiceBySlug, getRelatedServices } from "@/lib/services-data";
+import { serviceImages } from "@/lib/images";
 import QuoteForm from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
@@ -104,15 +106,15 @@ export default function AsphaltSealcoatingPage() {
                 <p className="font-body text-gray-600 text-base leading-relaxed">{service.whyUs}</p>
               </div>
 
-              {/* Image placeholder */}
-              <div className="aspect-video bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent" />
-                <div className="text-center relative z-10">
-                  <p className="text-gray-400 text-xs font-mono tracking-widest mb-1">PROJECT PHOTOS</p>
-                  <p className="text-gray-300 text-xs font-body">Upload {service.name.toLowerCase()} project images here</p>
-                </div>
-                <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-brand/20" />
-                <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-brand/20" />
+              {/* Project image */}
+              <div className="aspect-video relative rounded-lg overflow-hidden">
+                <Image
+                  src={serviceImages["asphalt-sealcoating"]}
+                  alt={`${service.name} project by Bonardi Construction`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                />
               </div>
             </div>
 

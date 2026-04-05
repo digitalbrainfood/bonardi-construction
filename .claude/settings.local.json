@@ -16,7 +16,8 @@
       "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/app/services/page.tsx C:/Users/PC/bonardi-construction/app/services/[slug]/page.tsx C:/Users/PC/bonardi-construction/app/services/asphalt/sealcoating/page.tsx C:/Users/PC/bonardi-construction/app/areas-we-serve/page.tsx C:/Users/PC/bonardi-construction/app/areas-we-serve/[slug]/page.tsx)",
       "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/app/services/[slug]/page.tsx C:/Users/PC/bonardi-construction/app/services/asphalt/sealcoating/page.tsx C:/Users/PC/bonardi-construction/app/areas-we-serve/page.tsx C:/Users/PC/bonardi-construction/app/areas-we-serve/[slug]/page.tsx)",
       "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/app/services/[slug]/page.tsx C:/Users/PC/bonardi-construction/app/areas-we-serve/[slug]/page.tsx)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/app/gallery/page.tsx C:/Users/PC/bonardi-construction/app/blog/page.tsx C:/Users/PC/bonardi-construction/app/services/[slug]/page.tsx C:/Users/PC/bonardi-construction/app/about/page.tsx C:/Users/PC/bonardi-construction/components/Hero.tsx C:/Users/PC/bonardi-construction/app/gary-m-bonelli/page.tsx C:/Users/PC/bonardi-construction/app/services/asphalt/sealcoating/page.tsx)"
     ]
   }
 }

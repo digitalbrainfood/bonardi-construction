@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { galleryImages } from "@/lib/images";
 
 const categories = [
   "All",
@@ -13,37 +15,24 @@ const categories = [
   "Restoration",
 ];
 
-// Deterministic category assignment to avoid hydration mismatch
-const categoryOrder = [
-  "Asphalt & Paving", "Concrete & Masonry", "Roofing", "New Construction",
-  "Hardscaping", "Restoration", "Asphalt & Paving", "Concrete & Masonry",
-  "Roofing", "New Construction", "Hardscaping", "Restoration",
-  "Asphalt & Paving", "Concrete & Masonry", "Roofing", "New Construction",
-  "Hardscaping", "Restoration", "Asphalt & Paving", "Concrete & Masonry",
-  "Roofing", "New Construction", "Hardscaping", "Restoration",
-];
-
-// Placeholder items — replace with real images
-const projects = Array.from({ length: 24 }, (_, i) => ({
-  id: i + 1,
-  category: categoryOrder[i],
-  title: [
-    "Residential Driveway — Queens",
-    "Commercial Parking Lot — Nassau",
-    "Brick Restoration — Brooklyn",
-    "Custom Patio — Garden City",
-    "New Roof — Huntington",
-    "Foundation Repair — Flushing",
-    "Office Buildout — Midtown",
-    "Sidewalk Violation Repair — Jamaica",
-  ][i % 8],
-  // aspect ratios to create masonry-like effect
-  tall: [2, 5, 9, 14, 17, 21].includes(i),
-}));
+const projects = Object.entries(galleryImages).flatMap(([category, images]) =>
+  images.map((src, i) => ({
+    id: category + i,
+    category,
+    src,
+    title: [
+      "Residential Driveway — Queens",
+      "Commercial Parking Lot — Nassau",
+      "Brick Restoration — Brooklyn",
+      "Custom Patio — Garden City",
+    ][i % 4],
+    tall: i % 3 === 1,
+  }))
+);
 
 export default function GalleryPage() {
   const [active, setActive] = useState("All");
-  const [lightbox, setLightbox] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
@@ -95,24 +84,18 @@ export default function GalleryPage() {
                 className="group relative break-inside-avoid rounded-lg overflow-hidden shadow-card cursor-pointer"
                 onClick={() => setLightbox(project.id)}
               >
-                {/* Placeholder image block */}
                 <div
-                  className={`w-full bg-gray-100 relative ${
+                  className={`w-full relative ${
                     project.tall ? "aspect-[3/4]" : "aspect-[4/3]"
                   }`}
                 >
-                  {/* Simulated photo texture */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200/50 via-transparent to-brand/5" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center mx-auto mb-3">
-                        <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                      <p className="text-gray-400 text-xs font-mono tracking-widest">PHOTO</p>
-                    </div>
-                  </div>
+                  <Image
+                    src={project.src}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
 
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-brand/85 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-start justify-end p-5">
@@ -150,15 +133,14 @@ export default function GalleryPage() {
             className="max-w-4xl w-full bg-white rounded-lg overflow-hidden shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="aspect-video bg-gray-100 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-16 h-16 border border-gray-300 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-7 h-7 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <p className="text-gray-400 text-xs font-mono tracking-widest">PROJECT IMAGE {lightbox}</p>
-              </div>
+            <div className="aspect-video relative">
+              <Image
+                src={projects.find(x => x.id === lightbox)?.src || ""}
+                alt="Project"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 896px"
+              />
             </div>
             <div className="p-6 border-t border-gray-200">
               {(() => {
