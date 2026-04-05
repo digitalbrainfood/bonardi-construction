@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import type { Metadata } from "next";
 
 const categories = [
   "All",
@@ -13,10 +12,20 @@ const categories = [
   "Restoration",
 ];
 
+// Deterministic category assignment to avoid hydration mismatch
+const categoryOrder = [
+  "Asphalt & Paving", "Concrete & Masonry", "Roofing", "New Construction",
+  "Hardscaping", "Restoration", "Asphalt & Paving", "Concrete & Masonry",
+  "Roofing", "New Construction", "Hardscaping", "Restoration",
+  "Asphalt & Paving", "Concrete & Masonry", "Roofing", "New Construction",
+  "Hardscaping", "Restoration", "Asphalt & Paving", "Concrete & Masonry",
+  "Roofing", "New Construction", "Hardscaping", "Restoration",
+];
+
 // Placeholder items — replace with real images
 const projects = Array.from({ length: 24 }, (_, i) => ({
   id: i + 1,
-  category: categories[Math.floor(Math.random() * (categories.length - 1)) + 1],
+  category: categoryOrder[i],
   title: [
     "Residential Driveway — Queens",
     "Commercial Parking Lot — Nassau",

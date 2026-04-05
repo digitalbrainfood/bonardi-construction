@@ -17,7 +17,7 @@ const serviceLinks = [
 
 const companyLinks = [
   { name: "About Us", href: "/about" },
-  { name: "Gary M. Bonelli", href: "/about/gary-m-bonelli" },
+  { name: "Gary M. Bonelli", href: "/about#gary-m-bonelli" },
   { name: "Gallery", href: "/gallery" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
@@ -198,12 +198,12 @@ export default function Footer() {
             © {new Date().getFullYear()} Bonardi Construction, Inc. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-stone hover:text-ash text-xs font-body transition-colors">
+            <span className="text-stone text-xs font-body">
               Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-stone hover:text-ash text-xs font-body transition-colors">
+            </span>
+            <span className="text-stone text-xs font-body">
               Terms of Use
-            </Link>
+            </span>
           </div>
         </div>
       </div>

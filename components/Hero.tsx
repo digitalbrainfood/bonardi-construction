@@ -50,7 +50,7 @@ export default function Hero() {
               className="will-animate font-display font-bold text-display-2xl text-ivory leading-none mb-6"
             >
               Built on{" "}
-              <em className="italic text-gold not-italic" style={{ fontStyle: "italic" }}>
+              <em className="italic text-gold">
                 Thirty
               </em>
               <br />
