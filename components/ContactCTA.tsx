@@ -37,38 +37,38 @@ export default function ContactCTA() {
           {/* Right -- contact card */}
           <div className="lg:col-span-5">
             <ScrollReveal animation="slide-right" delay={200}>
-              <div className="bg-white rounded-lg shadow-brand-lg p-8 space-y-6">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-brand-lg p-8 space-y-6">
                 <div>
                   <p className="font-mono text-xs font-medium tracking-[0.2em] uppercase text-brand mb-2">
                     Call or Text
                   </p>
                   <a
                     href="tel:7187623400"
-                    className="font-display text-3xl text-gray-900 hover:text-brand transition-colors"
+                    className="font-display text-3xl text-gray-900 dark:text-gray-100 hover:text-brand transition-colors"
                   >
                     718.762.3400
                   </a>
                 </div>
-                <hr className="border-gray-200" />
+                <hr className="border-gray-200 dark:border-gray-700" />
                 <div>
                   <p className="font-mono text-xs font-medium tracking-[0.2em] uppercase text-brand mb-2">
                     Fax
                   </p>
-                  <span className="font-body text-gray-600">718.762.8606</span>
+                  <span className="font-body text-gray-600 dark:text-gray-400">718.762.8606</span>
                 </div>
-                <hr className="border-gray-200" />
+                <hr className="border-gray-200 dark:border-gray-700" />
                 <div>
                   <p className="font-mono text-xs font-medium tracking-[0.2em] uppercase text-brand mb-2">
                     Email
                   </p>
                   <a
                     href="mailto:Info@bonardiconst.com"
-                    className="font-body text-gray-600 hover:text-brand transition-colors"
+                    className="font-body text-gray-600 dark:text-gray-400 hover:text-brand transition-colors"
                   >
                     Info@bonardiconst.com
                   </a>
                 </div>
-                <hr className="border-gray-200" />
+                <hr className="border-gray-200 dark:border-gray-700" />
                 <Link
                   href="/contact-us"
                   className="flex items-center justify-center gap-3 bg-accent hover:bg-accent-dark text-black w-full py-4 font-body font-semibold text-base tracking-wide rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/25"

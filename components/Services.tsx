@@ -140,7 +140,7 @@ const serviceCategories = [
 
 export default function Services() {
   return (
-    <section className="py-24 bg-white" id="services">
+    <section className="py-24 bg-white dark:bg-gray-900" id="services">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section header */}
         <ScrollReveal>
@@ -152,14 +152,14 @@ export default function Services() {
                   What We Build
                 </span>
               </div>
-              <h2 className="font-display font-bold text-4xl md:text-5xl text-black leading-tight">
+              <h2 className="font-display font-bold text-4xl md:text-5xl text-black dark:text-white leading-tight">
                 Comprehensive Services,
                 <br />
                 <span className="text-brand">Unmatched Quality.</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:flex lg:items-end">
-              <p className="font-body text-gray-500 text-base leading-relaxed">
+              <p className="font-body text-gray-500 dark:text-gray-400 text-base leading-relaxed">
                 From ground-up builds to precision repairs, our licensed team
                 handles every aspect of your project with decades of hands-on
                 expertise across the New York metro area.
@@ -179,10 +179,10 @@ export default function Services() {
                     className="w-1.5 h-8 rounded-full"
                     style={{ backgroundColor: cat.color }}
                   />
-                  <h3 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-800">
+                  <h3 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-800 dark:text-gray-200">
                     {cat.category}
                   </h3>
-                  <div className="flex-1 h-px bg-gray-200" />
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
                 </div>
 
                 {/* Service grid */}
@@ -191,7 +191,7 @@ export default function Services() {
                     <Link
                       key={service.name}
                       href={service.href}
-                      className="group relative block bg-white border border-gray-200 rounded-lg shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                      className="group relative block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover dark:hover:shadow-gray-900/20 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                     >
                       <div className="p-6 flex flex-col h-full">
                         <div className="flex items-start justify-between mb-4">
@@ -215,10 +215,10 @@ export default function Services() {
                             />
                           </svg>
                         </div>
-                        <h4 className="font-body font-semibold text-black text-base mb-2 group-hover:text-brand transition-colors duration-300">
+                        <h4 className="font-body font-semibold text-black dark:text-white text-base mb-2 group-hover:text-brand transition-colors duration-300">
                           {service.name}
                         </h4>
-                        <p className="font-body text-gray-500 text-sm leading-relaxed flex-1">
+                        <p className="font-body text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-1">
                           {service.desc}
                         </p>
                       </div>

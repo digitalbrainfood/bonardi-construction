@@ -25,7 +25,7 @@ export default function CookieConsent() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg transition-transform duration-300 ease-out ${
+      className={`fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg transition-transform duration-300 ease-out ${
         exiting ? "translate-y-full" : "translate-y-0 animate-[slide-up_0.4s_ease-out]"
       }`}
       style={
@@ -47,7 +47,7 @@ export default function CookieConsent() {
         }
       `}</style>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
-        <p className="text-sm text-gray-600 font-body">
+        <p className="text-sm text-gray-600 dark:text-gray-400 font-body">
           We use cookies to improve your experience.
         </p>
         <div className="flex items-center gap-4">

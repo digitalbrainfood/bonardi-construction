@@ -38,7 +38,7 @@ export default function AboutPage() {
         ])}
       />
       {/* Hero */}
-      <section className="pt-16 pb-20 bg-white border-b border-gray-200 relative overflow-hidden">
+      <section className="pt-16 pb-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.04] to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="flex items-center gap-3 mb-6">
@@ -47,14 +47,14 @@ export default function AboutPage() {
           </div>
           <div className="grid lg:grid-cols-2 gap-16 items-end">
             <div>
-              <h1 className="font-display font-bold text-display-xl text-black">
+              <h1 className="font-display font-bold text-display-xl text-black dark:text-white">
                 Three Decades of
                 <br />
                 <em className="italic text-brand">Building Trust.</em>
               </h1>
             </div>
             <div>
-              <p className="font-body text-gray-600 text-lg leading-relaxed border-l-2 border-brand pl-6">
+              <p className="font-body text-gray-600 dark:text-gray-400 text-lg leading-relaxed border-l-2 border-brand pl-6">
                 Bonardi Construction, Inc. was founded on a simple belief: that clients deserve a
                 contractor who treats their project with the same care and urgency they would their own.
                 That philosophy has guided every job we&apos;ve taken since day one.
@@ -65,7 +65,7 @@ export default function AboutPage() {
       </section>
 
       {/* Core values */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-12">
             <div className="w-8 h-px bg-brand" />
@@ -73,12 +73,12 @@ export default function AboutPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {values.map((v, i) => (
-              <div key={v.title} className="bg-white border border-gray-200 rounded-lg p-10">
+              <div key={v.title} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-10">
                 <span className="font-mono text-xs text-brand tracking-widest mb-4 block">
                   0{i + 1}
                 </span>
-                <h2 className="font-display font-bold text-display-md text-black mb-4">{v.title}</h2>
-                <p className="font-body text-gray-600 text-sm leading-relaxed">{v.body}</p>
+                <h2 className="font-display font-bold text-display-md text-black dark:text-white mb-4">{v.title}</h2>
+                <p className="font-body text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{v.body}</p>
               </div>
             ))}
           </div>
@@ -86,7 +86,7 @@ export default function AboutPage() {
       </section>
 
       {/* Gary Bonelli bio */}
-      <section className="py-20 bg-white border-t border-b border-gray-200" id="gary-m-bonelli">
+      <section className="py-20 bg-white dark:bg-gray-900 border-t border-b border-gray-200 dark:border-gray-700" id="gary-m-bonelli">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Photo */}
@@ -108,14 +108,14 @@ export default function AboutPage() {
                 <div className="w-8 h-px bg-brand" />
                 <span className="section-label">Leadership</span>
               </div>
-              <h2 className="font-display font-bold text-display-lg text-black mb-2">
+              <h2 className="font-display font-bold text-display-lg text-black dark:text-white mb-2">
                 Gary M. Bonelli
               </h2>
               <p className="font-mono text-brand text-xs tracking-widest mb-8">
                 OWNER &amp; PRINCIPAL CONTRACTOR
               </p>
 
-              <div className="space-y-5 font-body text-gray-600 text-base leading-relaxed">
+              <div className="space-y-5 font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">
                 <p>
                   Gary M. Bonelli founded Bonardi Construction with a commitment to delivering
                   exceptional craftsmanship and genuine reliability to every client. With over
@@ -147,9 +147,9 @@ export default function AboutPage() {
                   { label: "Certification", value: "Lead-Safe Firm" },
                   { label: "Authorized Dealer", value: "Generac" },
                 ].map(({ label, value }) => (
-                  <div key={label} className="bg-white border border-gray-200 rounded-lg p-4">
-                    <p className="text-gray-400 text-xs font-mono mb-1">{label}</p>
-                    <p className="text-black text-sm font-body font-medium">{value}</p>
+                  <div key={label} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <p className="text-gray-400 dark:text-gray-500 text-xs font-mono mb-1">{label}</p>
+                    <p className="text-black dark:text-white text-sm font-body font-medium">{value}</p>
                   </div>
                 ))}
               </div>
@@ -159,7 +159,7 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications & Partners */}
-      <section className="py-20 bg-gray-50 border-t border-gray-200">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-12">
             <div className="w-8 h-px bg-brand" />
@@ -173,9 +173,9 @@ export default function AboutPage() {
               { name: "Nicolock", sub: "Certified Partner" },
               { name: "Unilock", sub: "Certified Partner" },
             ].map(({ name, sub }) => (
-              <div key={name} className="bg-white border border-gray-200 rounded-lg flex flex-col items-center justify-center py-10 px-6 text-center">
-                <span className="font-display font-semibold text-black text-base mb-2 whitespace-pre-line">{name}</span>
-                <span className="text-gray-500 text-xs font-body">{sub}</span>
+              <div key={name} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg flex flex-col items-center justify-center py-10 px-6 text-center">
+                <span className="font-display font-semibold text-black dark:text-white text-base mb-2 whitespace-pre-line">{name}</span>
+                <span className="text-gray-500 dark:text-gray-400 text-xs font-body">{sub}</span>
               </div>
             ))}
           </div>

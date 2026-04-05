@@ -124,7 +124,7 @@ export default function FloatingContact() {
       >
         {actions.map((action, i) => {
           const className =
-            "flex items-center gap-3 whitespace-nowrap rounded-lg bg-white px-4 py-3 shadow-card font-body text-sm font-medium text-gray-800 transition-all duration-200 hover:shadow-card-hover hover:text-brand";
+            "flex items-center gap-3 whitespace-nowrap rounded-lg bg-white dark:bg-gray-800 px-4 py-3 shadow-card dark:shadow-none font-body text-sm font-medium text-gray-800 dark:text-gray-200 transition-all duration-200 hover:shadow-card-hover hover:text-brand dark:border dark:border-gray-700";
 
           const style = {
             transitionDelay: expanded ? `${i * 50}ms` : "0ms",

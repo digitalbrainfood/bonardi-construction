@@ -85,7 +85,7 @@ export default function Hero() {
   }, [reducedMotion]);
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-white">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-white dark:bg-gray-900">
       {/* Background construction image with parallax */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -174,7 +174,7 @@ export default function Hero() {
             </div>
 
             {/* Main headline */}
-            <h1 className="will-animate font-display font-bold text-display-2xl text-black leading-none mb-6">
+            <h1 className="will-animate font-display font-bold text-display-2xl text-black dark:text-white leading-none mb-6">
               Built on{" "}
               <em className="italic text-accent not-italic" style={{ fontStyle: "italic" }}>
                 Thirty
@@ -211,7 +211,7 @@ export default function Hero() {
             </h1>
 
             {/* Sub-headline */}
-            <p className="will-animate font-body text-gray-600 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+            <p className="will-animate font-body text-gray-600 dark:text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
               Bonardi Construction delivers quality, value, and reliability across
               residential and commercial projects throughout New York City and Long Island.
             </p>
@@ -245,10 +245,10 @@ export default function Hero() {
             <div className="will-animate flex gap-8 max-w-md">
               {trustBadges.map(({ label, icon }) => (
                 <div key={label} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-9 h-9 rounded-md bg-brand-50 border border-brand-100 flex items-center justify-center text-brand">
+                  <div className="flex-shrink-0 w-9 h-9 rounded-md bg-brand-50 dark:bg-brand-900/30 border border-brand-100 dark:border-brand-800 flex items-center justify-center text-brand">
                     {icon}
                   </div>
-                  <span className="text-gray-700 text-xs font-body leading-tight whitespace-pre-line pt-0.5">
+                  <span className="text-gray-700 dark:text-gray-300 text-xs font-body leading-tight whitespace-pre-line pt-0.5">
                     {label}
                   </span>
                 </div>
@@ -259,13 +259,13 @@ export default function Hero() {
           {/* -- Right column -- info cards -- */}
           <div className="lg:col-span-5 flex flex-col gap-5">
             {/* Core Services card */}
-            <div className="will-animate bg-white border border-gray-200 rounded-xl shadow-card p-6">
+            <div className="will-animate bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-card dark:shadow-none p-6">
               <p className="section-label mb-4">Core Services</p>
               <div className="flex flex-wrap gap-2">
                 {services.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-body text-brand-700 border border-brand/20 bg-brand-50/60 hover:border-brand hover:bg-brand-50 px-3 py-1.5 rounded-md cursor-default transition-all duration-200"
+                    className="text-xs font-body text-brand-700 dark:text-brand-100 border border-brand/20 bg-brand-50/60 dark:bg-brand-900/30 hover:border-brand hover:bg-brand-50 dark:hover:bg-brand-900/50 px-3 py-1.5 rounded-md cursor-default transition-all duration-200"
                   >
                     {tag}
                   </span>
@@ -274,7 +274,7 @@ export default function Hero() {
             </div>
 
             {/* Quick contact card */}
-            <div className="will-animate bg-white border border-gray-200 rounded-xl shadow-card p-6 relative overflow-hidden">
+            <div className="will-animate bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-card dark:shadow-none p-6 relative overflow-hidden">
               {/* Accent left border */}
               <div className="absolute top-0 left-0 w-1 h-full bg-brand rounded-l-xl" />
 
@@ -285,7 +285,7 @@ export default function Hero() {
               >
                 718.762.3400
               </a>
-              <p className="text-gray-500 text-sm font-body mb-4 pl-3">
+              <p className="text-gray-500 dark:text-gray-400 text-sm font-body mb-4 pl-3">
                 Queens, Brooklyn &amp; Long Island
               </p>
 
@@ -296,7 +296,7 @@ export default function Hero() {
                   href="https://www.facebook.com/Bonardiconstruction/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-gray-500 hover:text-brand text-xs font-mono tracking-wider transition-colors"
+                  className="group flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-brand text-xs font-mono tracking-wider transition-colors"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -307,7 +307,7 @@ export default function Hero() {
                   href="https://www.instagram.com/bonardiconstruction/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-gray-500 hover:text-brand text-xs font-mono tracking-wider transition-colors"
+                  className="group flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-brand text-xs font-mono tracking-wider transition-colors"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
@@ -322,7 +322,7 @@ export default function Hero() {
 
       {/* Bottom scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-        <span className="text-gray-500 text-xs font-mono tracking-widest">SCROLL</span>
+        <span className="text-gray-500 dark:text-gray-400 text-xs font-mono tracking-widest">SCROLL</span>
         <div className="w-px h-8 bg-gradient-to-b from-gray-400 to-transparent animate-pulse" />
       </div>
     </section>

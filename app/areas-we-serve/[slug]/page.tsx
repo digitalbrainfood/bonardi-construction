@@ -65,18 +65,18 @@ export default function AreaDetailPage({ params }: Props) {
         <JsonLd data={faqSchema(area.faqs)} />
       )}
       {/* Header */}
-      <section className="pt-10 pb-16 bg-white border-b border-gray-200 relative overflow-hidden">
+      <section className="pt-10 pb-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.03] to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative">
           <nav className="flex items-center gap-2 mb-8">
-            <Link href="/" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
+            <Link href="/" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs font-mono tracking-wide transition-colors">
               HOME
             </Link>
-            <span className="text-gray-300 text-xs">/</span>
-            <Link href="/areas-we-serve" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
+            <span className="text-gray-300 dark:text-gray-600 text-xs">/</span>
+            <Link href="/areas-we-serve" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs font-mono tracking-wide transition-colors">
               AREAS WE SERVE
             </Link>
-            <span className="text-gray-300 text-xs">/</span>
+            <span className="text-gray-300 dark:text-gray-600 text-xs">/</span>
             <span className="text-brand text-xs font-mono tracking-wide uppercase">
               {area.name}
             </span>
@@ -86,24 +86,24 @@ export default function AreaDetailPage({ params }: Props) {
             <div className="w-8 h-px bg-brand" />
             <span className="section-label">{area.county}</span>
           </div>
-          <h1 className="font-display font-bold text-4xl md:text-5xl text-black mb-3">
+          <h1 className="font-display font-bold text-4xl md:text-5xl text-black dark:text-white mb-3">
             General Contractor in {area.name}
           </h1>
         </div>
       </section>
 
       {/* Content */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16">
             {/* Main content */}
             <div className="lg:col-span-7 space-y-10">
-              <p className="font-body text-gray-600 text-lg leading-relaxed">{area.description}</p>
+              <p className="font-body text-gray-600 dark:text-gray-400 text-lg leading-relaxed">{area.description}</p>
 
               <div>
                 <div className="flex items-center gap-3 mb-7">
                   <div className="w-6 h-px bg-brand" />
-                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
+                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700 dark:text-gray-300">
                     Services Available in {area.name}
                   </h2>
                 </div>
@@ -112,10 +112,10 @@ export default function AreaDetailPage({ params }: Props) {
                     <Link
                       key={service!.slug}
                       href={`/services/${service!.slug}`}
-                      className="group bg-white border border-gray-200 rounded-lg hover:shadow-card-hover transition-all duration-300 p-5 flex items-center gap-3"
+                      className="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-card-hover transition-all duration-300 p-5 flex items-center gap-3"
                     >
                       <div className="w-1.5 h-1.5 bg-brand rotate-45 flex-shrink-0" />
-                      <span className="font-body text-gray-800 text-sm group-hover:text-brand transition-colors">
+                      <span className="font-body text-gray-800 dark:text-gray-200 text-sm group-hover:text-brand transition-colors">
                         {service!.name}
                       </span>
                     </Link>
@@ -128,7 +128,7 @@ export default function AreaDetailPage({ params }: Props) {
                 <div>
                   <div className="flex items-center gap-3 mb-7">
                     <div className="w-6 h-px bg-brand" />
-                    <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
+                    <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700 dark:text-gray-300">
                       Frequently Asked Questions
                     </h2>
                   </div>
@@ -140,16 +140,16 @@ export default function AreaDetailPage({ params }: Props) {
             {/* Sidebar */}
             <div className="lg:col-span-5 space-y-8">
               {/* Quote form */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
                 <p className="section-label mb-4">Request a Quote</p>
-                <p className="font-body text-gray-600 text-sm mb-4">
+                <p className="font-body text-gray-600 dark:text-gray-400 text-sm mb-4">
                   Get a free estimate for your project in {area.name}.
                 </p>
                 <QuoteForm variant="compact" />
               </div>
 
               {/* Why Choose Bonardi */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 space-y-4">
                 <p className="section-label">Why Choose Bonardi</p>
                 {[
                   "30+ years of licensed experience",
@@ -160,7 +160,7 @@ export default function AreaDetailPage({ params }: Props) {
                 ].map((text) => (
                   <div key={text} className="flex items-center gap-3">
                     <span className="text-brand text-xs">&#9670;</span>
-                    <span className="text-gray-600 text-sm font-body">{text}</span>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm font-body">{text}</span>
                   </div>
                 ))}
               </div>

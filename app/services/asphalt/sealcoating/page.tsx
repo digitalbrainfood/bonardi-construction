@@ -36,22 +36,22 @@ export default function AsphaltSealcoatingPage() {
         ])}
       />
       {/* Breadcrumb + header */}
-      <section className="pt-10 pb-16 bg-white border-b border-gray-200 relative overflow-hidden">
+      <section className="pt-10 pb-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.03] to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative">
           <nav className="flex items-center gap-2 mb-8">
-            <Link href="/" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
+            <Link href="/" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs font-mono tracking-wide transition-colors">
               HOME
             </Link>
-            <span className="text-gray-300 text-xs">/</span>
-            <Link href="/services" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
+            <span className="text-gray-300 dark:text-gray-600 text-xs">/</span>
+            <Link href="/services" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs font-mono tracking-wide transition-colors">
               SERVICES
             </Link>
-            <span className="text-gray-300 text-xs">/</span>
-            <Link href="/services/asphalt" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
+            <span className="text-gray-300 dark:text-gray-600 text-xs">/</span>
+            <Link href="/services/asphalt" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-xs font-mono tracking-wide transition-colors">
               ASPHALT
             </Link>
-            <span className="text-gray-300 text-xs">/</span>
+            <span className="text-gray-300 dark:text-gray-600 text-xs">/</span>
             <span className="text-brand text-xs font-mono tracking-wide uppercase">SEALCOATING</span>
           </nav>
 
@@ -61,13 +61,13 @@ export default function AsphaltSealcoatingPage() {
                 <div className="w-8 h-px bg-brand" />
                 <div className="flex gap-2">
                   {service.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] font-mono text-gray-600 bg-gray-100 px-2 py-0.5 rounded">
+                    <span key={tag} className="text-[10px] font-mono text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <h1 className="font-display font-bold text-display-lg text-black mb-3">
+              <h1 className="font-display font-bold text-display-lg text-black dark:text-white mb-3">
                 {service.name}
               </h1>
               <p className="font-body text-brand text-base font-medium">{service.tagline}</p>
@@ -88,18 +88,18 @@ export default function AsphaltSealcoatingPage() {
       </section>
 
       {/* Main content */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16">
             <div className="lg:col-span-7 space-y-12">
               <div>
-                <p className="font-body text-gray-600 text-lg leading-relaxed">{service.intro}</p>
+                <p className="font-body text-gray-600 dark:text-gray-400 text-lg leading-relaxed">{service.intro}</p>
               </div>
 
               <div>
                 <div className="flex items-center gap-3 mb-7">
                   <div className="w-6 h-px bg-brand" />
-                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
+                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700 dark:text-gray-300">
                     What&apos;s Included
                   </h2>
                 </div>
@@ -107,20 +107,20 @@ export default function AsphaltSealcoatingPage() {
                   {service.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-4">
                       <div className="w-1.5 h-1.5 bg-brand rotate-45 mt-2 flex-shrink-0" />
-                      <span className="font-body text-gray-800 text-base">{bullet}</span>
+                      <span className="font-body text-gray-800 dark:text-gray-200 text-base">{bullet}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="border-l-2 border-brand pl-6 bg-brand-50 -ml-6 py-6 pr-6 rounded-r-lg">
+              <div className="border-l-2 border-brand pl-6 bg-brand-50 dark:bg-brand-900/30 -ml-6 py-6 pr-6 rounded-r-lg">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-6 h-px bg-brand" />
-                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
+                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700 dark:text-gray-300">
                     The Bonardi Advantage
                   </h2>
                 </div>
-                <p className="font-body text-gray-600 text-base leading-relaxed">{service.whyUs}</p>
+                <p className="font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">{service.whyUs}</p>
               </div>
 
               {/* Project image */}
@@ -137,9 +137,9 @@ export default function AsphaltSealcoatingPage() {
 
             <div className="lg:col-span-5 space-y-8">
               {/* Quote card */}
-              <div className="bg-white border border-gray-200 rounded-lg p-8">
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8">
                 <p className="section-label mb-5">Request a Quote</p>
-                <p className="font-body text-gray-600 text-sm leading-relaxed mb-6">
+                <p className="font-body text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
                   Get a free, no-obligation estimate for your {service.name.toLowerCase()} project.
                   We respond within one business day.
                 </p>
@@ -147,7 +147,7 @@ export default function AsphaltSealcoatingPage() {
               </div>
 
               {/* Why Choose Bonardi */}
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 space-y-4">
                 <p className="section-label">Why Choose Bonardi</p>
                 {[
                   "30+ years of licensed experience",
@@ -158,15 +158,15 @@ export default function AsphaltSealcoatingPage() {
                 ].map((text) => (
                   <div key={text} className="flex items-center gap-3">
                     <span className="text-brand text-xs">&#9670;</span>
-                    <span className="text-gray-600 text-sm font-body">{text}</span>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm font-body">{text}</span>
                   </div>
                 ))}
               </div>
 
               {/* Service area */}
-              <div className="border border-gray-200 rounded-lg p-6">
+              <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
                 <p className="section-label mb-3">Service Area</p>
-                <p className="text-gray-600 text-sm font-body leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 text-sm font-body leading-relaxed">
                   Queens · Brooklyn · Nassau County · Suffolk County · Long Island
                 </p>
               </div>
@@ -177,7 +177,7 @@ export default function AsphaltSealcoatingPage() {
 
       {/* Related services */}
       {related.length > 0 && (
-        <section className="py-16 bg-gray-50 border-t border-gray-200">
+        <section className="py-16 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-px bg-brand" />
@@ -188,12 +188,12 @@ export default function AsphaltSealcoatingPage() {
                 <Link
                   key={rel.slug}
                   href={`/services/${rel.slug}`}
-                  className="group bg-white border border-gray-200 rounded-lg hover:shadow-card-hover transition-all duration-300 p-6"
+                  className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-card-hover transition-all duration-300 p-6"
                 >
-                  <h3 className="font-body font-semibold text-black text-sm mb-2 group-hover:text-brand transition-colors">
+                  <h3 className="font-body font-semibold text-black dark:text-white text-sm mb-2 group-hover:text-brand transition-colors">
                     {rel.name}
                   </h3>
-                  <p className="text-gray-500 text-xs font-body leading-relaxed line-clamp-2">{rel.tagline}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs font-body leading-relaxed line-clamp-2">{rel.tagline}</p>
                   <div className="mt-4 text-brand text-xs font-body font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
                     Learn more
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

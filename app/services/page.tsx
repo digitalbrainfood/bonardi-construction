@@ -267,19 +267,19 @@ export default function ServicesPage() {
         ])}
       />
       {/* Header */}
-      <section className="pt-16 pb-14 bg-white border-b border-gray-200">
+      <section className="pt-16 pb-14 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-brand" />
             <span className="section-label">What We Do</span>
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-end">
-            <h1 className="font-display font-bold text-4xl md:text-5xl text-black">
+            <h1 className="font-display font-bold text-4xl md:text-5xl text-black dark:text-white">
               Every Service
               <br />
               <em className="italic text-brand">Under One Roof.</em>
             </h1>
-            <p className="font-body text-gray-600 text-base leading-relaxed">
+            <p className="font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">
               20+ services spanning residential, commercial, exterior, and specialty work.
               One licensed team. 30 years of experience. The full scope of your project — handled.
             </p>
@@ -288,7 +288,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Service categories */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-6 space-y-20">
           {categories.map((cat) => (
             <div key={cat.label}>
@@ -297,9 +297,9 @@ export default function ServicesPage() {
                 <div className="w-2 h-10 rounded-sm" style={{ backgroundColor: cat.color }} />
                 <div>
                   <p className="section-label">{cat.label}</p>
-                  <p className="text-gray-500 text-xs font-body mt-0.5">{cat.services.length} services</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs font-body mt-0.5">{cat.services.length} services</p>
                 </div>
-                <div className="flex-1 h-px bg-gray-200" />
+                <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
               </div>
 
               {/* Cards */}
@@ -308,12 +308,12 @@ export default function ServicesPage() {
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}`}
-                    className="group bg-white border border-gray-200 rounded-lg shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 p-8 flex flex-col"
+                    className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 p-8 flex flex-col"
                   >
                     <div className="flex items-start justify-between mb-5">
                       <div className="flex flex-wrap gap-1.5">
                         {service.tags.map((tag) => (
-                          <span key={tag} className="text-[10px] font-mono text-gray-600 bg-gray-100 rounded px-2 py-0.5">
+                          <span key={tag} className="text-[10px] font-mono text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 rounded px-2 py-0.5">
                             {tag}
                           </span>
                         ))}
@@ -329,10 +329,10 @@ export default function ServicesPage() {
                       </svg>
                     </div>
 
-                    <h3 className="font-body font-semibold text-black text-base mb-3 group-hover:text-brand transition-colors duration-300">
+                    <h3 className="font-body font-semibold text-black dark:text-white text-base mb-3 group-hover:text-brand transition-colors duration-300">
                       {service.name}
                     </h3>
-                    <p className="font-body text-gray-500 text-sm leading-relaxed flex-1">{service.desc}</p>
+                    <p className="font-body text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-1">{service.desc}</p>
 
                     <div
                       className="mt-6 h-px w-0 group-hover:w-full transition-all duration-500 rounded"
@@ -347,13 +347,13 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA strip */}
-      <section className="py-16 bg-white border-t border-gray-200">
+      <section className="py-16 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display font-bold text-2xl text-black mb-2">
+            <h2 className="font-display font-bold text-2xl text-black dark:text-white mb-2">
               Don&apos;t see what you need?
             </h2>
-            <p className="font-body text-gray-600">
+            <p className="font-body text-gray-600 dark:text-gray-400">
               Call us at{" "}
               <a href="tel:7187623400" className="text-brand hover:text-brand-dark transition-colors">
                 718.762.3400

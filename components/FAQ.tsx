@@ -27,12 +27,12 @@ export default function FAQ({ items, className = "" }: FAQProps) {
         return (
           <div
             key={index}
-            className="border-b border-gray-200"
+            className="border-b border-gray-200 dark:border-gray-700"
           >
             <button
               onClick={() => toggle(index)}
               aria-expanded={isOpen}
-              className="flex w-full items-center justify-between py-4 text-left font-body font-semibold text-gray-900 transition-colors hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+              className="flex w-full items-center justify-between py-4 text-left font-body font-semibold text-gray-900 dark:text-gray-100 transition-colors hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
             >
               <span className="pr-4">{item.question}</span>
 
@@ -66,7 +66,7 @@ export default function FAQ({ items, className = "" }: FAQProps) {
               }}
             >
               <div className="overflow-hidden">
-                <div className="pb-4 pt-1 font-body text-sm leading-relaxed text-gray-600">
+                <div className="pb-4 pt-1 font-body text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                   {item.answer}
                 </div>
               </div>

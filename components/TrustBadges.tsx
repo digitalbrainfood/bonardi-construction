@@ -93,7 +93,7 @@ export default function TrustBadges() {
   ];
 
   return (
-    <section className="bg-brand-50 py-6">
+    <section className="bg-brand-50 dark:bg-brand-900/30 py-6">
       <div className="mx-auto max-w-7xl px-6">
         {/* Desktop: flex row | Mobile: scrollable or 2-row grid */}
         <div className="grid grid-cols-2 items-center justify-items-center gap-x-6 gap-y-3 sm:grid-cols-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-8">
@@ -103,7 +103,7 @@ export default function TrustBadges() {
               className="flex items-center gap-2 whitespace-nowrap"
             >
               {badge.icon}
-              <span className="font-body text-sm font-medium text-gray-700">
+              <span className="font-body text-sm font-medium text-gray-700 dark:text-gray-300">
                 {badge.label}
               </span>
             </div>

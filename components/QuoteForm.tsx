@@ -76,13 +76,13 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
   if (status === "success") {
     return (
       <div className={`flex flex-col items-center justify-center py-10 text-center ${className}`}>
-        <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mb-4">
-          <svg className="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-4">
+          <svg className="w-7 h-7 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="font-display font-bold text-xl text-gray-900 mb-2">Message Sent</h3>
-        <p className="text-gray-600 font-body text-sm">
+        <h3 className="font-display font-bold text-xl text-gray-900 dark:text-gray-100 mb-2">Message Sent</h3>
+        <p className="text-gray-600 dark:text-gray-400 font-body text-sm">
           We&apos;ll review your project and respond within one business day.
         </p>
       </div>
@@ -90,7 +90,7 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
   }
 
   const inputClass =
-    "w-full bg-white border border-gray-200 focus:border-brand focus:ring-1 focus:ring-brand/20 text-gray-900 placeholder:text-gray-400 font-body text-sm px-4 py-3 rounded-lg outline-none transition-all duration-200";
+    "w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-brand focus:ring-1 focus:ring-brand/20 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-body text-sm px-4 py-3 rounded-lg outline-none transition-all duration-200";
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-4 ${className}`}>
@@ -106,7 +106,7 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
                 className={`flex-1 py-2.5 text-sm font-body font-medium tracking-wide rounded-lg transition-all duration-200 capitalize ${
                   form.type === t
                     ? "bg-brand text-white shadow-brand"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                 }`}
               >
                 {t}
@@ -118,13 +118,13 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-body font-medium text-gray-700 mb-1.5" htmlFor="qf-name">
+          <label className="block text-xs font-body font-medium text-gray-700 dark:text-gray-300 mb-1.5" htmlFor="qf-name">
             Full Name <span className="text-red-500">*</span>
           </label>
           <input id="qf-name" name="name" required value={form.name} onChange={handleChange} placeholder="John Smith" className={inputClass} />
         </div>
         <div>
-          <label className="block text-xs font-body font-medium text-gray-700 mb-1.5" htmlFor="qf-phone">
+          <label className="block text-xs font-body font-medium text-gray-700 dark:text-gray-300 mb-1.5" htmlFor="qf-phone">
             Phone <span className="text-red-500">*</span>
           </label>
           <input id="qf-phone" name="phone" required type="tel" value={form.phone} onChange={handleChange} placeholder="(718) 000-0000" className={inputClass} />
@@ -132,14 +132,14 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
       </div>
 
       <div>
-        <label className="block text-xs font-body font-medium text-gray-700 mb-1.5" htmlFor="qf-email">
+        <label className="block text-xs font-body font-medium text-gray-700 dark:text-gray-300 mb-1.5" htmlFor="qf-email">
           Email <span className="text-red-500">*</span>
         </label>
         <input id="qf-email" name="email" required type="email" value={form.email} onChange={handleChange} placeholder="john@example.com" className={inputClass} />
       </div>
 
       <div>
-        <label className="block text-xs font-body font-medium text-gray-700 mb-1.5" htmlFor="qf-service">
+        <label className="block text-xs font-body font-medium text-gray-700 dark:text-gray-300 mb-1.5" htmlFor="qf-service">
           Service Needed
         </label>
         <select id="qf-service" name="service" value={form.service} onChange={handleChange} className={`${inputClass} appearance-none cursor-pointer`}>
@@ -152,7 +152,7 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
 
       {variant === "full" && (
         <div>
-          <label className="block text-xs font-body font-medium text-gray-700 mb-1.5" htmlFor="qf-address">
+          <label className="block text-xs font-body font-medium text-gray-700 dark:text-gray-300 mb-1.5" htmlFor="qf-address">
             Project Address
           </label>
           <input id="qf-address" name="address" value={form.address} onChange={handleChange} placeholder="123 Main St, Queens, NY 11354" className={inputClass} />
@@ -160,7 +160,7 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
       )}
 
       <div>
-        <label className="block text-xs font-body font-medium text-gray-700 mb-1.5" htmlFor="qf-message">
+        <label className="block text-xs font-body font-medium text-gray-700 dark:text-gray-300 mb-1.5" htmlFor="qf-message">
           Project Details {variant === "full" && <span className="text-red-500">*</span>}
         </label>
         <textarea
@@ -203,7 +203,7 @@ export default function QuoteForm({ preselectedService, variant = "full", classN
       )}
 
       {variant === "full" && (
-        <p className="text-gray-400 text-xs font-body text-center">
+        <p className="text-gray-400 dark:text-gray-500 text-xs font-body text-center">
           We respond within one business day. No spam, ever.
         </p>
       )}

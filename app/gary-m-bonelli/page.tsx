@@ -46,14 +46,14 @@ export default function GaryBonelliPage() {
         ])}
       />
       {/* Hero */}
-      <section className="pt-16 pb-20 bg-white border-b border-gray-200 relative overflow-hidden">
+      <section className="pt-16 pb-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.04] to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-brand" />
             <span className="section-label">Leadership</span>
           </div>
-          <h1 className="font-display font-bold text-display-xl text-black">
+          <h1 className="font-display font-bold text-display-xl text-black dark:text-white">
             Gary M. Bonelli
           </h1>
           <p className="font-mono text-brand text-xs tracking-widest mt-3">
@@ -63,7 +63,7 @@ export default function GaryBonelliPage() {
       </section>
 
       {/* Bio */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Photo */}
@@ -81,7 +81,7 @@ export default function GaryBonelliPage() {
 
             {/* Bio content */}
             <div className="lg:col-span-8">
-              <div className="space-y-5 font-body text-gray-600 text-base leading-relaxed">
+              <div className="space-y-5 font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">
                 <p>
                   Gary M. Bonelli founded Bonardi Construction with a commitment to delivering
                   exceptional craftsmanship and genuine reliability to every client. With over
@@ -113,9 +113,9 @@ export default function GaryBonelliPage() {
                   { label: "Certification", value: "Lead-Safe Firm" },
                   { label: "Authorized Dealer", value: "Generac" },
                 ].map(({ label, value }) => (
-                  <div key={label} className="bg-white border border-gray-200 rounded-lg p-4">
-                    <p className="text-gray-400 text-xs font-mono mb-1">{label}</p>
-                    <p className="text-black text-sm font-body font-medium">{value}</p>
+                  <div key={label} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <p className="text-gray-400 dark:text-gray-500 text-xs font-mono mb-1">{label}</p>
+                    <p className="text-black dark:text-white text-sm font-body font-medium">{value}</p>
                   </div>
                 ))}
               </div>

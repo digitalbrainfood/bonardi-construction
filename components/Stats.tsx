@@ -40,10 +40,10 @@ function StatItem({ value, suffix, label, description, start }: (typeof stats)[0
           </span>
         )}
       </div>
-      <p className="font-body font-semibold text-gray-900 text-base mb-1">
+      <p className="font-body font-semibold text-gray-900 dark:text-gray-100 text-base mb-1">
         {label}
       </p>
-      <p className="font-body text-gray-500 text-sm">{description}</p>
+      <p className="font-body text-gray-500 dark:text-gray-400 text-sm">{description}</p>
     </div>
   );
 }
@@ -68,11 +68,11 @@ export default function Stats() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 bg-white border-y border-gray-200 overflow-hidden"
+      className="relative py-20 bg-white dark:bg-gray-900 border-y border-gray-200 dark:border-gray-700 overflow-hidden"
     >
       {/* Background watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <span className="font-display font-bold text-[20vw] text-gray-100 select-none tracking-tighter leading-none">
+        <span className="font-display font-bold text-[20vw] text-gray-100 dark:text-gray-800 select-none tracking-tighter leading-none">
           BUILT
         </span>
       </div>
@@ -92,8 +92,8 @@ export default function Stats() {
             <div
               key={stat.label}
               className={`${
-                i < stats.length - 1 ? "lg:border-r lg:border-gray-200" : ""
-              } ${i < 2 ? "border-b border-gray-200 lg:border-b-0" : ""}`}
+                i < stats.length - 1 ? "lg:border-r lg:border-gray-200 dark:lg:border-gray-700" : ""
+              } ${i < 2 ? "border-b border-gray-200 dark:border-gray-700 lg:border-b-0" : ""}`}
             >
               <StatItem {...stat} start={started} />
             </div>

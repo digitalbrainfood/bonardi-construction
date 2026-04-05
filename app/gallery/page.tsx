@@ -97,13 +97,13 @@ export default function GalleryPage() {
   return (
     <>
       {/* Header */}
-      <section className="pt-16 pb-14 bg-white border-b border-gray-200">
+      <section className="pt-16 pb-14 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-brand" />
             <span className="section-label">Portfolio</span>
           </div>
-          <h1 className="font-display font-bold text-display-xl text-black">
+          <h1 className="font-display font-bold text-display-xl text-black dark:text-white">
             Our Work,
             <br />
             <em className="italic text-brand">Speaks for Itself.</em>
@@ -112,7 +112,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Filter tabs */}
-      <section className="py-4 bg-white border-b border-gray-200 sticky top-[56px] md:top-[80px] z-30 shadow-sm">
+      <section className="py-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-[56px] md:top-[80px] z-30 shadow-sm">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1">
             {categories.map((cat) => (
@@ -122,7 +122,7 @@ export default function GalleryPage() {
                 className={`flex-shrink-0 px-4 py-2 text-xs font-mono tracking-widest uppercase rounded-lg transition-all duration-200 ${
                   active === cat
                     ? "bg-brand text-white"
-                    : "border border-gray-100 text-gray-500 hover:border-brand hover:text-brand"
+                    : "border border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-brand hover:text-brand"
                 }`}
               >
                 {cat}
@@ -133,7 +133,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Gallery grid */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
             {filtered.map((project) => (
@@ -167,7 +167,7 @@ export default function GalleryPage() {
 
           {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-gray-500 font-body">No projects found for this category.</p>
+              <p className="text-gray-500 dark:text-gray-400 font-body">No projects found for this category.</p>
             </div>
           )}
         </div>
@@ -184,13 +184,13 @@ export default function GalleryPage() {
           onTouchEnd={handleTouchEnd}
         >
           {/* Image counter */}
-          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm text-gray-700 text-xs font-mono tracking-wide px-3 py-1.5 rounded-md border border-gray-200">
+          <div className="absolute top-6 left-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-gray-700 dark:text-gray-300 text-xs font-mono tracking-wide px-3 py-1.5 rounded-md border border-gray-200 dark:border-gray-700">
             {currentIndex + 1} of {filtered.length}
           </div>
 
           {/* Close button */}
           <button
-            className="absolute top-6 right-6 w-10 h-10 border border-gray-300 hover:border-brand text-gray-500 hover:text-brand rounded-lg flex items-center justify-center bg-white transition-all z-10"
+            className="absolute top-6 right-6 w-10 h-10 border border-gray-300 dark:border-gray-600 hover:border-brand text-gray-500 hover:text-brand rounded-lg flex items-center justify-center bg-white dark:bg-gray-800 transition-all z-10"
             onClick={closeLightbox}
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -200,7 +200,7 @@ export default function GalleryPage() {
 
           {/* Previous arrow */}
           <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 backdrop-blur-sm border border-gray-200 hover:border-brand text-gray-600 hover:text-brand rounded-full flex items-center justify-center transition-all z-10"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:border-brand text-gray-600 dark:text-gray-400 hover:text-brand rounded-full flex items-center justify-center transition-all z-10"
             onClick={(e) => {
               e.stopPropagation();
               goPrev();
@@ -214,7 +214,7 @@ export default function GalleryPage() {
 
           {/* Next arrow */}
           <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 backdrop-blur-sm border border-gray-200 hover:border-brand text-gray-600 hover:text-brand rounded-full flex items-center justify-center transition-all z-10"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:border-brand text-gray-600 dark:text-gray-400 hover:text-brand rounded-full flex items-center justify-center transition-all z-10"
             onClick={(e) => {
               e.stopPropagation();
               goNext();
@@ -228,7 +228,7 @@ export default function GalleryPage() {
 
           {/* Lightbox content */}
           <div
-            className={`max-w-4xl w-full bg-white rounded-lg overflow-hidden shadow-xl transition-all duration-300 ${
+            className={`max-w-4xl w-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-xl transition-all duration-300 ${
               lightboxVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -242,14 +242,14 @@ export default function GalleryPage() {
                 sizes="(max-width: 1024px) 100vw, 896px"
               />
             </div>
-            <div className="p-6 border-t border-gray-200">
+            <div className="p-6 border-t border-gray-200 dark:border-gray-700">
               {(() => {
                 const p = projects.find((x) => x.id === lightbox);
                 return p ? (
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-[10px] font-mono text-brand tracking-widest block mb-1">{p.category}</span>
-                      <h3 className="font-body font-semibold text-black">{p.title}</h3>
+                      <h3 className="font-body font-semibold text-black dark:text-white">{p.title}</h3>
                     </div>
                     <Link
                       href="/contact-us"

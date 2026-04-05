@@ -73,17 +73,17 @@ export default function SocialProof() {
           : "translate-y-4 opacity-0 pointer-events-none"
       }`}
     >
-      <div className="bg-white shadow-lg rounded-lg p-4 flex items-center gap-3 max-w-xs border border-gray-100">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 flex items-center gap-3 max-w-xs border border-gray-100 dark:border-gray-700">
         {/* Avatar */}
-        <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-          <span className="text-sm font-body font-semibold text-gray-500">
+        <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center flex-shrink-0">
+          <span className="text-sm font-body font-semibold text-gray-500 dark:text-gray-400">
             {initials}
           </span>
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-body text-gray-800 leading-snug">
+          <p className="text-sm font-body text-gray-800 dark:text-gray-200 leading-snug">
             <span className="font-semibold">{msg.name}</span> from{" "}
             <span className="font-semibold">{msg.location}</span>{" "}
             {msg.action}
@@ -94,7 +94,7 @@ export default function SocialProof() {
         {/* Close button */}
         <button
           onClick={dismiss}
-          className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded text-gray-400 hover:text-gray-600 transition-colors"
+          className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           aria-label="Dismiss notification"
         >
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

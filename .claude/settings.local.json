@@ -19,7 +19,10 @@
       "Bash(cd:*)",
       "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/app/gallery/page.tsx C:/Users/PC/bonardi-construction/app/blog/page.tsx C:/Users/PC/bonardi-construction/app/services/[slug]/page.tsx C:/Users/PC/bonardi-construction/app/about/page.tsx C:/Users/PC/bonardi-construction/components/Hero.tsx C:/Users/PC/bonardi-construction/app/gary-m-bonelli/page.tsx C:/Users/PC/bonardi-construction/app/services/asphalt/sealcoating/page.tsx)",
       "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/components/Testimonials.tsx C:/Users/PC/bonardi-construction/components/BeforeAfter.tsx C:/Users/PC/bonardi-construction/components/SectionDivider.tsx C:/Users/PC/bonardi-construction/components/TrustBadges.tsx C:/Users/PC/bonardi-construction/components/Newsletter.tsx C:/Users/PC/bonardi-construction/components/PartnersCarousel.tsx C:/Users/PC/bonardi-construction/components/Breadcrumb.tsx C:/Users/PC/bonardi-construction/app/opengraph-image.tsx C:/Users/PC/bonardi-construction/app/contact-us/layout.tsx C:/Users/PC/bonardi-construction/app/gallery/layout.tsx C:/Users/PC/bonardi-construction/app/services/[slug]/loading.tsx C:/Users/PC/bonardi-construction/app/gallery/loading.tsx C:/Users/PC/bonardi-construction/app/blog/loading.tsx)",
-      "Bash(grep -l \"JsonLd\" app/page.tsx app/about/page.tsx app/services/page.tsx app/services/[slug]/page.tsx app/blog/page.tsx app/gary-m-bonelli/page.tsx app/areas-we-serve/page.tsx app/areas-we-serve/[slug]/page.tsx)"
+      "Bash(grep -l \"JsonLd\" app/page.tsx app/about/page.tsx app/services/page.tsx app/services/[slug]/page.tsx app/blog/page.tsx app/gary-m-bonelli/page.tsx app/areas-we-serve/page.tsx app/areas-we-serve/[slug]/page.tsx)",
+      "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/lib/blog-data.ts C:/Users/PC/bonardi-construction/app/blog/[slug]/page.tsx)",
+      "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/app/blog/[slug]/page.tsx)",
+      "Bash(ls -la --time-style=long-iso C:/Users/PC/bonardi-construction/app/blog/[slug]/page.tsx C:/Users/PC/bonardi-construction/app/blog/page.tsx)"
     ]
   }
 }

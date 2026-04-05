@@ -68,7 +68,7 @@ function StarRating({ rating }: { rating: number }) {
         <svg
           key={i}
           className={`h-4 w-4 ${
-            i < rating ? "text-accent" : "text-gray-200"
+            i < rating ? "text-accent" : "text-gray-200 dark:text-gray-700"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -106,14 +106,14 @@ export default function Testimonials() {
   );
 
   return (
-    <section className="bg-gray-50 py-section">
+    <section className="bg-gray-50 dark:bg-gray-800 py-section">
       <div className="mx-auto max-w-7xl px-6">
         {/* ── Section Header ── */}
         <div className="mb-12 text-center">
           <span className="mb-3 inline-block font-mono text-xs font-semibold uppercase tracking-[0.2em] text-brand">
             Testimonials
           </span>
-          <h2 className="font-display text-display-lg text-gray-900">
+          <h2 className="font-display text-display-lg text-gray-900 dark:text-gray-100">
             What Our Clients Say
           </h2>
         </div>
@@ -127,25 +127,25 @@ export default function Testimonials() {
           {visibleTestimonials.map((testimonial, i) => (
             <div
               key={`${currentPage}-${i}`}
-              className="flex flex-col rounded-xl border border-gray-200 bg-white p-8 shadow-card transition-shadow duration-300 hover:shadow-card-hover animate-fade-in"
+              className="flex flex-col rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-8 shadow-card dark:shadow-none transition-shadow duration-300 hover:shadow-card-hover animate-fade-in"
             >
               {/* Stars */}
               <StarRating rating={testimonial.rating} />
 
               {/* Quote */}
-              <blockquote className="mt-5 flex-1 font-body text-gray-700 italic leading-relaxed">
+              <blockquote className="mt-5 flex-1 font-body text-gray-700 dark:text-gray-300 italic leading-relaxed">
                 &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
 
               {/* Divider */}
-              <div className="my-5 h-px bg-gray-200" />
+              <div className="my-5 h-px bg-gray-200 dark:bg-gray-700" />
 
               {/* Attribution */}
               <div>
-                <p className="font-body font-semibold text-gray-900">
+                <p className="font-body font-semibold text-gray-900 dark:text-gray-100">
                   {testimonial.name}
                 </p>
-                <p className="mt-0.5 font-body text-sm text-gray-500">
+                <p className="mt-0.5 font-body text-sm text-gray-500 dark:text-gray-400">
                   {testimonial.projectType} &middot; {testimonial.location}
                 </p>
               </div>
@@ -164,7 +164,7 @@ export default function Testimonials() {
                 className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                   i === currentPage
                     ? "bg-brand scale-110"
-                    : "bg-gray-300 hover:bg-gray-400"
+                    : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400"
                 }`}
               />
             ))}

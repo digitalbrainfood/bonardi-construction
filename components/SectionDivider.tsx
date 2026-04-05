@@ -42,7 +42,7 @@ export default function SectionDivider({
           <path
             d="M0 20C240 0 480 40 720 20C960 0 1200 40 1440 20V40H0V20Z"
             fill="currentColor"
-            className="text-gray-50"
+            className="text-gray-50 dark:text-gray-800"
           />
         </svg>
       </div>
@@ -58,7 +58,7 @@ export default function SectionDivider({
         aria-hidden="true"
       >
         <div
-          className="h-16 w-full bg-brand-50"
+          className="h-16 w-full bg-brand-50 dark:bg-brand-900/30"
           style={{
             clipPath: flip
               ? "polygon(0 0, 100% 0, 100% 100%, 0 20%)"

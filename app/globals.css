@@ -214,3 +214,35 @@ body {
 .dark .section-label {
   color: #60a5fa;
 }
+.dark .brand-rule {
+  background: linear-gradient(90deg, #60a5fa, #FBB62E);
+}
+.dark .brand-rule-left {
+  background: linear-gradient(90deg, #60a5fa 40%, transparent);
+}
+.dark .link-underline::after {
+  background: #60a5fa;
+}
+
+/* Dark scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Dark selection */
+.dark ::selection {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* Dark shimmer */
+.dark .animate-shimmer-bg {
+  background: linear-gradient(90deg, transparent, rgba(96,165,250,0.06), transparent);
+  background-size: 1000px 100%;
+}

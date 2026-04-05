@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import ThemeToggle from "@/components/ThemeToggle";
 
 /* ─── Category header images (Unsplash) ─── */
 const categoryImages: Record<string, string> = {
@@ -201,7 +202,7 @@ export default function Navbar() {
     `relative text-sm font-body font-medium tracking-wide transition-colors duration-200 pb-1 ${
       isActive(href)
         ? "text-brand border-b-2 border-brand"
-        : "text-gray-700 hover:text-brand"
+        : "text-gray-700 dark:text-gray-300 hover:text-brand"
     }`;
 
   /* ─── Mega menu hover handlers (with grace period) ─── */
@@ -230,16 +231,16 @@ export default function Navbar() {
       {/* ════════════════════════════════════════════════════════
           TOP UTILITY BAR
           ════════════════════════════════════════════════════════ */}
-      <div className="hidden md:block bg-white border-b border-gray-200">
+      <div className="hidden md:block bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
-          <p className="text-gray-500 text-xs font-body tracking-wide">
+          <p className="text-gray-500 dark:text-gray-400 text-xs font-body tracking-wide">
             NYC Lic: #1274180 &nbsp;&middot;&nbsp; Nassau: #H0446880000
             &nbsp;&middot;&nbsp; Suffolk: #57853-H
           </p>
           <div className="flex items-center gap-6">
             <a
               href="mailto:Info@bonardiconst.com"
-              className="text-gray-500 text-xs font-body hover:text-brand transition-colors duration-200"
+              className="text-gray-500 dark:text-gray-400 text-xs font-body hover:text-brand transition-colors duration-200"
             >
               Info@bonardiconst.com
             </a>
@@ -257,10 +258,10 @@ export default function Navbar() {
           MAIN NAVBAR
           ════════════════════════════════════════════════════════ */}
       <nav
-        className={`sticky top-0 z-50 transition-all duration-300 bg-white ${
+        className={`sticky top-0 z-50 transition-all duration-300 bg-white dark:bg-gray-900 ${
           scrolled
-            ? "shadow-md backdrop-blur-md border-b border-gray-100"
-            : "border-b border-gray-200"
+            ? "shadow-md backdrop-blur-md border-b border-gray-100 dark:border-gray-800"
+            : "border-b border-gray-200 dark:border-gray-700"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6">
@@ -291,7 +292,7 @@ export default function Navbar() {
                       className={`flex items-center gap-1 text-sm font-body font-medium tracking-wide transition-colors duration-200 pb-1 ${
                         isActive("/services")
                           ? "text-brand border-b-2 border-brand"
-                          : "text-gray-700 hover:text-brand"
+                          : "text-gray-700 dark:text-gray-300 hover:text-brand"
                       }`}
                       onClick={() => setMegaOpen((prev) => !prev)}
                       aria-expanded={megaOpen}
@@ -324,6 +325,9 @@ export default function Navbar() {
 
             {/* ── CTA + hamburger ── */}
             <div className="flex items-center gap-4">
+              <div className="hidden lg:block">
+                <ThemeToggle />
+              </div>
               <Link
                 href="/contact-us"
                 className="hidden md:inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-black px-5 py-2.5 rounded-md text-sm font-body font-semibold tracking-wide transition-all duration-300 hover:shadow-lg"
@@ -334,7 +338,7 @@ export default function Navbar() {
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden p-2 text-gray-700 hover:text-brand transition-colors"
+                className="lg:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-brand transition-colors"
                 aria-label="Toggle menu"
               >
                 <div className="w-6 flex flex-col gap-1.5">
@@ -375,7 +379,7 @@ export default function Navbar() {
           <div className="h-[2px] bg-gradient-to-r from-brand via-brand to-accent" />
 
           {/* Frosted glass panel */}
-          <div className="bg-white/[0.97] backdrop-blur-xl shadow-2xl border-b border-gray-200/50">
+          <div className="bg-white/[0.97] dark:bg-gray-900/[0.97] backdrop-blur-xl shadow-2xl border-b border-gray-200/50 dark:border-gray-700/50">
             <div className="max-w-7xl mx-auto px-6 py-8">
               {/* 4-column layout: 3 service cols + 1 featured/CTA */}
               <div className="grid grid-cols-4 gap-6">
@@ -408,7 +412,7 @@ export default function Navbar() {
                       </div>
 
                       {/* Category description */}
-                      <p className="text-xs text-gray-500 font-body mb-3 pl-0.5">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 font-body mb-3 pl-0.5">
                         {categoryDescriptions[col.heading]}
                       </p>
 
@@ -428,10 +432,10 @@ export default function Navbar() {
                                   setHoveredService(item.name)
                                 }
                                 onMouseLeave={() => setHoveredService(null)}
-                                className={`block border-l-2 border-transparent hover:border-brand hover:bg-brand-50/50 pl-3 -ml-3 py-1.5 rounded-r transition-all duration-200 ${
+                                className={`block border-l-2 border-transparent hover:border-brand hover:bg-brand-50/50 dark:hover:bg-brand/10 pl-3 -ml-3 py-1.5 rounded-r transition-all duration-200 ${
                                   isActive(item.href)
-                                    ? "text-brand font-medium border-brand bg-brand-50/30"
-                                    : "text-gray-700 hover:text-brand"
+                                    ? "text-brand font-medium border-brand bg-brand-50/30 dark:bg-brand/10"
+                                    : "text-gray-700 dark:text-gray-300 hover:text-brand"
                                 }`}
                               >
                                 <span className="flex items-center">
@@ -439,13 +443,13 @@ export default function Navbar() {
                                     {item.name}
                                   </span>
                                   {isPopular && (
-                                    <span className="bg-accent/15 text-amber-700 text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded ml-2 flex-shrink-0">
+                                    <span className="bg-accent/15 text-amber-700 dark:text-amber-400 text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded ml-2 flex-shrink-0">
                                       Popular
                                     </span>
                                   )}
                                 </span>
                                 {isTop3 && description && (
-                                  <span className="block text-xs text-gray-400 font-body mt-0.5 leading-tight">
+                                  <span className="block text-xs text-gray-400 dark:text-gray-500 font-body mt-0.5 leading-tight">
                                     {description}
                                   </span>
                                 )}
@@ -470,7 +474,7 @@ export default function Navbar() {
                   }}
                 >
                   {/* Featured Project header */}
-                  <p className="text-[10px] font-mono font-semibold text-gray-400 uppercase tracking-[0.15em] mb-3">
+                  <p className="text-[10px] font-mono font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.15em] mb-3">
                     Featured Project
                   </p>
 
@@ -484,7 +488,7 @@ export default function Navbar() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                     {/* Location badge */}
-                    <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-mono font-semibold text-gray-700 px-2 py-1 rounded">
+                    <span className="absolute top-3 left-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-[10px] font-mono font-semibold text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
                       {currentFeaturedLocation}
                     </span>
 
@@ -500,7 +504,7 @@ export default function Navbar() {
                   </div>
 
                   {/* Popular Services pills */}
-                  <p className="text-[10px] font-mono font-semibold text-gray-400 uppercase tracking-[0.15em] mb-2">
+                  <p className="text-[10px] font-mono font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.15em] mb-2">
                     Popular Services
                   </p>
                   <div className="flex flex-wrap gap-1.5 mb-4">
@@ -509,7 +513,7 @@ export default function Navbar() {
                         key={pill.href}
                         href={pill.href}
                         onClick={() => setMegaOpen(false)}
-                        className="text-[11px] font-body font-medium text-brand bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-full transition-colors duration-200"
+                        className="text-[11px] font-body font-medium text-brand bg-brand-50 dark:bg-brand-900/30 hover:bg-brand-100 dark:hover:bg-brand-900/50 px-2.5 py-1 rounded-full transition-colors duration-200"
                       >
                         {pill.name}
                       </Link>
@@ -541,7 +545,7 @@ export default function Navbar() {
               </div>
 
               {/* Bottom row */}
-              <div className="mt-6 pt-5 border-t border-gray-100">
+              <div className="mt-6 pt-5 border-t border-gray-100 dark:border-gray-800">
                 <Link
                   href="/services"
                   onClick={() => setMegaOpen(false)}
@@ -581,12 +585,12 @@ export default function Navbar() {
 
       {/* Panel */}
       <div
-        className={`lg:hidden fixed top-0 right-0 z-50 h-full w-full max-w-sm bg-white shadow-2xl transition-transform duration-500 ease-out ${
+        className={`lg:hidden fixed top-0 right-0 z-50 h-full w-full max-w-sm bg-white dark:bg-gray-900 shadow-2xl transition-transform duration-500 ease-out ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Mobile header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-gray-800">
           <Image
             src="/images/bonardi-logo.webp"
             alt="Bonardi Construction"
@@ -596,7 +600,7 @@ export default function Navbar() {
           />
           <button
             onClick={() => setMobileOpen(false)}
-            className="p-2 text-gray-500 hover:text-brand transition-colors"
+            className="p-2 text-gray-500 dark:text-gray-400 hover:text-brand transition-colors"
             aria-label="Close menu"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -614,11 +618,11 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`block py-4 border-b border-gray-100 text-lg font-display font-semibold transition-all duration-500 ${
+                className={`block py-4 border-b border-gray-100 dark:border-gray-800 text-lg font-display font-semibold transition-all duration-500 ${
                   mobileOpen
                     ? "opacity-100 translate-x-0"
                     : "opacity-0 translate-x-8"
-                } ${isActive(item.href) ? "text-brand" : "text-gray-900 hover:text-brand"}`}
+                } ${isActive(item.href) ? "text-brand" : "text-gray-900 dark:text-gray-100 hover:text-brand"}`}
                 style={{
                   transitionDelay: mobileOpen ? `${100 + i * 60}ms` : "0ms",
                 }}
@@ -629,7 +633,7 @@ export default function Navbar() {
 
             {/* Services accordion */}
             <div
-              className={`border-b border-gray-100 transition-all duration-500 ${
+              className={`border-b border-gray-100 dark:border-gray-800 transition-all duration-500 ${
                 mobileOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
               }`}
               style={{
@@ -638,7 +642,7 @@ export default function Navbar() {
             >
               <button
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className="w-full flex items-center justify-between py-4 text-lg font-display font-semibold text-gray-900 hover:text-brand transition-colors"
+                className="w-full flex items-center justify-between py-4 text-lg font-display font-semibold text-gray-900 dark:text-gray-100 hover:text-brand transition-colors"
               >
                 Services
                 <svg
@@ -662,7 +666,7 @@ export default function Navbar() {
                 <div className="pb-4 space-y-6">
                   {serviceColumns.map((col) => (
                     <div key={col.heading}>
-                      <p className="text-xs font-body font-bold text-gray-400 uppercase tracking-wider mb-2">
+                      <p className="text-xs font-body font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">
                         {col.heading}
                       </p>
                       <div className="space-y-1">
@@ -674,7 +678,7 @@ export default function Navbar() {
                             className={`block py-1.5 text-sm font-body transition-colors duration-200 ${
                               isActive(item.href)
                                 ? "text-brand font-medium"
-                                : "text-gray-600 hover:text-brand"
+                                : "text-gray-600 dark:text-gray-400 hover:text-brand"
                             }`}
                           >
                             {item.name}
@@ -699,7 +703,7 @@ export default function Navbar() {
           </nav>
 
           {/* Mobile footer */}
-          <div className="mt-auto px-6 py-6 bg-gray-50 border-t border-gray-100">
+          <div className="mt-auto px-6 py-6 bg-gray-50 dark:bg-gray-800 border-t border-gray-100 dark:border-gray-800">
             <Link
               href="/contact-us"
               onClick={() => setMobileOpen(false)}

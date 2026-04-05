@@ -32,7 +32,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-      className="w-9 h-9 rounded-md border border-gray-200 hover:border-brand flex items-center justify-center transition-colors duration-200"
+      className="w-9 h-9 rounded-md border border-gray-200 dark:border-gray-700 hover:border-brand flex items-center justify-center transition-colors duration-200 dark:bg-gray-800"
     >
       <span
         className="inline-block transition-transform duration-300"
