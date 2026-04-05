@@ -27,6 +27,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bonardiconst.com"),
   title: {
     default: "Bonardi Construction | General Contracting — Queens, NY",
     template: "%s | Bonardi Construction",
@@ -45,6 +46,14 @@ export const metadata: Metadata = {
     siteName: "Bonardi Construction, Inc.",
     locale: "en_US",
     type: "website",
+    url: "/",
+    title: "Bonardi Construction | General Contracting — Queens, NY",
+    description:
+      "30 years of expert general contracting across Queens, Brooklyn, Nassau & Suffolk County.",
+    images: [],
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
@@ -59,8 +68,11 @@ export default function RootLayout({
       className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Navbar />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

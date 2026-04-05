@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Full list of general contracting services from Bonardi Construction — asphalt, concrete, roofing, masonry, new construction, and 15 more across Queens, Brooklyn, and Long Island.",
+  alternates: { canonical: "/services" },
 };
 
 type Service = {
@@ -17,7 +18,7 @@ type Service = {
 const categories: { label: string; color: string; services: Service[] }[] = [
   {
     label: "Residential",
-    color: "#C9A44A",
+    color: "#0055A5",
     services: [
       {
         name: "Home Additions & Extensions",
@@ -89,7 +90,7 @@ const categories: { label: string; color: string; services: Service[] }[] = [
   },
   {
     label: "Exterior & Site Work",
-    color: "#9E7E32",
+    color: "#003D7A",
     services: [
       {
         name: "Asphalt Services",
@@ -173,7 +174,7 @@ const categories: { label: string; color: string; services: Service[] }[] = [
   },
   {
     label: "Commercial & Specialty",
-    color: "#B04A2A",
+    color: "#FBB62E",
     services: [
       {
         name: "Construction Management",
@@ -243,19 +244,19 @@ export default function ServicesPage() {
   return (
     <>
       {/* Header */}
-      <section className="pt-16 pb-14 bg-carbon border-b border-slate">
+      <section className="pt-16 pb-14 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-px bg-gold" />
+            <div className="w-8 h-px bg-brand" />
             <span className="section-label">What We Do</span>
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-end">
-            <h1 className="font-display font-bold text-display-xl text-ivory">
+            <h1 className="font-display font-bold text-4xl md:text-5xl text-black">
               Every Service
               <br />
-              <em className="italic text-gold">Under One Roof.</em>
+              <em className="italic text-brand">Under One Roof.</em>
             </h1>
-            <p className="font-body text-ash text-base leading-relaxed">
+            <p className="font-body text-gray-600 text-base leading-relaxed">
               20+ services spanning residential, commercial, exterior, and specialty work.
               One licensed team. 30 years of experience. The full scope of your project — handled.
             </p>
@@ -264,38 +265,38 @@ export default function ServicesPage() {
       </section>
 
       {/* Service categories */}
-      <section className="py-20 bg-obsidian">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 space-y-20">
           {categories.map((cat) => (
             <div key={cat.label}>
               {/* Category label */}
               <div className="flex items-center gap-4 mb-10">
-                <div className="w-2 h-10" style={{ backgroundColor: cat.color }} />
+                <div className="w-2 h-10 rounded-sm" style={{ backgroundColor: cat.color }} />
                 <div>
                   <p className="section-label">{cat.label}</p>
-                  <p className="text-stone text-xs font-body mt-0.5">{cat.services.length} services</p>
+                  <p className="text-gray-500 text-xs font-body mt-0.5">{cat.services.length} services</p>
                 </div>
-                <div className="flex-1 h-px bg-slate" />
+                <div className="flex-1 h-px bg-gray-200" />
               </div>
 
               {/* Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cat.services.map((service) => (
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}`}
-                    className="group bg-obsidian hover:bg-carbon transition-colors duration-300 p-8 flex flex-col"
+                    className="group bg-white border border-gray-200 rounded-lg shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 p-8 flex flex-col"
                   >
                     <div className="flex items-start justify-between mb-5">
                       <div className="flex flex-wrap gap-1.5">
                         {service.tags.map((tag) => (
-                          <span key={tag} className="text-[10px] font-mono text-stone border border-slate/60 px-2 py-0.5">
+                          <span key={tag} className="text-[10px] font-mono text-gray-600 bg-gray-100 rounded px-2 py-0.5">
                             {tag}
                           </span>
                         ))}
                       </div>
                       <svg
-                        className="w-4 h-4 text-stone group-hover:text-gold -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex-shrink-0 ml-2 mt-1"
+                        className="w-4 h-4 text-gray-400 group-hover:text-brand -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex-shrink-0 ml-2 mt-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -305,13 +306,13 @@ export default function ServicesPage() {
                       </svg>
                     </div>
 
-                    <h3 className="font-body font-semibold text-ivory text-base mb-3 group-hover:text-gold transition-colors duration-300">
+                    <h3 className="font-body font-semibold text-black text-base mb-3 group-hover:text-brand transition-colors duration-300">
                       {service.name}
                     </h3>
-                    <p className="font-body text-cement text-sm leading-relaxed flex-1">{service.desc}</p>
+                    <p className="font-body text-gray-500 text-sm leading-relaxed flex-1">{service.desc}</p>
 
                     <div
-                      className="mt-6 h-px w-0 group-hover:w-full transition-all duration-500"
+                      className="mt-6 h-px w-0 group-hover:w-full transition-all duration-500 rounded"
                       style={{ backgroundColor: cat.color }}
                     />
                   </Link>
@@ -323,15 +324,15 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA strip */}
-      <section className="py-16 bg-charcoal border-t border-slate">
+      <section className="py-16 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display font-bold text-2xl text-ivory mb-2">
+            <h2 className="font-display font-bold text-2xl text-black mb-2">
               Don&apos;t see what you need?
             </h2>
-            <p className="font-body text-ash">
+            <p className="font-body text-gray-600">
               Call us at{" "}
-              <a href="tel:7187623400" className="text-gold hover:text-gold-light transition-colors">
+              <a href="tel:7187623400" className="text-brand hover:text-brand-dark transition-colors">
                 718.762.3400
               </a>{" "}
               — we handle more than what&apos;s listed.
@@ -339,7 +340,7 @@ export default function ServicesPage() {
           </div>
           <Link
             href="/contact-us"
-            className="flex-shrink-0 flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian px-8 py-4 font-body font-semibold text-base tracking-wide transition-all duration-300"
+            className="flex-shrink-0 flex items-center gap-3 border-2 border-brand text-brand hover:bg-brand hover:text-white px-8 py-4 rounded-lg font-body font-semibold text-base tracking-wide transition-all duration-300"
           >
             Request a Free Quote
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

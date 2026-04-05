@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const serviceLinks = [
   { name: "Asphalt Services", href: "/services/asphalt" },
@@ -24,55 +25,60 @@ const companyLinks = [
   { name: "Contact", href: "/contact-us" },
 ];
 
+const partners = [
+  "Lead-Safe Certified",
+  "Generac",
+  "Cambridge",
+  "Nicolock",
+  "Unilock",
+];
+
 export default function Footer() {
   return (
-    <footer className="bg-obsidian border-t border-slate">
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="group flex items-center gap-3 mb-6">
-              <div className="w-7 h-7 relative">
-                <div className="absolute inset-0 border-2 border-gold rotate-45" />
-                <div className="absolute inset-[5px] bg-gold rotate-45" />
-              </div>
-              <div>
-                <span className="font-display font-bold text-ivory text-base leading-none block">
-                  BONARDI
-                </span>
-                <span className="font-mono text-[8px] tracking-[0.25em] text-gold uppercase block mt-0.5">
-                  Construction, Inc.
-                </span>
-              </div>
+    <footer className="bg-[#001a3a] text-white">
+      {/* ── Main Footer ── */}
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-12">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          {/* ─ Brand Column ─ */}
+          <div>
+            <Link href="/" aria-label="Bonardi Construction home">
+              <Image
+                src="/images/bonardi-footer-logo.webp"
+                alt="Bonardi Construction"
+                width={180}
+                height={50}
+                className="h-auto w-[180px]"
+              />
             </Link>
 
-            <p className="font-body text-cement text-sm leading-relaxed mb-6">
-              30+ years of expert general contracting across Queens, Brooklyn,
-              Nassau & Suffolk County.
+            <p className="mt-5 font-body text-sm leading-relaxed text-white/70">
+              Over 30 years of trusted general contracting throughout Queens,
+              Brooklyn, Nassau&nbsp;County, Suffolk&nbsp;County &amp;&nbsp;Long&nbsp;Island.
             </p>
 
             {/* Licenses */}
-            <div className="space-y-1.5 mb-6">
-              {[
-                "NYC Lic: #1274180",
-                "Nassau: #H0446880000",
-                "Suffolk: #57853-H",
-              ].map((lic) => (
-                <p key={lic} className="font-mono text-stone text-xs">{lic}</p>
-              ))}
+            <div className="mt-6 space-y-1">
+              <p className="font-mono text-[11px] tracking-wide text-white/50">
+                NYC Lic #1274180
+              </p>
+              <p className="font-mono text-[11px] tracking-wide text-white/50">
+                Nassau #H0446880000
+              </p>
+              <p className="font-mono text-[11px] tracking-wide text-white/50">
+                Suffolk #57853-H
+              </p>
             </div>
 
-            {/* Social */}
-            <div className="flex gap-4">
+            {/* Social Icons */}
+            <div className="mt-6 flex items-center gap-3">
               <a
                 href="https://www.facebook.com/Bonardiconstruction/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 border border-slate hover:border-gold flex items-center justify-center text-stone hover:text-gold transition-all"
                 aria-label="Facebook"
+                className="flex h-9 w-9 items-center justify-center rounded-md border border-white/20 text-white/60 transition-colors hover:border-accent hover:text-accent"
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                 </svg>
               </a>
@@ -80,10 +86,16 @@ export default function Footer() {
                 href="https://www.instagram.com/bonardiconstruction/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 border border-slate hover:border-gold flex items-center justify-center text-stone hover:text-gold transition-all"
                 aria-label="Instagram"
+                className="flex h-9 w-9 items-center justify-center rounded-md border border-white/20 text-white/60 transition-colors hover:border-accent hover:text-accent"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                >
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -92,15 +104,17 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services */}
-          <div className="lg:col-span-1">
-            <h4 className="section-label mb-5">Services</h4>
+          {/* ─ Services Column ─ */}
+          <div>
+            <h4 className="mb-5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              Services
+            </h4>
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-cement hover:text-gold text-sm font-body transition-colors link-underline"
+                    className="font-body text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {link.name}
                   </Link>
@@ -109,15 +123,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
-          <div className="lg:col-span-1">
-            <h4 className="section-label mb-5">Company</h4>
+          {/* ─ Company Column ─ */}
+          <div>
+            <h4 className="mb-5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              Company
+            </h4>
             <ul className="space-y-2.5">
               {companyLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-cement hover:text-gold text-sm font-body transition-colors link-underline"
+                    className="font-body text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {link.name}
                   </Link>
@@ -126,45 +142,79 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="lg:col-span-1">
-            <h4 className="section-label mb-5">Contact</h4>
+          {/* ─ Contact Column ─ */}
+          <div>
+            <h4 className="mb-5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              Contact
+            </h4>
+
             <div className="space-y-4">
+              {/* Phone */}
               <div>
-                <p className="text-stone text-xs font-mono mb-1">PHONE</p>
+                <p className="font-mono text-[11px] uppercase tracking-widest text-white/40">
+                  Phone
+                </p>
                 <a
                   href="tel:7187623400"
-                  className="text-ivory hover:text-gold font-body text-sm transition-colors"
+                  className="mt-0.5 block font-body text-sm text-white transition-colors hover:text-accent"
                 >
                   718.762.3400
                 </a>
               </div>
+
+              {/* Fax */}
               <div>
-                <p className="text-stone text-xs font-mono mb-1">FAX</p>
-                <span className="text-ash font-body text-sm">718.762.8606</span>
+                <p className="font-mono text-[11px] uppercase tracking-widest text-white/40">
+                  Fax
+                </p>
+                <span className="mt-0.5 block font-body text-sm text-white/70">
+                  718.762.8606
+                </span>
               </div>
+
+              {/* Email */}
               <div>
-                <p className="text-stone text-xs font-mono mb-1">EMAIL</p>
+                <p className="font-mono text-[11px] uppercase tracking-widest text-white/40">
+                  Email
+                </p>
                 <a
                   href="mailto:Info@bonardiconst.com"
-                  className="text-ash hover:text-gold font-body text-sm transition-colors"
+                  className="mt-0.5 block font-body text-sm text-white transition-colors hover:text-accent"
                 >
                   Info@bonardiconst.com
                 </a>
               </div>
+
+              {/* Service Area */}
               <div>
-                <p className="text-stone text-xs font-mono mb-2">SERVICE AREA</p>
-                <p className="text-cement text-sm font-body leading-relaxed">
-                  Queens · Brooklyn · Nassau County · Suffolk County · Long Island
+                <p className="font-mono text-[11px] uppercase tracking-widest text-white/40">
+                  Service Area
+                </p>
+                <p className="mt-0.5 font-body text-sm leading-relaxed text-white/70">
+                  Queens&nbsp;&middot; Brooklyn&nbsp;&middot; Nassau&nbsp;&middot; Suffolk&nbsp;&middot; Long&nbsp;Island
                 </p>
               </div>
 
-              <div className="pt-4">
+              {/* CTA */}
+              <div className="pt-2">
                 <Link
                   href="/contact-us"
-                  className="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-obsidian px-5 py-3 text-sm font-body font-semibold transition-all duration-300"
+                  className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 font-body text-sm font-semibold text-black transition-colors hover:bg-accent-dark"
                 >
                   Get a Free Quote
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
                 </Link>
               </div>
             </div>
@@ -172,36 +222,35 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Partner logos bar */}
-      <div className="border-t border-slate">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-stone text-xs font-mono tracking-widest">CERTIFIED PARTNERS</span>
-              <div className="w-px h-4 bg-slate" />
-              <div className="flex items-center gap-6">
-                {["Lead-Safe Certified", "Generac", "Cambridge", "Nicolock", "Unilock"].map((partner) => (
-                  <span key={partner} className="text-cement text-xs font-body">
-                    {partner}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+      {/* ── Partner Bar ── */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-3 px-6 py-5">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40">
+            Certified Partners
+          </span>
+          <span className="hidden h-4 w-px bg-white/15 sm:block" />
+          {partners.map((partner) => (
+            <span
+              key={partner}
+              className="font-body text-xs text-white/50"
+            >
+              {partner}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Copyright bar */}
-      <div className="border-t border-slate/50">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4">
-          <p className="text-stone text-xs font-body">
-            © {new Date().getFullYear()} Bonardi Construction, Inc. All rights reserved.
+      {/* ── Copyright Bar ── */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-5">
+          <p className="font-body text-xs text-white/40">
+            &copy; 2026 Bonardi Construction, Inc. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <span className="text-stone text-xs font-body">
+            <span className="font-body text-xs text-white/40">
               Privacy Policy
             </span>
-            <span className="text-stone text-xs font-body">
+            <span className="font-body text-xs text-white/40">
               Terms of Use
             </span>
           </div>

@@ -29,17 +29,21 @@ const stats = [
 function StatItem({ value, suffix, label, description, start }: (typeof stats)[0] & { start: boolean }) {
   const count = useCountUp(value, 2200, start);
   return (
-    <div className="relative group">
-      {/* Gold accent line on hover */}
-      <div className="absolute top-0 left-0 w-0 group-hover:w-full h-px bg-gold transition-all duration-500" />
-      <div className="pt-6 pb-8 px-2">
-        <div className="flex items-start gap-1 mb-2">
-          <span className="font-display font-bold text-display-lg text-ivory">{count}</span>
-          <span className="font-display font-bold text-display-md text-gold mt-1">{suffix}</span>
-        </div>
-        <p className="font-body font-semibold text-ivory text-base mb-1">{label}</p>
-        <p className="font-body text-cement text-sm">{description}</p>
+    <div className="relative group text-center py-10 px-6">
+      <div className="flex items-start justify-center gap-1 mb-3">
+        <span className="font-display font-bold text-display-lg text-brand">
+          {count}
+        </span>
+        {suffix && (
+          <span className="font-display font-bold text-display-md text-accent mt-1">
+            {suffix}
+          </span>
+        )}
       </div>
+      <p className="font-body font-semibold text-gray-900 text-base mb-1">
+        {label}
+      </p>
+      <p className="font-body text-gray-500 text-sm">{description}</p>
     </div>
   );
 }
@@ -62,23 +66,35 @@ export default function Stats() {
   }, [started]);
 
   return (
-    <section ref={sectionRef} className="relative py-20 bg-charcoal border-y border-slate overflow-hidden">
-      {/* Background text */}
+    <section
+      ref={sectionRef}
+      className="relative py-20 bg-white border-y border-gray-200 overflow-hidden"
+    >
+      {/* Background watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <span className="font-display font-bold text-[20vw] text-slate/[0.06] select-none tracking-tighter leading-none">
+        <span className="font-display font-bold text-[20vw] text-gray-100 select-none tracking-tighter leading-none">
           BUILT
         </span>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative">
+        {/* Section label */}
         <div className="flex items-center gap-4 mb-12">
-          <div className="w-8 h-px bg-gold" />
-          <span className="section-label">By The Numbers</span>
+          <div className="w-8 h-px bg-brand" />
+          <span className="font-mono text-xs font-medium tracking-[0.2em] uppercase text-brand">
+            By The Numbers
+          </span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate">
-          {stats.map((stat) => (
-            <div key={stat.label} className="bg-charcoal">
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className={`${
+                i < stats.length - 1 ? "lg:border-r lg:border-gray-200" : ""
+              } ${i < 2 ? "border-b border-gray-200 lg:border-b-0" : ""}`}
+            >
               <StatItem {...stat} start={started} />
             </div>
           ))}

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getServiceBySlug, getRelatedServices } from "@/lib/services-data";
+import QuoteForm from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Asphalt Sealcoating",
   description:
     "Professional asphalt sealcoating services from Bonardi Construction — protect and extend the life of your driveway or parking lot. Queens, Brooklyn, Nassau & Suffolk County.",
+  alternates: { canonical: "/services/asphalt/sealcoating" },
 };
 
 export default function AsphaltSealcoatingPage() {
@@ -15,46 +17,46 @@ export default function AsphaltSealcoatingPage() {
   return (
     <>
       {/* Breadcrumb + header */}
-      <section className="pt-10 pb-16 bg-carbon border-b border-slate relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-gold/[0.04] to-transparent pointer-events-none" />
+      <section className="pt-10 pb-16 bg-white border-b border-gray-200 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.03] to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative">
           <nav className="flex items-center gap-2 mb-8">
-            <Link href="/" className="text-stone hover:text-ash text-xs font-mono tracking-wide transition-colors">
+            <Link href="/" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
               HOME
             </Link>
-            <span className="text-slate text-xs">/</span>
-            <Link href="/services" className="text-stone hover:text-ash text-xs font-mono tracking-wide transition-colors">
+            <span className="text-gray-300 text-xs">/</span>
+            <Link href="/services" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
               SERVICES
             </Link>
-            <span className="text-slate text-xs">/</span>
-            <Link href="/services/asphalt" className="text-stone hover:text-ash text-xs font-mono tracking-wide transition-colors">
+            <span className="text-gray-300 text-xs">/</span>
+            <Link href="/services/asphalt" className="text-gray-400 hover:text-gray-600 text-xs font-mono tracking-wide transition-colors">
               ASPHALT
             </Link>
-            <span className="text-slate text-xs">/</span>
-            <span className="text-gold text-xs font-mono tracking-wide uppercase">SEALCOATING</span>
+            <span className="text-gray-300 text-xs">/</span>
+            <span className="text-brand text-xs font-mono tracking-wide uppercase">SEALCOATING</span>
           </nav>
 
           <div className="grid lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-7">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-px bg-gold" />
+                <div className="w-8 h-px bg-brand" />
                 <div className="flex gap-2">
                   {service.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] font-mono text-stone border border-slate px-2 py-0.5">
+                    <span key={tag} className="text-[10px] font-mono text-gray-600 bg-gray-100 px-2 py-0.5 rounded">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <h1 className="font-display font-bold text-display-lg text-ivory mb-3">
+              <h1 className="font-display font-bold text-display-lg text-black mb-3">
                 {service.name}
               </h1>
-              <p className="font-body text-gold text-base font-medium">{service.tagline}</p>
+              <p className="font-body text-brand text-base font-medium">{service.tagline}</p>
             </div>
             <div className="lg:col-span-5 lg:text-right">
               <a
                 href="tel:7187623400"
-                className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian px-7 py-4 font-body font-semibold text-base tracking-wide transition-all duration-300"
+                className="inline-flex items-center gap-3 bg-accent hover:bg-accent-dark text-black px-7 py-4 rounded-lg font-body font-semibold text-base tracking-wide transition-all duration-300"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -67,66 +69,85 @@ export default function AsphaltSealcoatingPage() {
       </section>
 
       {/* Main content */}
-      <section className="py-20 bg-obsidian">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16">
             <div className="lg:col-span-7 space-y-12">
               <div>
-                <p className="font-body text-ash text-lg leading-relaxed">{service.intro}</p>
+                <p className="font-body text-gray-600 text-lg leading-relaxed">{service.intro}</p>
               </div>
 
               <div>
                 <div className="flex items-center gap-3 mb-7">
-                  <div className="w-6 h-px bg-gold" />
-                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-ash">
+                  <div className="w-6 h-px bg-brand" />
+                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
                     What&apos;s Included
                   </h2>
                 </div>
                 <ul className="space-y-4">
                   {service.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-4">
-                      <div className="w-1.5 h-1.5 bg-gold rotate-45 mt-2 flex-shrink-0" />
-                      <span className="font-body text-ivory text-base">{bullet}</span>
+                      <div className="w-1.5 h-1.5 bg-brand rotate-45 mt-2 flex-shrink-0" />
+                      <span className="font-body text-gray-800 text-base">{bullet}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="border-l-2 border-gold pl-6 bg-charcoal -ml-6 py-6 pr-6">
+              <div className="border-l-2 border-brand pl-6 bg-brand-50 -ml-6 py-6 pr-6 rounded-r-lg">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-6 h-px bg-gold" />
-                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-ash">
+                  <div className="w-6 h-px bg-brand" />
+                  <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
                     The Bonardi Advantage
                   </h2>
                 </div>
-                <p className="font-body text-ash text-base leading-relaxed">{service.whyUs}</p>
+                <p className="font-body text-gray-600 text-base leading-relaxed">{service.whyUs}</p>
+              </div>
+
+              {/* Image placeholder */}
+              <div className="aspect-video bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent" />
+                <div className="text-center relative z-10">
+                  <p className="text-gray-400 text-xs font-mono tracking-widest mb-1">PROJECT PHOTOS</p>
+                  <p className="text-gray-300 text-xs font-body">Upload {service.name.toLowerCase()} project images here</p>
+                </div>
+                <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-brand/20" />
+                <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-brand/20" />
               </div>
             </div>
 
             <div className="lg:col-span-5 space-y-8">
-              <div className="bg-charcoal border border-slate p-8">
+              {/* Quote card */}
+              <div className="bg-white border border-gray-200 rounded-lg p-8">
                 <p className="section-label mb-5">Request a Quote</p>
-                <p className="font-body text-ash text-sm leading-relaxed mb-6">
+                <p className="font-body text-gray-600 text-sm leading-relaxed mb-6">
                   Get a free, no-obligation estimate for your {service.name.toLowerCase()} project.
                   We respond within one business day.
                 </p>
-                <Link
-                  href={`/contact-us?service=${encodeURIComponent(service.name)}`}
-                  className="flex items-center justify-center gap-3 bg-gold hover:bg-gold-light text-obsidian w-full py-4 font-body font-semibold text-base tracking-wide transition-all duration-300 mb-4"
-                >
-                  {service.cta}
-                </Link>
-                <a
-                  href="tel:7187623400"
-                  className="flex items-center justify-center gap-3 border border-slate hover:border-gold text-ivory hover:text-gold w-full py-4 font-body font-medium text-sm tracking-wide transition-all duration-300"
-                >
-                  Call 718.762.3400
-                </a>
+                <QuoteForm variant="compact" preselectedService={service.name} />
               </div>
 
-              <div className="border border-slate/50 p-6">
+              {/* Why Choose Bonardi */}
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 space-y-4">
+                <p className="section-label">Why Choose Bonardi</p>
+                {[
+                  "30+ years of licensed experience",
+                  "NYC, Nassau & Suffolk licensed",
+                  "Lead-Safe Certified Firm",
+                  "Full project management",
+                  "Transparent pricing, no surprises",
+                ].map((text) => (
+                  <div key={text} className="flex items-center gap-3">
+                    <span className="text-brand text-xs">&#9670;</span>
+                    <span className="text-gray-600 text-sm font-body">{text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Service area */}
+              <div className="border border-gray-200 rounded-lg p-6">
                 <p className="section-label mb-3">Service Area</p>
-                <p className="text-ash text-sm font-body leading-relaxed">
+                <p className="text-gray-600 text-sm font-body leading-relaxed">
                   Queens · Brooklyn · Nassau County · Suffolk County · Long Island
                 </p>
               </div>
@@ -137,23 +158,29 @@ export default function AsphaltSealcoatingPage() {
 
       {/* Related services */}
       {related.length > 0 && (
-        <section className="py-16 bg-charcoal border-t border-slate">
+        <section className="py-16 bg-gray-50 border-t border-gray-200">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-px bg-gold" />
+              <div className="w-8 h-px bg-brand" />
               <span className="section-label">Related Services</span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {related.map((rel) => (
                 <Link
                   key={rel.slug}
                   href={`/services/${rel.slug}`}
-                  className="group bg-charcoal hover:bg-carbon transition-colors duration-300 p-6"
+                  className="group bg-white border border-gray-200 rounded-lg hover:shadow-card-hover transition-all duration-300 p-6"
                 >
-                  <h3 className="font-body font-semibold text-ivory text-sm mb-2 group-hover:text-gold transition-colors">
+                  <h3 className="font-body font-semibold text-black text-sm mb-2 group-hover:text-brand transition-colors">
                     {rel.name}
                   </h3>
-                  <p className="text-cement text-xs font-body leading-relaxed line-clamp-2">{rel.tagline}</p>
+                  <p className="text-gray-500 text-xs font-body leading-relaxed line-clamp-2">{rel.tagline}</p>
+                  <div className="mt-4 text-brand text-xs font-body font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
+                    Learn more
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
                 </Link>
               ))}
             </div>

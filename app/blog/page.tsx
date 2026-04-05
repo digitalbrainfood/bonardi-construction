@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Construction tips, project spotlights, and industry insights from the team at Bonardi Construction.",
+  alternates: { canonical: "/blog" },
 };
 
 const posts = [
@@ -68,15 +69,15 @@ export default function BlogPage() {
   return (
     <>
       {/* Header */}
-      <section className="pt-16 pb-14 bg-carbon border-b border-slate">
+      <section className="pt-16 pb-14 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-px bg-gold" />
+            <div className="w-8 h-px bg-brand" />
             <span className="section-label">Insights</span>
           </div>
-          <h1 className="font-display font-bold text-display-xl text-ivory">
+          <h1 className="font-display font-bold text-display-xl text-black">
             Construction{" "}
-            <em className="italic text-gold">Knowledge</em>
+            <em className="italic text-brand">Knowledge</em>
             <br />
             Worth Reading.
           </h1>
@@ -84,34 +85,34 @@ export default function BlogPage() {
       </section>
 
       {/* Posts */}
-      <section className="py-20 bg-obsidian">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           {/* Featured post */}
           <div className="mb-16">
             <Link
               href={`/blog/${posts[0].slug}`}
-              className="group grid lg:grid-cols-2 gap-px bg-slate"
+              className="group grid lg:grid-cols-2 bg-white rounded-lg border border-gray-200 shadow-card hover:shadow-card-hover transition-shadow duration-300 overflow-hidden"
             >
-              <div className="aspect-[16/9] lg:aspect-auto bg-charcoal flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent group-hover:from-gold/15 transition-all duration-500" />
+              <div className="aspect-[16/9] lg:aspect-auto bg-gradient-to-br from-brand/10 via-brand/5 to-transparent flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand/10 to-transparent group-hover:from-brand/15 transition-all duration-500" />
                 <div className="relative z-10 text-center px-8">
-                  <div className="w-12 h-12 border border-gold/30 flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-5 h-5 text-gold/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <div className="w-12 h-12 border border-brand/30 rounded-lg flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-5 h-5 text-brand/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                     </svg>
                   </div>
-                  <p className="text-stone text-xs font-mono tracking-widest">FEATURED</p>
+                  <p className="text-brand text-xs font-mono tracking-widest">FEATURED</p>
                 </div>
               </div>
-              <div className="bg-charcoal p-10 flex flex-col justify-center">
-                <span className="text-[10px] font-mono text-gold tracking-widest mb-4 block">
+              <div className="p-10 flex flex-col justify-center">
+                <span className="text-[10px] font-mono text-brand tracking-widest mb-4 block">
                   {posts[0].category} · {posts[0].date}
                 </span>
-                <h2 className="font-display font-bold text-2xl text-ivory mb-4 group-hover:text-gold transition-colors duration-300">
+                <h2 className="font-display font-bold text-2xl text-black mb-4 group-hover:text-brand transition-colors duration-300">
                   {posts[0].title}
                 </h2>
-                <p className="font-body text-ash text-sm leading-relaxed mb-6">{posts[0].excerpt}</p>
-                <div className="flex items-center gap-2 text-gold text-sm font-body font-medium">
+                <p className="font-body text-gray-600 text-sm leading-relaxed mb-6">{posts[0].excerpt}</p>
+                <div className="flex items-center gap-2 text-brand text-sm font-body font-medium">
                   Read article
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -122,25 +123,25 @@ export default function BlogPage() {
           </div>
 
           {/* Grid posts */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.slice(1).map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group bg-obsidian hover:bg-carbon transition-colors duration-300 p-8 flex flex-col"
+                className="group bg-white border border-gray-200 rounded-lg shadow-card hover:shadow-card-hover transition-all duration-300 p-8 flex flex-col"
               >
                 <div className="flex items-center justify-between mb-5">
-                  <span className="text-[10px] font-mono text-gold tracking-widest">{post.category}</span>
-                  <span className="text-stone text-[10px] font-mono">{post.readTime}</span>
+                  <span className="text-[10px] font-mono text-brand tracking-widest">{post.category}</span>
+                  <span className="text-gray-400 text-[10px] font-mono">{post.readTime}</span>
                 </div>
-                <h3 className="font-display font-semibold text-ivory text-lg mb-3 group-hover:text-gold transition-colors duration-300 leading-snug">
+                <h3 className="font-display font-semibold text-black text-lg mb-3 group-hover:text-brand transition-colors duration-300 leading-snug">
                   {post.title}
                 </h3>
-                <p className="font-body text-cement text-sm leading-relaxed flex-1">{post.excerpt}</p>
+                <p className="font-body text-gray-600 text-sm leading-relaxed flex-1">{post.excerpt}</p>
                 <div className="mt-6 flex items-center justify-between">
-                  <span className="text-stone text-xs font-body">{post.date}</span>
+                  <span className="text-gray-400 text-xs font-body">{post.date}</span>
                   <svg
-                    className="w-4 h-4 text-stone group-hover:text-gold -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    className="w-4 h-4 text-brand -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

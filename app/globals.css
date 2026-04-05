@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap');
-
 :root {
   --font-playfair: 'Playfair Display', Georgia, serif;
   --font-dm-sans: 'DM Sans', system-ui, sans-serif;
@@ -23,44 +21,35 @@ html {
 }
 
 body {
-  background-color: #0D0D0B;
-  color: #F2EDE4;
+  background-color: #ffffff;
+  color: #1a1a1a;
   font-family: var(--font-dm-sans);
   overflow-x: hidden;
 }
 
-/* Noise texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.025;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* Gold divider line utility */
-.gold-rule {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #C9A44A, transparent);
-}
-
-.gold-rule-left {
-  height: 1px;
-  background: linear-gradient(90deg, #C9A44A 60%, transparent);
-}
-
-/* Section label style */
+/* ── Section label ── */
 .section-label {
   font-family: var(--font-dm-mono);
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #C9A44A;
+  color: #0055A5;
+  font-weight: 500;
 }
 
-/* Animated underline for links */
+/* ── Decorative rules ── */
+.brand-rule {
+  height: 2px;
+  background: linear-gradient(90deg, #0055A5, #FBB62E);
+  border-radius: 1px;
+}
+
+.brand-rule-left {
+  height: 2px;
+  background: linear-gradient(90deg, #0055A5 40%, transparent);
+}
+
+/* ── Link underline animation ── */
 .link-underline {
   position: relative;
 }
@@ -70,86 +59,93 @@ body::before {
   bottom: -2px;
   left: 0;
   width: 0;
-  height: 1px;
-  background: #C9A44A;
+  height: 2px;
+  background: #0055A5;
   transition: width 0.3s ease;
 }
 .link-underline:hover::after {
   width: 100%;
 }
 
-/* Scrollbar */
+/* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #161614;
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4A4A44;
+  background: #c0c0c0;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C9A44A;
+  background: #0055A5;
 }
 
-/* Selection */
+/* ── Selection ── */
 ::selection {
-  background: #C9A44A;
-  color: #0D0D0B;
+  background: #0055A5;
+  color: #ffffff;
 }
 
-/* Page enter animation */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ── Focus states ── */
+:focus-visible {
+  outline: 2px solid #0055A5;
+  outline-offset: 2px;
+}
+.bg-brand:focus-visible,
+.bg-accent:focus-visible {
+  outline-color: #000;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* ── Skip to content ── */
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 1rem 2rem;
+  background: #FBB62E;
+  color: #000;
+  z-index: 9999;
+  font-weight: 600;
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes expandWidth {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-.animate-fade-up {
-  animation: fadeUp 0.7s ease forwards;
-}
-.animate-fade-in {
-  animation: fadeIn 0.7s ease forwards;
-}
-.animate-slide-left {
-  animation: slideInLeft 0.7s ease forwards;
-}
-
+/* ── Animation delays ── */
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
 .delay-300 { animation-delay: 300ms; }
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 .delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
 
 /* Pre-hidden for animation */
 .will-animate {
   opacity: 0;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Shimmer placeholder ── */
+.animate-shimmer-bg {
+  background: linear-gradient(90deg, transparent, rgba(0,85,165,0.04), transparent);
+  background-size: 1000px 100%;
 }
