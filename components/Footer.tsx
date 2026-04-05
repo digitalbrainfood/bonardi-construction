@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import Newsletter from "@/components/Newsletter";
 import PartnersCarousel from "@/components/PartnersCarousel";
 
 const serviceLinks = [
@@ -221,17 +220,6 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* ── Newsletter ── */}
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <p className="font-body text-sm font-semibold text-white mb-1">Stay Updated</p>
-            <p className="font-body text-xs text-white/50">Construction tips, project spotlights, and company news.</p>
-          </div>
-          <Newsletter className="w-full md:w-auto" />
         </div>
       </div>
 
