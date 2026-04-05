@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import { getAreaBySlug, areas } from "@/lib/areas-data";
 import { services } from "@/lib/services-data";
 import QuoteForm from "@/components/QuoteForm";
+import JsonLd from "@/components/JsonLd";
+import FAQ from "@/components/FAQ";
+import { organizationSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 type Props = { params: { slug: string } };
 
@@ -36,8 +39,31 @@ export default function AreaDetailPage({ params }: Props) {
     .filter(Boolean)
     .slice(0, 12);
 
+  const areaOrgSchema = {
+    ...organizationSchema(),
+    areaServed: {
+      "@type": "City",
+      name: area.name,
+      containedInPlace: {
+        "@type": "State",
+        name: "New York",
+      },
+    },
+  };
+
   return (
     <>
+      <JsonLd data={areaOrgSchema} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Areas We Serve", url: "/areas-we-serve" },
+          { name: area.name, url: `/areas-we-serve/${area.slug}` },
+        ])}
+      />
+      {area.faqs && area.faqs.length > 0 && (
+        <JsonLd data={faqSchema(area.faqs)} />
+      )}
       {/* Header */}
       <section className="pt-10 pb-16 bg-white border-b border-gray-200 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.03] to-transparent pointer-events-none" />
@@ -96,6 +122,19 @@ export default function AreaDetailPage({ params }: Props) {
                   ))}
                 </div>
               </div>
+
+              {/* FAQ section */}
+              {area.faqs && area.faqs.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-7">
+                    <div className="w-6 h-px bg-brand" />
+                    <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
+                      Frequently Asked Questions
+                    </h2>
+                  </div>
+                  <FAQ items={area.faqs} />
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}

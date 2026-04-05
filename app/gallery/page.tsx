@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { galleryImages } from "@/lib/images";
@@ -33,8 +33,66 @@ const projects = Object.entries(galleryImages).flatMap(([category, images]) =>
 export default function GalleryPage() {
   const [active, setActive] = useState("All");
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [lightboxVisible, setLightboxVisible] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
+
+  const currentIndex = lightbox ? filtered.findIndex((p) => p.id === lightbox) : -1;
+
+  const openLightbox = (id: string) => {
+    setLightbox(id);
+    // Trigger entrance animation after mount
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setLightboxVisible(true);
+      });
+    });
+  };
+
+  const closeLightbox = useCallback(() => {
+    setLightboxVisible(false);
+    setTimeout(() => setLightbox(null), 200);
+  }, []);
+
+  const goNext = useCallback(() => {
+    if (currentIndex < 0 || filtered.length === 0) return;
+    const nextIndex = (currentIndex + 1) % filtered.length;
+    setLightbox(filtered[nextIndex].id);
+  }, [currentIndex, filtered]);
+
+  const goPrev = useCallback(() => {
+    if (currentIndex < 0 || filtered.length === 0) return;
+    const prevIndex = (currentIndex - 1 + filtered.length) % filtered.length;
+    setLightbox(filtered[prevIndex].id);
+  }, [currentIndex, filtered]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!lightbox) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightbox, closeLightbox, goNext, goPrev]);
+
+  // Touch / swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0) goNext();
+      else goPrev();
+    }
+    touchStartX.current = null;
+  };
 
   return (
     <>
@@ -82,7 +140,7 @@ export default function GalleryPage() {
               <div
                 key={project.id}
                 className="group relative break-inside-avoid rounded-lg overflow-hidden shadow-card cursor-pointer"
-                onClick={() => setLightbox(project.id)}
+                onClick={() => openLightbox(project.id)}
               >
                 <div
                   className={`w-full relative ${
@@ -118,19 +176,61 @@ export default function GalleryPage() {
       {/* Lightbox */}
       {lightbox !== null && (
         <div
-          className="fixed inset-0 z-50 bg-gray-900/70 backdrop-blur-sm flex items-center justify-center p-6"
-          onClick={() => setLightbox(null)}
+          className={`fixed inset-0 z-50 bg-gray-900/70 backdrop-blur-sm flex items-center justify-center p-6 transition-opacity duration-200 ${
+            lightboxVisible ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
+          {/* Image counter */}
+          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm text-gray-700 text-xs font-mono tracking-wide px-3 py-1.5 rounded-md border border-gray-200">
+            {currentIndex + 1} of {filtered.length}
+          </div>
+
+          {/* Close button */}
           <button
-            className="absolute top-6 right-6 w-10 h-10 border border-gray-300 hover:border-brand text-gray-500 hover:text-brand rounded-lg flex items-center justify-center bg-white transition-all"
-            onClick={() => setLightbox(null)}
+            className="absolute top-6 right-6 w-10 h-10 border border-gray-300 hover:border-brand text-gray-500 hover:text-brand rounded-lg flex items-center justify-center bg-white transition-all z-10"
+            onClick={closeLightbox}
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
+
+          {/* Previous arrow */}
+          <button
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 backdrop-blur-sm border border-gray-200 hover:border-brand text-gray-600 hover:text-brand rounded-full flex items-center justify-center transition-all z-10"
+            onClick={(e) => {
+              e.stopPropagation();
+              goPrev();
+            }}
+            aria-label="Previous image"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Next arrow */}
+          <button
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 backdrop-blur-sm border border-gray-200 hover:border-brand text-gray-600 hover:text-brand rounded-full flex items-center justify-center transition-all z-10"
+            onClick={(e) => {
+              e.stopPropagation();
+              goNext();
+            }}
+            aria-label="Next image"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Lightbox content */}
           <div
-            className="max-w-4xl w-full bg-white rounded-lg overflow-hidden shadow-xl"
+            className={`max-w-4xl w-full bg-white rounded-lg overflow-hidden shadow-xl transition-all duration-300 ${
+              lightboxVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="aspect-video relative">

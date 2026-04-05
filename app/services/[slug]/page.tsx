@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import { getServiceBySlug, getRelatedServices, services } from "@/lib/services-data";
 import { serviceImages } from "@/lib/images";
 import QuoteForm from "@/components/QuoteForm";
+import JsonLd from "@/components/JsonLd";
+import FAQ from "@/components/FAQ";
+import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 
 type Props = { params: { slug: string } };
 
@@ -30,6 +33,23 @@ export default function ServiceDetailPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={serviceSchema({
+          name: service.name,
+          description: service.tagline,
+          slug: service.slug,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: service.name, url: `/services/${service.slug}` },
+        ])}
+      />
+      {service.faqs && service.faqs.length > 0 && (
+        <JsonLd data={faqSchema(service.faqs)} />
+      )}
       {/* Breadcrumb + header */}
       <section className="pt-10 pb-16 bg-white border-b border-gray-200 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.03] to-transparent pointer-events-none" />
@@ -121,13 +141,26 @@ export default function ServiceDetailPage({ params }: Props) {
                 <p className="font-body text-gray-600 text-base leading-relaxed">{service.whyUs}</p>
               </div>
 
+              {/* FAQ section */}
+              {service.faqs && service.faqs.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-3 mb-7">
+                    <div className="w-6 h-px bg-brand" />
+                    <h2 className="font-body font-semibold text-sm tracking-[0.15em] uppercase text-gray-700">
+                      Frequently Asked Questions
+                    </h2>
+                  </div>
+                  <FAQ items={service.faqs} />
+                </div>
+              )}
+
               {/* Project image */}
-              <div className="aspect-video relative rounded-lg overflow-hidden">
+              <div className="group aspect-video relative rounded-lg overflow-hidden">
                 <Image
                   src={serviceImages[service.slug] || serviceImages["asphalt"]}
                   alt={`${service.name} project by Bonardi Construction`}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 100vw, 58vw"
                 />
               </div>

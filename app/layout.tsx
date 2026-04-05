@@ -5,6 +5,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ScrollProgress from "@/components/ScrollProgress";
+import FloatingContact from "@/components/FloatingContact";
+import CookieConsent from "@/components/CookieConsent";
+import SocialProof from "@/components/SocialProof";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -78,6 +81,9 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <BackToTop />
+        <FloatingContact />
+        <SocialProof />
+        <CookieConsent />
       </body>
     </html>
   );

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { aboutImages } from "@/lib/images";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Gary M. Bonelli — Owner & Principal Contractor",
@@ -11,8 +13,38 @@ export const metadata: Metadata = {
 };
 
 export default function GaryBonelliPage() {
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Gary M. Bonelli",
+    jobTitle: "Owner & Principal Contractor",
+    url: "https://bonardiconst.com/gary-m-bonelli",
+    worksFor: {
+      "@type": "LocalBusiness",
+      "@id": "https://bonardiconst.com/#organization",
+      name: "Bonardi Construction, Inc.",
+    },
+    knowsAbout: [
+      "General Contracting",
+      "Residential Construction",
+      "Commercial Construction",
+      "Construction Management",
+    ],
+    sameAs: [
+      "https://www.facebook.com/Bonardiconstruction/",
+      "https://www.instagram.com/bonardiconstruction/",
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={personSchema} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Gary M. Bonelli", url: "/gary-m-bonelli" },
+        ])}
+      />
       {/* Hero */}
       <section className="pt-16 pb-20 bg-white border-b border-gray-200 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.04] to-transparent pointer-events-none" />

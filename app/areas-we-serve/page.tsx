@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { areas } from "@/lib/areas-data";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Areas We Serve",
@@ -15,6 +17,12 @@ export default function AreasWeServePage() {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Areas We Serve", url: "/areas-we-serve" },
+        ])}
+      />
       {/* Header */}
       <section className="pt-16 pb-14 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">

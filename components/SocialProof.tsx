@@ -1,0 +1,107 @@
+"use client";
+
+import { useEffect, useState, useCallback } from "react";
+
+const messages = [
+  { name: "John", location: "Queens", action: "just requested a quote" },
+  { name: "Sarah", location: "Bayside", action: "viewed Roofing Services" },
+  { name: "Mike", location: "Garden City", action: "requested a free estimate" },
+  { name: "Lisa", location: "Brooklyn", action: "viewed Masonry Services" },
+  { name: "David", location: "Nassau County", action: "just requested a quote" },
+  { name: "Angela", location: "Huntington", action: "viewed Paving Services" },
+];
+
+export default function SocialProof() {
+  const [visible, setVisible] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [dismissed, setDismissed] = useState(false);
+
+  const dismiss = useCallback(() => {
+    setVisible(false);
+    setDismissed(true);
+    try {
+      sessionStorage.setItem("socialProofDismissed", "true");
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    // Check if permanently dismissed this session
+    try {
+      if (sessionStorage.getItem("socialProofDismissed") === "true") {
+        setDismissed(true);
+        return;
+      }
+    } catch {}
+
+    // Initial delay before first appearance
+    const initialTimer = setTimeout(() => {
+      setVisible(true);
+    }, 5000);
+
+    return () => clearTimeout(initialTimer);
+  }, []);
+
+  // Auto-dismiss after 4 seconds, then cycle every 8 seconds
+  useEffect(() => {
+    if (dismissed) return;
+
+    if (visible) {
+      const hideTimer = setTimeout(() => {
+        setVisible(false);
+      }, 4000);
+      return () => clearTimeout(hideTimer);
+    } else {
+      // Show next notification after 8 seconds (from when previous hid)
+      const showTimer = setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % messages.length);
+        setVisible(true);
+      }, 8000);
+      return () => clearTimeout(showTimer);
+    }
+  }, [visible, dismissed]);
+
+  if (dismissed) return null;
+
+  const msg = messages[currentIndex];
+  const initials = msg.name[0];
+
+  return (
+    <div
+      className={`fixed bottom-6 left-6 z-40 transition-all duration-500 ease-out ${
+        visible
+          ? "translate-y-0 opacity-100"
+          : "translate-y-4 opacity-0 pointer-events-none"
+      }`}
+    >
+      <div className="bg-white shadow-lg rounded-lg p-4 flex items-center gap-3 max-w-xs border border-gray-100">
+        {/* Avatar */}
+        <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+          <span className="text-sm font-body font-semibold text-gray-500">
+            {initials}
+          </span>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-body text-gray-800 leading-snug">
+            <span className="font-semibold">{msg.name}</span> from{" "}
+            <span className="font-semibold">{msg.location}</span>{" "}
+            {msg.action}
+          </p>
+          <p className="text-[10px] font-mono text-gray-400 mt-0.5">Just now</p>
+        </div>
+
+        {/* Close button */}
+        <button
+          onClick={dismiss}
+          className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded text-gray-400 hover:text-gray-600 transition-colors"
+          aria-label="Dismiss notification"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}

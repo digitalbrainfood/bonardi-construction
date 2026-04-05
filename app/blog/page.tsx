@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { blogImages } from "@/lib/images";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -74,8 +76,44 @@ const posts = [
 ];
 
 export default function BlogPage() {
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Bonardi Construction Blog",
+    description:
+      "Construction tips, project spotlights, and industry insights from the team at Bonardi Construction.",
+    url: "https://bonardiconst.com/blog",
+    publisher: {
+      "@type": "LocalBusiness",
+      "@id": "https://bonardiconst.com/#organization",
+      name: "Bonardi Construction, Inc.",
+    },
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      url: `https://bonardiconst.com/blog/${post.slug}`,
+      datePublished: post.date,
+      author: {
+        "@type": "Organization",
+        name: "Bonardi Construction, Inc.",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Bonardi Construction, Inc.",
+      },
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={blogSchema} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Blog", url: "/blog" },
+        ])}
+      />
       {/* Header */}
       <section className="pt-16 pb-14 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">

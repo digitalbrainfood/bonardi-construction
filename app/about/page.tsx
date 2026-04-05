@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { aboutImages } from "@/lib/images";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -28,6 +30,13 @@ const values = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={organizationSchema()} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "About Us", url: "/about" },
+        ])}
+      />
       {/* Hero */}
       <section className="pt-16 pb-20 bg-white border-b border-gray-200 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.04] to-transparent pointer-events-none" />
@@ -87,7 +96,7 @@ export default function AboutPage() {
                   src={aboutImages.gary}
                   alt="Gary M. Bonelli — Owner & Principal Contractor"
                   fill
-                  className="object-cover"
+                  className="object-cover hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
               </div>

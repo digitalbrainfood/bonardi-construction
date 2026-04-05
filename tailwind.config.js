@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -45,6 +46,7 @@ module.exports = {
         "brand-lg": "0 10px 30px 0 rgba(0, 85, 165, 0.2)",
         "card": "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
         "card-hover": "0 10px 25px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04)",
+        "card-active": "0 1px 2px rgba(0,0,0,0.04)",
       },
       spacing: {
         section: "6rem",
@@ -75,6 +77,11 @@ module.exports = {
           "0%": { backgroundPosition: "-1000px 0" },
           "100%": { backgroundPosition: "1000px 0" },
         },
+        "floating-pulse": {
+          "0%": { transform: "scale(1)", opacity: "0.5" },
+          "50%": { transform: "scale(1.6)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "0" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease forwards",
@@ -83,6 +90,7 @@ module.exports = {
         "slide-right": "slide-right 0.6s ease forwards",
         "scale-in": "scale-in 0.5s ease forwards",
         shimmer: "shimmer 2.5s infinite linear",
+        "floating-pulse": "floating-pulse 3s ease-out infinite",
       },
     },
   },

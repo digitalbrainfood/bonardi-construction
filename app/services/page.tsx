@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -241,8 +243,29 @@ const categories: { label: string; color: string; services: Service[] }[] = [
 ];
 
 export default function ServicesPage() {
+  const allServices = categories.flatMap((cat) => cat.services);
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Bonardi Construction Services",
+    numberOfItems: allServices.length,
+    itemListElement: allServices.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: service.name,
+      url: `https://bonardiconst.com/services/${service.slug}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={itemListSchema} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+        ])}
+      />
       {/* Header */}
       <section className="pt-16 pb-14 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">

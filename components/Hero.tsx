@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { heroImages } from "@/lib/images";
@@ -51,7 +51,17 @@ const trustBadges = [
 ];
 
 export default function Hero() {
+  const [scrollY, setScrollY] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
   useEffect(() => {
+    // Check for prefers-reduced-motion
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mql.matches);
+    const handleChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mql.addEventListener("change", handleChange);
+
+    // Animate in elements
     const elements = document.querySelectorAll(".will-animate");
     elements.forEach((el, i) => {
       setTimeout(() => {
@@ -59,12 +69,32 @@ export default function Hero() {
         el.classList.add("animate-fade-up");
       }, i * 120);
     });
+
+    return () => mql.removeEventListener("change", handleChange);
   }, []);
+
+  // Parallax scroll listener (only if reduced motion is not preferred)
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [reducedMotion]);
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-white">
-      {/* Background construction image */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Background construction image with parallax */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={
+          !reducedMotion
+            ? { transform: `translateY(${scrollY * 0.3}px)` }
+            : undefined
+        }
+      >
         <Image
           src={heroImages.main}
           alt=""
@@ -74,6 +104,19 @@ export default function Hero() {
           sizes="100vw"
         />
       </div>
+
+      {/* Uncomment to use video background instead of image:
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.08]"
+        poster={heroImages.main}
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+      */}
 
       {/* Blueprint / architectural background pattern */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -122,7 +165,7 @@ export default function Hero() {
       {/* Hero content */}
       <div className="max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center pt-16 pb-20 md:pt-24 relative z-10">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* ── Left column — main content ── */}
+          {/* -- Left column -- main content -- */}
           <div className="lg:col-span-7 lg:pr-12">
             {/* Label */}
             <div className="will-animate flex items-center gap-3 mb-8">
@@ -213,7 +256,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── Right column — info cards ── */}
+          {/* -- Right column -- info cards -- */}
           <div className="lg:col-span-5 flex flex-col gap-5">
             {/* Core Services card */}
             <div className="will-animate bg-white border border-gray-200 rounded-xl shadow-card p-6">

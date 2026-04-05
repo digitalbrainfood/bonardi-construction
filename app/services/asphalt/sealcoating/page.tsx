@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getServiceBySlug, getRelatedServices } from "@/lib/services-data";
 import { serviceImages } from "@/lib/images";
 import QuoteForm from "@/components/QuoteForm";
+import JsonLd from "@/components/JsonLd";
+import { serviceSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Asphalt Sealcoating",
@@ -18,6 +20,21 @@ export default function AsphaltSealcoatingPage() {
 
   return (
     <>
+      <JsonLd
+        data={serviceSchema({
+          name: service.name,
+          description: service.tagline,
+          slug: "asphalt-sealcoating",
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: "Asphalt", url: "/services/asphalt" },
+          { name: "Sealcoating", url: "/services/asphalt/sealcoating" },
+        ])}
+      />
       {/* Breadcrumb + header */}
       <section className="pt-10 pb-16 bg-white border-b border-gray-200 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-brand/[0.03] to-transparent pointer-events-none" />
