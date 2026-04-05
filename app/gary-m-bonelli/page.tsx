@@ -2,27 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "Gary M. Bonelli — Owner & Principal Contractor",
   description:
-    "Learn about Bonardi Construction, Inc. — 30+ years of general contracting excellence across Queens, Brooklyn, Nassau and Suffolk County.",
+    "Meet Gary M. Bonelli, owner and principal contractor of Bonardi Construction, Inc. — 30+ years of hands-on general contracting expertise across NYC and Long Island.",
 };
 
-const values = [
-  {
-    title: "Quality",
-    body: "Every material we specify and every technique we apply reflects our commitment to work that outlasts trends and withstands decades of use.",
-  },
-  {
-    title: "Value",
-    body: "Fair, transparent pricing that gives you maximum return on every dollar invested — without sacrificing an inch of craftsmanship.",
-  },
-  {
-    title: "Reliability",
-    body: "Schedules kept. Calls returned. Promises honored. Our clients return to us project after project because we simply do what we say.",
-  },
-];
-
-export default function AboutPage() {
+export default function GaryBonelliPage() {
   return (
     <>
       {/* Hero */}
@@ -31,50 +16,19 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-gold" />
-            <span className="section-label">Our Story</span>
+            <span className="section-label">Leadership</span>
           </div>
-          <div className="grid lg:grid-cols-2 gap-16 items-end">
-            <div>
-              <h1 className="font-display font-bold text-display-xl text-ivory">
-                Three Decades of
-                <br />
-                <em className="italic text-gold">Building Trust.</em>
-              </h1>
-            </div>
-            <div>
-              <p className="font-body text-ash text-lg leading-relaxed border-l-2 border-gold pl-6">
-                Bonardi Construction, Inc. was founded on a simple belief: that clients deserve a
-                contractor who treats their project with the same care and urgency they would their own.
-                That philosophy has guided every job we've taken since day one.
-              </p>
-            </div>
-          </div>
+          <h1 className="font-display font-bold text-display-xl text-ivory">
+            Gary M. Bonelli
+          </h1>
+          <p className="font-mono text-gold text-xs tracking-widest mt-3">
+            OWNER &amp; PRINCIPAL CONTRACTOR
+          </p>
         </div>
       </section>
 
-      {/* Core values */}
+      {/* Bio */}
       <section className="py-20 bg-obsidian">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-3 mb-12">
-            <div className="w-8 h-px bg-gold" />
-            <span className="section-label">Our Core Values</span>
-          </div>
-          <div className="grid md:grid-cols-3 gap-px bg-slate">
-            {values.map((v, i) => (
-              <div key={v.title} className="bg-obsidian p-10">
-                <span className="font-mono text-xs text-gold tracking-widest mb-4 block">
-                  0{i + 1}
-                </span>
-                <h2 className="font-display font-bold text-display-md text-ivory mb-4">{v.title}</h2>
-                <p className="font-body text-ash text-sm leading-relaxed">{v.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Gary Bonelli bio */}
-      <section className="py-20 bg-charcoal border-t border-b border-slate" id="gary-m-bonelli">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Photo placeholder */}
@@ -87,7 +41,6 @@ export default function AboutPage() {
                   </div>
                   <p className="text-stone text-xs font-mono tracking-widest">PHOTO COMING SOON</p>
                 </div>
-                {/* Decorative corner */}
                 <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-gold/40" />
                 <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-gold/40" />
               </div>
@@ -95,17 +48,6 @@ export default function AboutPage() {
 
             {/* Bio content */}
             <div className="lg:col-span-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-px bg-gold" />
-                <span className="section-label">Leadership</span>
-              </div>
-              <h2 className="font-display font-bold text-display-lg text-ivory mb-2">
-                Gary M. Bonelli
-              </h2>
-              <p className="font-mono text-gold text-xs tracking-widest mb-8">
-                OWNER &amp; PRINCIPAL CONTRACTOR
-              </p>
-
               <div className="space-y-5 font-body text-ash text-base leading-relaxed">
                 <p>
                   Gary M. Bonelli founded Bonardi Construction with a commitment to delivering
@@ -145,30 +87,6 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications & Partners */}
-      <section className="py-20 bg-obsidian border-t border-slate">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-3 mb-12">
-            <div className="w-8 h-px bg-gold" />
-            <span className="section-label">Certifications &amp; Partners</span>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-px bg-slate">
-            {[
-              { name: "Lead-Safe\nCertified Firm", sub: "EPA Certified" },
-              { name: "Generac", sub: "Authorized Dealer & Installer" },
-              { name: "Cambridge", sub: "Certified Partner" },
-              { name: "Nicolock", sub: "Certified Partner" },
-              { name: "Unilock", sub: "Certified Partner" },
-            ].map(({ name, sub }) => (
-              <div key={name} className="bg-obsidian flex flex-col items-center justify-center py-10 px-6 text-center">
-                <span className="font-display font-semibold text-ivory text-base mb-2 whitespace-pre-line">{name}</span>
-                <span className="text-stone text-xs font-body">{sub}</span>
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -3,25 +3,25 @@ import Link from "next/link";
 const serviceLinks = [
   { name: "Asphalt Services", href: "/services/asphalt" },
   { name: "Concrete & Blacktop", href: "/services/concrete" },
-  { name: "Masonry & Brick Pointing", href: "/services/masonry" },
-  { name: "Roofing", href: "/services/roofing" },
+  { name: "Masonry & Brick Pointing", href: "/services/masonry-brick-pointing" },
+  { name: "Roofing", href: "/services/roofing-services" },
   { name: "New Construction", href: "/services/new-construction" },
-  { name: "Foundation Repair", href: "/services/foundation-repair" },
-  { name: "Home Additions", href: "/services/home-additions" },
+  { name: "Foundation Repair", href: "/services/foundation-repair-restoration" },
+  { name: "Home Additions", href: "/services/home-additions-extensions" },
   { name: "Fire Restoration", href: "/services/fire-damage-restoration" },
   { name: "Waterproofing", href: "/services/waterproofing" },
   { name: "Hardscaping", href: "/services/hardscaping" },
   { name: "Demolition", href: "/services/demolition" },
-  { name: "Water & Mold Restoration", href: "/services/water-mold-restoration" },
+  { name: "Water & Mold Restoration", href: "/services/water-and-mold-restoration" },
 ];
 
 const companyLinks = [
   { name: "About Us", href: "/about" },
-  { name: "Gary M. Bonelli", href: "/about#gary-m-bonelli" },
+  { name: "Gary M. Bonelli", href: "/gary-m-bonelli" },
   { name: "Gallery", href: "/gallery" },
   { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-  { name: "Request a Quote", href: "/contact#quote" },
+  { name: "Areas We Serve", href: "/areas-we-serve" },
+  { name: "Contact", href: "/contact-us" },
 ];
 
 export default function Footer() {
@@ -161,7 +161,7 @@ export default function Footer() {
 
               <div className="pt-4">
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-obsidian px-5 py-3 text-sm font-body font-semibold transition-all duration-300"
                 >
                   Get a Free Quote

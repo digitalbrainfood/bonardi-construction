@@ -7,19 +7,19 @@ const serviceCategories = [
     services: [
       {
         name: "Home Additions & Extensions",
-        href: "/services/home-additions",
+        href: "/services/home-additions-extensions",
         desc: "Expand your living space with precision-built additions, dormers, and room extensions.",
         icon: "⬜",
       },
       {
         name: "Roofing Services",
-        href: "/services/roofing",
+        href: "/services/roofing-services",
         desc: "Expert installation, repair, and replacement for all roofing systems.",
         icon: "⬡",
       },
       {
         name: "Foundation Repair",
-        href: "/services/foundation-repair",
+        href: "/services/foundation-repair-restoration",
         desc: "Structural restoration and waterproofing for lasting stability.",
         icon: "◧",
       },
@@ -37,7 +37,7 @@ const serviceCategories = [
       },
       {
         name: "Generac Generators",
-        href: "/services/generators",
+        href: "/services/generac-generators",
         desc: "Standby generator installation and service for uninterrupted power.",
         icon: "⚡",
       },
@@ -61,7 +61,7 @@ const serviceCategories = [
       },
       {
         name: "Masonry & Brick Pointing",
-        href: "/services/masonry",
+        href: "/services/masonry-brick-pointing",
         desc: "Tuckpointing, weatherproofing, and complete masonry restoration.",
         icon: "▩",
       },
@@ -116,12 +116,17 @@ const serviceCategories = [
       {
         name: "Fire Damage Restoration",
         href: "/services/fire-damage-restoration",
-        desc: "Emergency board-up and complete structural restoration.",
         icon: "◉",
       },
       {
+        name: "Sheetrock & Painting",
+        href: "/services/sheetrock-painting",
+        desc: "Professional drywall, skim coating, and interior painting.",
+        icon: "▤",
+      },
+      {
         name: "Water & Mold Restoration",
-        href: "/services/water-mold-restoration",
+        href: "/services/water-and-mold-restoration",
         desc: "Extraction, remediation, and structural repair after water damage.",
         icon: "◎",
       },
@@ -205,7 +210,7 @@ export default function Services() {
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <Link
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center gap-3 border border-gold text-gold hover:bg-gold hover:text-obsidian px-8 py-4 font-body font-semibold text-base tracking-wide transition-all duration-300"
           >
             Discuss Your Project

@@ -5,25 +5,28 @@ import Link from "next/link";
 
 const services = [
   { name: "Asphalt Services", href: "/services/asphalt" },
+  { name: "Bathroom Remodeling", href: "/services/bathroom-remodeling" },
   { name: "Concrete & Blacktop", href: "/services/concrete" },
   { name: "Construction Management", href: "/services/construction-management" },
   { name: "Demolition", href: "/services/demolition" },
+  { name: "Dormer Additions", href: "/services/dormer-additions" },
   { name: "Drainage", href: "/services/drainage" },
   { name: "Excavation", href: "/services/excavation" },
   { name: "Fire Damage Restoration", href: "/services/fire-damage-restoration" },
   { name: "Flooring", href: "/services/flooring" },
-  { name: "Foundation Repair", href: "/services/foundation-repair" },
+  { name: "Foundation Repair", href: "/services/foundation-repair-restoration" },
   { name: "Framing", href: "/services/framing" },
-  { name: "Generac Generators", href: "/services/generators" },
+  { name: "Generac Generators", href: "/services/generac-generators" },
   { name: "Hardscaping", href: "/services/hardscaping" },
-  { name: "Home Additions", href: "/services/home-additions" },
-  { name: "Masonry & Brick Pointing", href: "/services/masonry" },
+  { name: "Home Additions", href: "/services/home-additions-extensions" },
+  { name: "Kitchen Remodeling", href: "/services/kitchen-remodeling" },
+  { name: "Masonry & Brick Pointing", href: "/services/masonry-brick-pointing" },
   { name: "New Construction", href: "/services/new-construction" },
   { name: "Office Buildouts", href: "/services/office-buildouts" },
-  { name: "Roofing", href: "/services/roofing" },
+  { name: "Roofing", href: "/services/roofing-services" },
   { name: "Sidewalks", href: "/services/sidewalks" },
   { name: "Waterproofing", href: "/services/waterproofing" },
-  { name: "Water & Mold Restoration", href: "/services/water-mold-restoration" },
+  { name: "Water & Mold Restoration", href: "/services/water-and-mold-restoration" },
 ];
 
 export default function Navbar() {
@@ -208,14 +211,20 @@ export default function Navbar() {
       >
         <div className="flex flex-col h-full pt-24 pb-8 px-6 overflow-y-auto">
           <nav className="flex flex-col gap-1">
-            {["Home", "About", "Gallery", "Blog", "Contact"].map((item) => (
+            {[
+              { name: "Home", href: "/" },
+              { name: "About", href: "/about" },
+              { name: "Gallery", href: "/gallery" },
+              { name: "Blog", href: "/blog" },
+              { name: "Contact", href: "/contact-us" },
+            ].map((item) => (
               <Link
-                key={item}
-                href={`/${item.toLowerCase() === "home" ? "" : item.toLowerCase()}`}
+                key={item.name}
+                href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className="py-4 border-b border-slate text-2xl font-display text-ivory hover:text-gold transition-colors"
               >
-                {item}
+                {item.name}
               </Link>
             ))}
             <div className="py-4 border-b border-slate">

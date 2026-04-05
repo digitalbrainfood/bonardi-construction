@@ -93,7 +93,7 @@ export default function Hero() {
             {/* CTAs */}
             <div className="will-animate flex flex-wrap gap-4 mb-16">
               <Link
-                href="/contact"
+                href="/contact-us"
                 className="group flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian px-7 py-4 font-body font-semibold text-base tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-gold/25"
               >
                 Request a Free Quote

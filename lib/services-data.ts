@@ -48,11 +48,11 @@ export const services: ServiceData[] = [
     whyUs:
       "We use high-quality concrete mixes and precision forming techniques to ensure flat, durable, long-lasting results. Every project is graded for proper drainage to prevent pooling and cracking over time.",
     cta: "Request Concrete Quote",
-    relatedSlugs: ["asphalt", "sidewalks", "foundation-repair", "drainage"],
+    relatedSlugs: ["asphalt", "sidewalks", "foundation-repair-restoration", "drainage"],
     tags: ["Exterior", "Commercial", "Structural"],
   },
   {
-    slug: "roofing",
+    slug: "roofing-services",
     name: "Roofing Services",
     tagline: "Your Roof is Your First Line of Defense — We Make It Bulletproof",
     intro:
@@ -68,11 +68,11 @@ export const services: ServiceData[] = [
     whyUs:
       "Every roofing job we complete is backed by manufacturer warranties and our own labor guarantee. We inspect the deck, flashing, and drainage before a single shingle is installed.",
     cta: "Request Roofing Quote",
-    relatedSlugs: ["waterproofing", "fire-damage-restoration", "home-additions", "foundation-repair"],
+    relatedSlugs: ["waterproofing", "fire-damage-restoration", "home-additions-extensions", "foundation-repair-restoration"],
     tags: ["Residential", "Commercial"],
   },
   {
-    slug: "masonry",
+    slug: "masonry-brick-pointing",
     name: "Masonry, Brick Pointing & Weatherproofing",
     tagline: "Restore Your Masonry to Factory-New Condition",
     intro:
@@ -88,7 +88,7 @@ export const services: ServiceData[] = [
     whyUs:
       "We match mortar color and profile to your existing masonry for seamless, invisible repairs. Our weatherproofing treatments are vapor-permeable — they protect without trapping moisture inside the wall.",
     cta: "Request Masonry Quote",
-    relatedSlugs: ["waterproofing", "foundation-repair", "concrete", "sidewalks"],
+    relatedSlugs: ["waterproofing", "foundation-repair-restoration", "concrete", "sidewalks"],
     tags: ["Exterior", "Restoration"],
   },
   {
@@ -108,11 +108,11 @@ export const services: ServiceData[] = [
     whyUs:
       "Our 30 years of local contracting experience means we know exactly how to navigate New York City's complex permit and inspection processes. We bring projects in on time and on budget.",
     cta: "Discuss Your New Build",
-    relatedSlugs: ["construction-management", "framing", "foundation-repair", "home-additions"],
+    relatedSlugs: ["construction-management", "framing", "foundation-repair-restoration", "home-additions-extensions"],
     tags: ["Residential", "Commercial"],
   },
   {
-    slug: "home-additions",
+    slug: "home-additions-extensions",
     name: "Home Additions & Extensions",
     tagline: "More Space, Seamlessly Integrated With What You Already Love",
     intro:
@@ -128,11 +128,11 @@ export const services: ServiceData[] = [
     whyUs:
       "We work with your existing structure, matching materials, rooflines, and trim profiles so the addition is indistinguishable from the original construction. Full permit and inspection management included.",
     cta: "Plan Your Addition",
-    relatedSlugs: ["framing", "roofing", "new-construction", "foundation-repair"],
+    relatedSlugs: ["framing", "roofing-services", "new-construction", "foundation-repair-restoration"],
     tags: ["Residential", "Structural"],
   },
   {
-    slug: "foundation-repair",
+    slug: "foundation-repair-restoration",
     name: "Foundation Repair & Restoration",
     tagline: "When the Ground Shifts, We Keep Your Structure Standing",
     intro:
@@ -168,11 +168,11 @@ export const services: ServiceData[] = [
     whyUs:
       "We coordinate directly with your insurance carrier and provide detailed scopes of work that meet or exceed adjuster expectations. Our goal is to restore your property to pre-loss condition — or better.",
     cta: "Emergency Contact: 718.762.3400",
-    relatedSlugs: ["water-mold-restoration", "framing", "roofing", "waterproofing"],
+    relatedSlugs: ["water-and-mold-restoration", "framing", "roofing-services", "waterproofing"],
     tags: ["Restoration", "Emergency"],
   },
   {
-    slug: "water-mold-restoration",
+    slug: "water-and-mold-restoration",
     name: "Water & Mold Restoration",
     tagline: "Fast Response. Thorough Remediation. Complete Restoration.",
     intro:
@@ -188,7 +188,7 @@ export const services: ServiceData[] = [
     whyUs:
       "We use industrial extraction and drying equipment and follow IICRC best practices for mold remediation. Documentation provided at every step to support your insurance claim.",
     cta: "Emergency Contact: 718.762.3400",
-    relatedSlugs: ["fire-damage-restoration", "waterproofing", "foundation-repair", "drainage"],
+    relatedSlugs: ["fire-damage-restoration", "waterproofing", "foundation-repair-restoration", "drainage"],
     tags: ["Restoration", "Emergency"],
   },
   {
@@ -208,7 +208,7 @@ export const services: ServiceData[] = [
     whyUs:
       "We assess the source of water entry before recommending a solution — because every waterproofing failure is different. Our systems carry manufacturer and installation warranties.",
     cta: "Request Waterproofing Assessment",
-    relatedSlugs: ["foundation-repair", "drainage", "masonry", "roofing"],
+    relatedSlugs: ["foundation-repair-restoration", "drainage", "masonry-brick-pointing", "roofing-services"],
     tags: ["Exterior", "Structural"],
   },
   {
@@ -268,7 +268,7 @@ export const services: ServiceData[] = [
     whyUs:
       "We assess your property's grading and drainage patterns before designing a solution. Our systems are sized for the actual water volumes your site generates.",
     cta: "Request Drainage Assessment",
-    relatedSlugs: ["foundation-repair", "waterproofing", "excavation", "concrete"],
+    relatedSlugs: ["foundation-repair-restoration", "waterproofing", "excavation", "concrete"],
     tags: ["Exterior", "Site"],
   },
   {
@@ -288,7 +288,7 @@ export const services: ServiceData[] = [
     whyUs:
       "Our operators understand NYC soil conditions and local utility infrastructure. We're fully bonded and coordinate all required utility locates before breaking ground.",
     cta: "Request Excavation Quote",
-    relatedSlugs: ["foundation-repair", "drainage", "new-construction", "demolition"],
+    relatedSlugs: ["foundation-repair-restoration", "drainage", "new-construction", "demolition"],
     tags: ["Site Work"],
   },
   {
@@ -348,7 +348,7 @@ export const services: ServiceData[] = [
     whyUs:
       "Our framers read structural drawings fluently and frame to tolerance. Every opening, bearing point, and fastener pattern is executed per plan to ensure the structure performs as designed.",
     cta: "Request Framing Quote",
-    relatedSlugs: ["new-construction", "home-additions", "roofing", "foundation-repair"],
+    relatedSlugs: ["new-construction", "home-additions-extensions", "roofing-services", "foundation-repair-restoration"],
     tags: ["Structural"],
   },
   {
@@ -368,11 +368,11 @@ export const services: ServiceData[] = [
     whyUs:
       "A beautiful floor starts with a perfectly prepared subfloor. We correct any flatness or moisture issues before installation to ensure your floor looks perfect and performs for decades.",
     cta: "Request Flooring Quote",
-    relatedSlugs: ["home-additions", "office-buildouts", "new-construction", "framing"],
+    relatedSlugs: ["home-additions-extensions", "office-buildouts", "new-construction", "framing"],
     tags: ["Interior", "Residential"],
   },
   {
-    slug: "generators",
+    slug: "generac-generators",
     name: "Generac Generators",
     tagline: "Never Lose Power Again — Authorized Generac Dealer & Installer",
     intro:
@@ -388,7 +388,7 @@ export const services: ServiceData[] = [
     whyUs:
       "We're one of a limited number of Generac-authorized installation contractors in the New York area. Every installation is completed by certified technicians and backed by manufacturer warranty.",
     cta: "Get Generator Quote",
-    relatedSlugs: ["new-construction", "home-additions", "office-buildouts"],
+    relatedSlugs: ["new-construction", "home-additions-extensions", "office-buildouts"],
     tags: ["Specialty", "Residential", "Commercial"],
   },
   {
@@ -408,7 +408,7 @@ export const services: ServiceData[] = [
     whyUs:
       "We know the DOT process inside and out. Our sidewalk crews are licensed and experienced with NYC compliance standards, and we handle all permit filings from start to sign-off.",
     cta: "Request Sidewalk Quote",
-    relatedSlugs: ["concrete", "masonry", "hardscaping", "drainage"],
+    relatedSlugs: ["concrete", "masonry-brick-pointing", "hardscaping", "drainage"],
     tags: ["Exterior", "Compliance"],
   },
   {
@@ -450,6 +450,266 @@ export const services: ServiceData[] = [
     cta: "Request Milling Quote",
     relatedSlugs: ["asphalt", "asphalt-sealcoating", "concrete"],
     tags: ["Exterior", "Commercial"],
+  },
+  {
+    slug: "concreteblacktop-striping",
+    name: "Concrete, Blacktop & Striping",
+    tagline: "Complete Concrete, Blacktop & Line Striping Services",
+    intro:
+      "Bonardi Construction provides full-scope concrete, blacktop, and pavement striping services for residential and commercial properties throughout Queens, Brooklyn, and Long Island. From pouring new concrete driveways to resurfacing blacktop lots and applying crisp line striping, we handle every phase.",
+    bullets: [
+      "Concrete driveway and walkway installation",
+      "Blacktop paving and resurfacing",
+      "Parking lot line striping and marking",
+      "Curb installation and repair",
+      "ADA-compliant crosswalk and handicap striping",
+      "Site grading and drainage integration",
+    ],
+    whyUs:
+      "We combine concrete, blacktop, and striping expertise under one roof — eliminating the need to coordinate multiple contractors and ensuring seamless transitions between surfaces.",
+    cta: "Request Concrete & Blacktop Quote",
+    relatedSlugs: ["concrete", "asphalt", "sidewalks", "hardscaping"],
+    tags: ["Exterior", "Commercial"],
+  },
+  {
+    slug: "parapet-wall-repair-rebuild",
+    name: "Parapet Wall Repair & Rebuild",
+    tagline: "Structural Parapet Wall Restoration for NYC Buildings",
+    intro:
+      "Parapet walls are critical to building safety and code compliance in New York City. Bonardi Construction repairs, rebuilds, and waterproofs deteriorating parapet walls to restore structural integrity and prevent costly violations.",
+    bullets: [
+      "Full parapet wall demolition and rebuild",
+      "Brick repointing and mortar restoration",
+      "Coping stone replacement and installation",
+      "Through-wall flashing installation",
+      "Waterproofing and sealant application",
+      "DOB violation resolution and filing",
+    ],
+    whyUs:
+      "Our masonry team understands NYC building code requirements for parapet walls. We handle DOB filings and inspections so your building stays compliant and structurally sound.",
+    cta: "Request Parapet Repair Quote",
+    relatedSlugs: ["masonry-brick-pointing", "masonry-restoration", "roofing-services", "waterproofing"],
+    tags: ["Exterior", "Restoration", "Commercial"],
+  },
+  {
+    slug: "construction-consultation",
+    name: "Construction Consultation",
+    tagline: "Expert Guidance Before You Break Ground",
+    intro:
+      "Not sure where to start? Bonardi Construction offers professional construction consultation services to help property owners plan projects, understand costs, navigate permits, and make informed decisions before committing to a full build.",
+    bullets: [
+      "Project feasibility assessment",
+      "Preliminary cost estimating and budgeting",
+      "Permit and code compliance guidance",
+      "Scope of work development",
+      "Contractor selection advisory",
+      "Insurance and restoration consulting",
+    ],
+    whyUs:
+      "With 30+ years in the field, our principal offers the kind of candid, experienced advice that helps you avoid costly mistakes and choose the right approach for your project.",
+    cta: "Schedule a Consultation",
+    relatedSlugs: ["construction-management", "new-construction", "office-buildouts"],
+    tags: ["Commercial", "Residential"],
+  },
+  {
+    slug: "bathroom-remodeling",
+    name: "Bathroom Remodeling",
+    tagline: "Custom Bathroom Renovations That Combine Form and Function",
+    intro:
+      "Bonardi Construction designs and builds custom bathroom renovations for homes across Queens, Brooklyn, and Long Island. From full gut renovations to targeted upgrades, we deliver bathrooms that are beautiful, functional, and built to last.",
+    bullets: [
+      "Full gut bathroom renovation",
+      "Tile installation — floor, wall, and shower",
+      "Vanity and cabinetry installation",
+      "Plumbing fixture upgrades",
+      "Waterproofing and moisture barrier systems",
+      "ADA-accessible bathroom conversions",
+    ],
+    whyUs:
+      "Bathrooms demand precision waterproofing and flawless tile work. Our crews get the details right — from membrane installation to grout lines — so your renovation looks great and stays dry for decades.",
+    cta: "Request Bathroom Remodel Quote",
+    relatedSlugs: ["kitchen-remodeling", "flooring", "home-additions-extensions", "framing"],
+    tags: ["Residential", "Interior"],
+  },
+  {
+    slug: "dormer-additions",
+    name: "Dormer Additions",
+    tagline: "Add Space, Light, and Value With a Custom Dormer",
+    intro:
+      "A dormer addition is one of the most effective ways to expand livable space, increase natural light, and add value to your home. Bonardi Construction builds shed, gable, and full dormers across Queens, Brooklyn, and Long Island.",
+    bullets: [
+      "Shed dormer design and construction",
+      "Gable and hip dormer builds",
+      "Full second-story dormer conversions",
+      "Roofline integration and matching",
+      "Interior framing, insulation, and finish",
+      "Permit filing and DOB coordination",
+    ],
+    whyUs:
+      "We specialize in seamlessly integrating dormers into existing rooflines so the addition looks original to the home. Every dormer is engineered for structural integrity and properly flashed to prevent leaks.",
+    cta: "Plan Your Dormer Addition",
+    relatedSlugs: ["home-additions-extensions", "roofing-services", "framing", "new-construction"],
+    tags: ["Residential", "Structural"],
+  },
+  {
+    slug: "kitchen-remodeling",
+    name: "Kitchen Remodeling",
+    tagline: "The Kitchen You've Always Wanted — Built by Experts",
+    intro:
+      "Bonardi Construction delivers full-service kitchen remodeling for homeowners across the New York metro area. From layout reconfiguration and cabinetry to countertops and flooring, we transform kitchens into the functional, beautiful heart of your home.",
+    bullets: [
+      "Full kitchen gut renovation",
+      "Cabinet design, supply, and installation",
+      "Countertop fabrication and installation",
+      "Backsplash tile work",
+      "Plumbing and electrical coordination",
+      "Flooring and lighting upgrades",
+    ],
+    whyUs:
+      "We manage every trade involved in a kitchen remodel — plumbing, electrical, carpentry, tile — under one contract. That means better coordination, fewer delays, and a finished kitchen that exceeds expectations.",
+    cta: "Request Kitchen Remodel Quote",
+    relatedSlugs: ["bathroom-remodeling", "flooring", "home-additions-extensions", "framing"],
+    tags: ["Residential", "Interior"],
+  },
+  {
+    slug: "commercial-milling-paving",
+    name: "Commercial Milling & Paving",
+    tagline: "Large-Scale Milling and Paving for Commercial Properties",
+    intro:
+      "Bonardi Construction provides commercial-grade asphalt milling and paving services for parking lots, roadways, and large commercial sites across the New York metro area. Our heavy equipment and experienced crews deliver smooth, durable surfaces built for high-traffic use.",
+    bullets: [
+      "Full-depth and surface milling for commercial lots",
+      "Asphalt overlay and resurfacing",
+      "Parking lot reconstruction",
+      "ADA ramp and transition compliance",
+      "Traffic management during paving operations",
+      "Striping and signage installation",
+    ],
+    whyUs:
+      "We've paved commercial sites ranging from retail plazas to industrial yards. Our crews work efficiently to minimize downtime for your business while delivering a surface that holds up under heavy commercial traffic.",
+    cta: "Request Commercial Paving Quote",
+    relatedSlugs: ["asphalt", "asphalt-milling", "commercial-parking-lot-maintenance", "concrete"],
+    tags: ["Commercial", "Exterior"],
+  },
+  {
+    slug: "sheetrock-painting",
+    name: "Sheetrock & Painting",
+    tagline: "Professional Drywall and Painting for a Flawless Finish",
+    intro:
+      "Bonardi Construction provides expert sheetrock installation, taping, and painting services for residential and commercial interiors. Whether it's new construction, renovation, or damage repair, we deliver smooth walls and crisp finishes.",
+    bullets: [
+      "Sheetrock/drywall installation",
+      "Taping, mudding, and skim coating",
+      "Level 5 finish for premium results",
+      "Interior painting — walls, ceilings, and trim",
+      "Drywall repair and patching",
+      "Texture matching for existing surfaces",
+    ],
+    whyUs:
+      "Clean drywall work is the difference between a renovation that looks professional and one that doesn't. Our finishers deliver seamless surfaces ready for paint, every time.",
+    cta: "Request Sheetrock & Painting Quote",
+    relatedSlugs: ["framing", "office-buildouts", "home-additions-extensions", "fire-damage-restoration"],
+    tags: ["Interior", "Residential", "Commercial"],
+  },
+  {
+    slug: "masonry-restoration",
+    name: "Masonry Restoration",
+    tagline: "Restore the Beauty and Integrity of Historic Masonry",
+    intro:
+      "Bonardi Construction's masonry restoration division specializes in bringing deteriorating brick, stone, and brownstone facades back to their original condition. We combine traditional craftsmanship with modern materials for restorations that last.",
+    bullets: [
+      "Brownstone and limestone facade restoration",
+      "Historic mortar matching and repointing",
+      "Brick replacement and color matching",
+      "Lintel and sill replacement",
+      "Facade cleaning and sealing",
+      "Landmark-compliant restoration work",
+    ],
+    whyUs:
+      "Masonry restoration requires an understanding of historic materials and techniques. We match mortar composition, brick color, and joint profile to preserve the building's original character while ensuring structural longevity.",
+    cta: "Request Restoration Quote",
+    relatedSlugs: ["masonry-brick-pointing", "parapet-wall-repair-rebuild", "waterproofing", "foundation-repair-restoration"],
+    tags: ["Exterior", "Restoration"],
+  },
+  {
+    slug: "concrete-leveling",
+    name: "Concrete Leveling",
+    tagline: "Fix Sunken and Uneven Concrete Without Full Replacement",
+    intro:
+      "Sunken sidewalks, settled slabs, and uneven garage floors don't always require full replacement. Bonardi Construction provides concrete leveling services that restore grade and eliminate trip hazards at a fraction of the cost of a tear-out.",
+    bullets: [
+      "Mudjacking and slab lifting",
+      "Polyurethane foam injection leveling",
+      "Sidewalk trip hazard correction",
+      "Garage and basement floor leveling",
+      "Pool deck leveling",
+      "DOT compliance for uneven sidewalks",
+    ],
+    whyUs:
+      "Concrete leveling is faster, cleaner, and significantly less expensive than full replacement. We assess each slab to determine whether leveling is appropriate or if replacement is the better long-term solution.",
+    cta: "Request Leveling Assessment",
+    relatedSlugs: ["concrete", "sidewalks", "foundation-repair-restoration", "soil-stabilization"],
+    tags: ["Exterior", "Residential"],
+  },
+  {
+    slug: "soil-stabilization",
+    name: "Soil Stabilization",
+    tagline: "Strengthen Weak Soil to Protect Your Structure's Foundation",
+    intro:
+      "Unstable soil is the root cause of foundation settlement, slab cracking, and pavement failure. Bonardi Construction provides soil stabilization solutions that address the problem at its source — below grade.",
+    bullets: [
+      "Chemical soil stabilization",
+      "Compaction grouting",
+      "Soil mixing and amendment",
+      "Subgrade preparation for new construction",
+      "Erosion control and grading",
+      "Geotechnical coordination",
+    ],
+    whyUs:
+      "We work with geotechnical engineers to select the right stabilization method for your site conditions. Proper soil preparation prevents the kind of costly structural failures that surface years after construction.",
+    cta: "Request Soil Assessment",
+    relatedSlugs: ["foundation-repair-restoration", "excavation", "concrete-leveling", "drainage"],
+    tags: ["Site Work", "Structural"],
+  },
+  {
+    slug: "commercial-underpinning",
+    name: "Commercial Underpinning",
+    tagline: "Strengthen and Deepen Foundations for Commercial Structures",
+    intro:
+      "When commercial foundations are compromised by settlement, adjacent excavation, or increased load requirements, underpinning restores structural integrity. Bonardi Construction performs commercial underpinning across the NYC metro area.",
+    bullets: [
+      "Mass concrete underpinning",
+      "Mini-pile and micro-pile underpinning",
+      "Pit underpinning for adjacent construction",
+      "Foundation depth extension",
+      "Structural monitoring during underpinning",
+      "Engineering coordination and documentation",
+    ],
+    whyUs:
+      "Commercial underpinning demands precision engineering and careful execution. Our crews work methodically, in sequences designed to maintain structural stability throughout the process.",
+    cta: "Discuss Underpinning Needs",
+    relatedSlugs: ["foundation-repair-restoration", "excavation", "soil-stabilization", "construction-management"],
+    tags: ["Commercial", "Structural"],
+  },
+  {
+    slug: "commercial-parking-lot-maintenance",
+    name: "Commercial Parking Lot Maintenance",
+    tagline: "Keep Your Parking Lot Safe, Compliant, and Professional",
+    intro:
+      "A well-maintained parking lot protects your investment, reduces liability, and makes a strong first impression. Bonardi Construction provides comprehensive parking lot maintenance programs for commercial property owners and managers.",
+    bullets: [
+      "Crack sealing and pothole repair",
+      "Sealcoating and surface protection",
+      "Line striping and stenciling",
+      "ADA compliance upgrades",
+      "Catch basin and drainage maintenance",
+      "Seasonal maintenance programs",
+    ],
+    whyUs:
+      "Reactive repairs cost more than proactive maintenance. We design maintenance programs that extend pavement life, maintain ADA compliance, and keep your lot looking professional year-round.",
+    cta: "Request Maintenance Plan",
+    relatedSlugs: ["asphalt", "asphalt-sealcoating", "commercial-milling-paving", "drainage"],
+    tags: ["Commercial", "Exterior"],
   },
 ];
 

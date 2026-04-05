@@ -21,7 +21,7 @@ const categories: { label: string; color: string; services: Service[] }[] = [
     services: [
       {
         name: "Home Additions & Extensions",
-        slug: "home-additions",
+        slug: "home-additions-extensions",
         desc: "Expand your living space with custom additions, dormers, and room extensions built to match your home's existing character.",
         tags: ["Residential", "Structural"],
       },
@@ -33,13 +33,13 @@ const categories: { label: string; color: string; services: Service[] }[] = [
       },
       {
         name: "Roofing Services",
-        slug: "roofing",
+        slug: "roofing-services",
         desc: "Expert roof installation, repair, and replacement using premium materials with full labor warranty.",
         tags: ["Residential", "Commercial"],
       },
       {
         name: "Foundation Repair & Restoration",
-        slug: "foundation-repair",
+        slug: "foundation-repair-restoration",
         desc: "Structural foundation repair, waterproofing, and crack injection for lasting stability and protection.",
         tags: ["Structural"],
       },
@@ -57,9 +57,33 @@ const categories: { label: string; color: string; services: Service[] }[] = [
       },
       {
         name: "Generac Generators",
-        slug: "generators",
+        slug: "generac-generators",
         desc: "Authorized Generac dealer and certified installer — standby generator systems for homes and businesses.",
         tags: ["Specialty"],
+      },
+      {
+        name: "Dormer Additions",
+        slug: "dormer-additions",
+        desc: "Shed, gable, and full dormers that add space, light, and value to your home.",
+        tags: ["Residential", "Structural"],
+      },
+      {
+        name: "Kitchen Remodeling",
+        slug: "kitchen-remodeling",
+        desc: "Full-service kitchen renovations from layout to cabinetry, countertops, and finishes.",
+        tags: ["Residential", "Interior"],
+      },
+      {
+        name: "Bathroom Remodeling",
+        slug: "bathroom-remodeling",
+        desc: "Custom bathroom renovations with expert tile work and waterproofing.",
+        tags: ["Residential", "Interior"],
+      },
+      {
+        name: "Sheetrock & Painting",
+        slug: "sheetrock-painting",
+        desc: "Professional drywall installation, skim coating, and interior painting services.",
+        tags: ["Interior"],
       },
     ],
   },
@@ -93,7 +117,7 @@ const categories: { label: string; color: string; services: Service[] }[] = [
       },
       {
         name: "Masonry, Brick Pointing & Weatherproofing",
-        slug: "masonry",
+        slug: "masonry-brick-pointing",
         desc: "Tuckpointing, brick restoration, weatherproofing, and full masonry repair for long-term structural integrity.",
         tags: ["Exterior", "Restoration"],
       },
@@ -120,6 +144,30 @@ const categories: { label: string; color: string; services: Service[] }[] = [
         slug: "excavation",
         desc: "Site excavation, grading, and soil removal for residential and commercial projects of all scales.",
         tags: ["Site Work"],
+      },
+      {
+        name: "Masonry Restoration",
+        slug: "masonry-restoration",
+        desc: "Historic masonry, brownstone, and limestone facade restoration with authentic material matching.",
+        tags: ["Exterior", "Restoration"],
+      },
+      {
+        name: "Parapet Wall Repair & Rebuild",
+        slug: "parapet-wall-repair-rebuild",
+        desc: "Structural parapet wall restoration, coping replacement, and DOB violation resolution.",
+        tags: ["Exterior", "Restoration"],
+      },
+      {
+        name: "Concrete Leveling",
+        slug: "concrete-leveling",
+        desc: "Fix sunken and uneven concrete without full replacement using mudjacking and foam injection.",
+        tags: ["Exterior"],
+      },
+      {
+        name: "Soil Stabilization",
+        slug: "soil-stabilization",
+        desc: "Strengthen weak soil to prevent foundation settlement and pavement failure.",
+        tags: ["Site Work", "Structural"],
       },
     ],
   },
@@ -153,7 +201,7 @@ const categories: { label: string; color: string; services: Service[] }[] = [
       },
       {
         name: "Water & Mold Restoration",
-        slug: "water-mold-restoration",
+        slug: "water-and-mold-restoration",
         desc: "Water extraction, mold remediation, structural drying, and complete restoration after water damage.",
         tags: ["Restoration", "Emergency"],
       },
@@ -162,6 +210,30 @@ const categories: { label: string; color: string; services: Service[] }[] = [
         slug: "waterproofing",
         desc: "Interior and exterior waterproofing systems for basements, foundations, and roofs.",
         tags: ["Exterior", "Structural"],
+      },
+      {
+        name: "Construction Consultation",
+        slug: "construction-consultation",
+        desc: "Expert project planning, feasibility assessment, and cost guidance before you break ground.",
+        tags: ["Commercial", "Residential"],
+      },
+      {
+        name: "Commercial Milling & Paving",
+        slug: "commercial-milling-paving",
+        desc: "Large-scale milling and paving for commercial parking lots and roadways.",
+        tags: ["Commercial", "Exterior"],
+      },
+      {
+        name: "Commercial Underpinning",
+        slug: "commercial-underpinning",
+        desc: "Foundation strengthening and depth extension for commercial structures.",
+        tags: ["Commercial", "Structural"],
+      },
+      {
+        name: "Commercial Parking Lot Maintenance",
+        slug: "commercial-parking-lot-maintenance",
+        desc: "Comprehensive parking lot maintenance programs including crack sealing, striping, and sealcoating.",
+        tags: ["Commercial", "Exterior"],
       },
     ],
   },
@@ -266,7 +338,7 @@ export default function ServicesPage() {
             </p>
           </div>
           <Link
-            href="/contact"
+            href="/contact-us"
             className="flex-shrink-0 flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian px-8 py-4 font-body font-semibold text-base tracking-wide transition-all duration-300"
           >
             Request a Free Quote

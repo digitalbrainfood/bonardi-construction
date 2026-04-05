@@ -1,27 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getServiceBySlug, getRelatedServices, services } from "@/lib/services-data";
+import { getServiceBySlug, getRelatedServices } from "@/lib/services-data";
 
-type Props = { params: { slug: string } };
+export const metadata: Metadata = {
+  title: "Asphalt Sealcoating",
+  description:
+    "Professional asphalt sealcoating services from Bonardi Construction — protect and extend the life of your driveway or parking lot. Queens, Brooklyn, Nassau & Suffolk County.",
+};
 
-export async function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug);
-  if (!service) return {};
-  return {
-    title: service.name,
-    description: `${service.tagline} — Bonardi Construction serves Queens, Brooklyn, Nassau & Suffolk County.`,
-  };
-}
-
-export default function ServiceDetailPage({ params }: Props) {
-  const service = getServiceBySlug(params.slug);
-  if (!service) notFound();
-
+export default function AsphaltSealcoatingPage() {
+  const service = getServiceBySlug("asphalt-sealcoating")!;
   const related = getRelatedServices(service.relatedSlugs);
 
   return (
@@ -30,7 +18,6 @@ export default function ServiceDetailPage({ params }: Props) {
       <section className="pt-10 pb-16 bg-carbon border-b border-slate relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[40%] h-full bg-gradient-to-l from-gold/[0.04] to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative">
-          {/* Breadcrumb */}
           <nav className="flex items-center gap-2 mb-8">
             <Link href="/" className="text-stone hover:text-ash text-xs font-mono tracking-wide transition-colors">
               HOME
@@ -40,9 +27,11 @@ export default function ServiceDetailPage({ params }: Props) {
               SERVICES
             </Link>
             <span className="text-slate text-xs">/</span>
-            <span className="text-gold text-xs font-mono tracking-wide uppercase">
-              {service.name}
-            </span>
+            <Link href="/services/asphalt" className="text-stone hover:text-ash text-xs font-mono tracking-wide transition-colors">
+              ASPHALT
+            </Link>
+            <span className="text-slate text-xs">/</span>
+            <span className="text-gold text-xs font-mono tracking-wide uppercase">SEALCOATING</span>
           </nav>
 
           <div className="grid lg:grid-cols-12 gap-8 items-end">
@@ -81,14 +70,11 @@ export default function ServiceDetailPage({ params }: Props) {
       <section className="py-20 bg-obsidian">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16">
-            {/* Content left */}
             <div className="lg:col-span-7 space-y-12">
-              {/* Intro */}
               <div>
                 <p className="font-body text-ash text-lg leading-relaxed">{service.intro}</p>
               </div>
 
-              {/* What's included */}
               <div>
                 <div className="flex items-center gap-3 mb-7">
                   <div className="w-6 h-px bg-gold" />
@@ -106,7 +92,6 @@ export default function ServiceDetailPage({ params }: Props) {
                 </ul>
               </div>
 
-              {/* Why Bonardi */}
               <div className="border-l-2 border-gold pl-6 bg-charcoal -ml-6 py-6 pr-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-6 h-px bg-gold" />
@@ -116,22 +101,9 @@ export default function ServiceDetailPage({ params }: Props) {
                 </div>
                 <p className="font-body text-ash text-base leading-relaxed">{service.whyUs}</p>
               </div>
-
-              {/* Image placeholder */}
-              <div className="aspect-video bg-charcoal border border-slate flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent" />
-                <div className="text-center relative z-10">
-                  <p className="text-stone text-xs font-mono tracking-widest mb-1">PROJECT PHOTOS</p>
-                  <p className="text-slate text-xs font-body">Upload {service.name.toLowerCase()} project images here</p>
-                </div>
-                <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-gold/30" />
-                <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/30" />
-              </div>
             </div>
 
-            {/* Sidebar right */}
             <div className="lg:col-span-5 space-y-8">
-              {/* Quote card */}
               <div className="bg-charcoal border border-slate p-8">
                 <p className="section-label mb-5">Request a Quote</p>
                 <p className="font-body text-ash text-sm leading-relaxed mb-6">
@@ -152,24 +124,6 @@ export default function ServiceDetailPage({ params }: Props) {
                 </a>
               </div>
 
-              {/* Service highlights */}
-              <div className="bg-carbon border border-slate/60 p-6 space-y-4">
-                <p className="section-label">Why Choose Bonardi</p>
-                {[
-                  { icon: "◆", text: "30+ years of licensed experience" },
-                  { icon: "◆", text: "NYC, Nassau & Suffolk licensed" },
-                  { icon: "◆", text: "Lead-Safe Certified Firm" },
-                  { icon: "◆", text: "Full project management" },
-                  { icon: "◆", text: "Transparent pricing, no surprises" },
-                ].map(({ icon, text }) => (
-                  <div key={text} className="flex items-center gap-3">
-                    <span className="text-gold text-xs">{icon}</span>
-                    <span className="text-ash text-sm font-body">{text}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Service area */}
               <div className="border border-slate/50 p-6">
                 <p className="section-label mb-3">Service Area</p>
                 <p className="text-ash text-sm font-body leading-relaxed">
@@ -200,12 +154,6 @@ export default function ServiceDetailPage({ params }: Props) {
                     {rel.name}
                   </h3>
                   <p className="text-cement text-xs font-body leading-relaxed line-clamp-2">{rel.tagline}</p>
-                  <div className="mt-4 text-gold text-xs font-body font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
-                    Learn more
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
                 </Link>
               ))}
             </div>

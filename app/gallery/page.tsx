@@ -169,7 +169,7 @@ export default function GalleryPage() {
                       <h3 className="font-body font-semibold text-ivory">{p.title}</h3>
                     </div>
                     <a
-                      href="/contact"
+                      href="/contact-us"
                       className="text-xs font-body font-semibold text-gold border border-gold/40 hover:border-gold px-4 py-2 transition-colors"
                     >
                       Similar Project?
@@ -190,7 +190,7 @@ export default function GalleryPage() {
             Let&apos;s build something you&apos;ll be proud to show off.
           </h2>
           <a
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center gap-3 bg-gold hover:bg-gold-light text-obsidian px-8 py-4 font-body font-semibold text-base tracking-wide transition-all duration-300"
           >
             Start Your Project

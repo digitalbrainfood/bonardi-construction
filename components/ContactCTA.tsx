@@ -56,7 +56,7 @@ export default function ContactCTA() {
               </div>
               <div className="gold-rule" />
               <Link
-                href="/contact"
+                href="/contact-us"
                 className="flex items-center justify-center gap-3 bg-gold hover:bg-gold-light text-obsidian w-full py-4 font-body font-semibold text-base tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-gold/25"
               >
                 Request a Free Quote
