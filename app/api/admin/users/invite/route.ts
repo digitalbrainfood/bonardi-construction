@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from '@supabase/supabase-js';
 
-// TODO: Connect to Supabase when ready
-// import { createClient } from '@supabase/supabase-js';
-// const supabase = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-//   process.env.SUPABASE_SERVICE_ROLE_KEY!
-// );
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 export async function POST(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const { email, role } = await request.json();
 
     if (!email || typeof email !== "string") {
@@ -26,26 +28,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Invite via Supabase auth admin
-    // const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.bonardiconstruction.com';
-    // const { data, error } = await supabase.auth.admin.inviteUserByEmail(email, {
-    //   redirectTo: `${siteUrl.replace(/\/$/, '')}/admin/reset-password`,
-    //   data: { role: role || 'editor' },
-    // });
-    // if (error) {
-    //   return NextResponse.json({ error: error.message }, { status: 400 });
-    // }
-    // return NextResponse.json({ success: true, user: data.user });
-
-    return NextResponse.json({
-      success: true,
-      message: `Invitation would be sent to ${email} with role: ${role || "editor"}`,
-      user: {
-        id: String(Date.now()),
-        email,
-        role: role || "editor",
-      },
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.bonardiconstruction.com';
+    const { data, error } = await supabase.auth.admin.inviteUserByEmail(email, {
+      redirectTo: `${siteUrl.replace(/\/$/, '')}/admin/reset-password`,
+      data: { role: role || 'editor' },
     });
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ success: true, user: data.user });
   } catch {
     return NextResponse.json(
       { error: "Failed to invite user" },

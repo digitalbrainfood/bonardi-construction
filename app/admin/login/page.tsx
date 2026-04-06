@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -20,12 +21,10 @@ export default function AdminLoginPage() {
     setIsLoading(true);
 
     try {
-      // TODO: Replace with Supabase auth when project is created
-      // const supabase = createClient();
-      // const { error } = await supabase.auth.signInWithPassword({ email, password });
-      // if (error) { setError(error.message); return; }
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) { setError(error.message); return; }
 
-      // Stub: just redirect to admin dashboard
       router.push("/admin");
       router.refresh();
     } catch {

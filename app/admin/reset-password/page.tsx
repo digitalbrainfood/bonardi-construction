@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Loader2, CheckCircle, ArrowLeft } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function ResetPasswordPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,14 +18,12 @@ export default function ResetPasswordPage() {
     setIsLoading(true);
 
     try {
-      // TODO: Replace with Supabase auth when project is created
-      // const supabase = createClient();
-      // const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      //   redirectTo: `${window.location.origin}/auth/callback?next=/admin/reset-password`,
-      // });
-      // if (error) { setError(error.message); return; }
+      const supabase = createClient();
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/callback?next=/admin/reset-password`,
+      });
+      if (error) { setError(error.message); return; }
 
-      // Stub: just show success message
       setSuccess(true);
     } catch {
       setError("An unexpected error occurred");

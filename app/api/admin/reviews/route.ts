@@ -1,24 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from '@supabase/supabase-js';
 
-// TODO: Connect to Supabase when ready
-// import { createClient } from '@supabase/supabase-js';
-// const supabase = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-//   process.env.SUPABASE_SERVICE_ROLE_KEY!
-// );
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 // GET - List all reviews
 export async function GET() {
   try {
-    // TODO: Fetch from Supabase
-    // const { data, error } = await supabase
-    //   .from('reviews')
-    //   .select('*')
-    //   .order('created_at', { ascending: false });
-    // if (error) throw error;
-    // return NextResponse.json(data || []);
-
-    return NextResponse.json([]);
+    const supabase = getSupabase();
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return NextResponse.json(data || []);
   } catch (error: unknown) {
     console.error("Fetch reviews error:", error);
     const message =
@@ -30,6 +29,7 @@ export async function GET() {
 // POST - Create new review
 export async function POST(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body = await request.json();
     const { name, location, rating, text, service, featured = false } = body;
 
@@ -40,28 +40,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Insert into Supabase
-    // const { data, error } = await supabase
-    //   .from('reviews')
-    //   .insert({ name, location, rating: rating || 5, text, service: service || 'General Construction', featured, created_at: new Date().toISOString() })
-    //   .select()
-    //   .single();
-    // if (error) throw error;
-    // return NextResponse.json(data, { status: 201 });
-
-    return NextResponse.json(
-      {
-        id: String(Date.now()),
+    const { data, error } = await supabase
+      .from('reviews')
+      .insert({
         name,
         location,
         rating: rating || 5,
         text,
-        service: service || "General Construction",
+        service: service || 'General Construction',
         featured,
         created_at: new Date().toISOString(),
-      },
-      { status: 201 }
-    );
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    return NextResponse.json(data, { status: 201 });
   } catch (error: unknown) {
     console.error("Create review error:", error);
     const message =
@@ -73,6 +66,7 @@ export async function POST(request: NextRequest) {
 // PUT - Update review
 export async function PUT(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body = await request.json();
     const { id, ...updates } = body;
 
@@ -83,17 +77,14 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // TODO: Update in Supabase
-    // const { data, error } = await supabase
-    //   .from('reviews')
-    //   .update(updates)
-    //   .eq('id', id)
-    //   .select()
-    //   .single();
-    // if (error) throw error;
-    // return NextResponse.json(data);
-
-    return NextResponse.json({ id, ...updates, success: true });
+    const { data, error } = await supabase
+      .from('reviews')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return NextResponse.json(data);
   } catch (error: unknown) {
     console.error("Update review error:", error);
     const message =
@@ -105,6 +96,7 @@ export async function PUT(request: NextRequest) {
 // DELETE - Delete review
 export async function DELETE(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 
@@ -115,12 +107,11 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    // TODO: Delete from Supabase
-    // const { error } = await supabase
-    //   .from('reviews')
-    //   .delete()
-    //   .eq('id', id);
-    // if (error) throw error;
+    const { error } = await supabase
+      .from('reviews')
+      .delete()
+      .eq('id', id);
+    if (error) throw error;
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from '@supabase/supabase-js';
 
-// TODO: Connect to Supabase when ready
-// import { createClient } from '@supabase/supabase-js';
-// const supabase = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-//   process.env.SUPABASE_SERVICE_ROLE_KEY!
-// );
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 const defaultBonardiSettings = {
   companyName: "Bonardi Construction",
@@ -31,19 +32,16 @@ const defaultBonardiSettings = {
 // GET - Get site settings
 export async function GET() {
   try {
-    // TODO: Fetch from Supabase
-    // const { data, error } = await supabase
-    //   .from('site_settings')
-    //   .select('*')
-    //   .eq('id', 'main')
-    //   .single();
-    // if (error && error.code !== 'PGRST116') throw error;
-    // return NextResponse.json(data || { id: 'main', data: {} });
+    const supabase = getSupabase();
+    const { data, error } = await supabase
+      .from('settings')
+      .select('*')
+      .limit(1)
+      .single();
 
-    return NextResponse.json({
-      id: "main",
-      data: defaultBonardiSettings,
-    });
+    if (error && error.code !== 'PGRST116') throw error;
+
+    return NextResponse.json(data || { id: 'default', data: defaultBonardiSettings });
   } catch (error: unknown) {
     console.error("Fetch settings error:", error);
     const message =
@@ -55,29 +53,43 @@ export async function GET() {
 // POST - Save site settings
 export async function POST(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body = await request.json();
 
-    // TODO: Upsert into Supabase
-    // const { data, error } = await supabase
-    //   .from('site_settings')
-    //   .upsert({
-    //     id: 'main',
-    //     data: body,
-    //     updated_at: new Date().toISOString(),
-    //   }, {
-    //     onConflict: 'id',
-    //   })
-    //   .select()
-    //   .single();
-    // if (error) throw error;
-    // return NextResponse.json(data);
+    // Check if settings row exists
+    const { data: existing } = await supabase
+      .from('settings')
+      .select('id')
+      .limit(1)
+      .single();
 
-    return NextResponse.json({
-      id: "main",
-      data: body,
-      updated_at: new Date().toISOString(),
-      success: true,
-    });
+    let result;
+    if (existing) {
+      const { data, error } = await supabase
+        .from('settings')
+        .update({
+          data: body,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', existing.id)
+        .select()
+        .single();
+      if (error) throw error;
+      result = data;
+    } else {
+      const { data, error } = await supabase
+        .from('settings')
+        .insert({
+          data: body,
+          updated_at: new Date().toISOString(),
+        })
+        .select()
+        .single();
+      if (error) throw error;
+      result = data;
+    }
+
+    return NextResponse.json(result);
   } catch (error: unknown) {
     console.error("Save settings error:", error);
     const message =

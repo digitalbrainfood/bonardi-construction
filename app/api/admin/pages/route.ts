@@ -1,51 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 
-// TODO: Uncomment when Supabase is configured
-// import { createClient } from '@supabase/supabase-js';
-// const supabase = createClient(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-//   process.env.SUPABASE_SERVICE_ROLE_KEY!
-// );
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 // GET - List all pages or get single page by slug
 export async function GET(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get('slug');
     const id = searchParams.get('id');
 
     if (id) {
-      // TODO: Supabase query
-      // const { data, error } = await supabase
-      //   .from('pages')
-      //   .select('*')
-      //   .eq('id', id)
-      //   .single();
-      // if (error) throw error;
-      // return NextResponse.json(data);
-      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      const { data, error } = await supabase
+        .from('pages')
+        .select('*')
+        .eq('id', id)
+        .single();
+      if (error) throw error;
+      return NextResponse.json(data);
     }
 
     if (slug) {
-      // TODO: Supabase query
-      // const preview = searchParams.get('preview') === 'true';
-      // const query = supabase.from('pages').select('*').eq('slug', slug);
-      // if (!preview) query.eq('status', 'published');
-      // const { data, error } = await query.single();
-      // if (error) throw error;
-      // return NextResponse.json(data);
-      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+      const preview = searchParams.get('preview') === 'true';
+      const query = supabase.from('pages').select('*').eq('slug', slug);
+      if (!preview) query.eq('status', 'published');
+      const { data, error } = await query.single();
+      if (error) throw error;
+      return NextResponse.json(data);
     }
 
     // List all pages
-    // TODO: Supabase query
-    // const { data, error } = await supabase
-    //   .from('pages')
-    //   .select('*')
-    //   .order('created_at', { ascending: false });
-    // if (error) throw error;
-    // return NextResponse.json(data || []);
-    return NextResponse.json([]);
+    const { data, error } = await supabase
+      .from('pages')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return NextResponse.json(data || []);
   } catch (error: unknown) {
     console.error('Fetch pages error:', error);
     const message = error instanceof Error ? error.message : (error as { message?: string })?.message || 'Failed to fetch pages';
@@ -56,6 +52,7 @@ export async function GET(request: NextRequest) {
 // POST - Create new page
 export async function POST(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body = await request.json();
     const { slug, title, status = 'draft', data = {} } = body;
 
@@ -66,41 +63,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Supabase insert
-    // const { data: existing } = await supabase
-    //   .from('pages')
-    //   .select('id')
-    //   .eq('slug', slug)
-    //   .single();
-    // if (existing) {
-    //   return NextResponse.json({ error: 'A page with this slug already exists' }, { status: 400 });
-    // }
-    // const { data: page, error } = await supabase
-    //   .from('pages')
-    //   .insert({
-    //     id: crypto.randomUUID(),
-    //     slug,
-    //     title,
-    //     status,
-    //     data,
-    //     created_at: new Date().toISOString(),
-    //     updated_at: new Date().toISOString(),
-    //   })
-    //   .select()
-    //   .single();
-    // if (error) throw error;
-    // return NextResponse.json(page, { status: 201 });
+    const { data: existing } = await supabase
+      .from('pages')
+      .select('id')
+      .eq('slug', slug)
+      .single();
+    if (existing) {
+      return NextResponse.json({ error: 'A page with this slug already exists' }, { status: 400 });
+    }
 
-    const stubPage = {
-      id: crypto.randomUUID(),
-      slug,
-      title,
-      status,
-      data,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    };
-    return NextResponse.json(stubPage, { status: 201 });
+    const { data: page, error } = await supabase
+      .from('pages')
+      .insert({
+        id: crypto.randomUUID(),
+        slug,
+        title,
+        status,
+        data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    return NextResponse.json(page, { status: 201 });
   } catch (error: unknown) {
     console.error('Create page error:', error);
     const message = error instanceof Error ? error.message : (error as { message?: string })?.message || 'Failed to create page';
@@ -111,6 +97,7 @@ export async function POST(request: NextRequest) {
 // PUT - Update page
 export async function PUT(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const body = await request.json();
     const { id, slug, title, status, data } = body;
 
@@ -118,40 +105,32 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Page ID is required' }, { status: 400 });
     }
 
-    // TODO: Supabase update
-    // if (slug) {
-    //   const { data: existing } = await supabase
-    //     .from('pages')
-    //     .select('id')
-    //     .eq('slug', slug)
-    //     .neq('id', id)
-    //     .single();
-    //   if (existing) {
-    //     return NextResponse.json({ error: 'A page with this slug already exists' }, { status: 400 });
-    //   }
-    // }
-    // const updateData: Record<string, unknown> = { updated_at: new Date().toISOString() };
-    // if (slug !== undefined) updateData.slug = slug;
-    // if (title !== undefined) updateData.title = title;
-    // if (status !== undefined) updateData.status = status;
-    // if (data !== undefined) updateData.data = data;
-    // const { data: page, error } = await supabase
-    //   .from('pages')
-    //   .update(updateData)
-    //   .eq('id', id)
-    //   .select()
-    //   .single();
-    // if (error) throw error;
-    // return NextResponse.json(page);
+    if (slug) {
+      const { data: existing } = await supabase
+        .from('pages')
+        .select('id')
+        .eq('slug', slug)
+        .neq('id', id)
+        .single();
+      if (existing) {
+        return NextResponse.json({ error: 'A page with this slug already exists' }, { status: 400 });
+      }
+    }
 
-    return NextResponse.json({
-      id,
-      slug,
-      title,
-      status,
-      data,
-      updated_at: new Date().toISOString(),
-    });
+    const updateData: Record<string, unknown> = { updated_at: new Date().toISOString() };
+    if (slug !== undefined) updateData.slug = slug;
+    if (title !== undefined) updateData.title = title;
+    if (status !== undefined) updateData.status = status;
+    if (data !== undefined) updateData.data = data;
+
+    const { data: page, error } = await supabase
+      .from('pages')
+      .update(updateData)
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return NextResponse.json(page);
   } catch (error: unknown) {
     console.error('Update page error:', error);
     const message = error instanceof Error ? error.message : (error as { message?: string })?.message || 'Failed to update page';
@@ -162,6 +141,7 @@ export async function PUT(request: NextRequest) {
 // DELETE - Delete page
 export async function DELETE(request: NextRequest) {
   try {
+    const supabase = getSupabase();
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
 
@@ -169,12 +149,11 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Page ID is required' }, { status: 400 });
     }
 
-    // TODO: Supabase delete
-    // const { error } = await supabase
-    //   .from('pages')
-    //   .delete()
-    //   .eq('id', id);
-    // if (error) throw error;
+    const { error } = await supabase
+      .from('pages')
+      .delete()
+      .eq('id', id);
+    if (error) throw error;
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
