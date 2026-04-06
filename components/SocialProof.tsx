@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { usePathname } from "next/navigation";
 
 const messages = [
   { name: "John", location: "Queens", action: "just requested a quote" },
@@ -12,9 +13,13 @@ const messages = [
 ];
 
 export default function SocialProof() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dismissed, setDismissed] = useState(false);
+
+  // Don't show on admin pages
+  if (pathname?.startsWith("/admin")) return null;
 
   const dismiss = useCallback(() => {
     setVisible(false);

@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import BackToTop from "@/components/BackToTop";
-import ScrollProgress from "@/components/ScrollProgress";
-import FloatingContact from "@/components/FloatingContact";
-import CookieConsent from "@/components/CookieConsent";
-import SocialProof from "@/components/SocialProof";
-import { ChatWrapper } from "@/components/chat";
+import LayoutShell from "@/components/LayoutShell";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -74,18 +67,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body>
-        <ScrollProgress />
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <Navbar />
-        <main id="main-content">{children}</main>
-        <Footer />
-        <BackToTop />
-        <ChatWrapper />
-        <FloatingContact />
-        <SocialProof />
-        <CookieConsent />
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );
