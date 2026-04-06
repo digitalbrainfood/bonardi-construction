@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ScrollProgress from "@/components/ScrollProgress";
-import FloatingContact from "@/components/FloatingContact";
+
 import CookieConsent from "@/components/CookieConsent";
 import SocialProof from "@/components/SocialProof";
 import { ChatWrapper } from "@/components/chat";
@@ -29,7 +29,6 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       <Footer />
       <BackToTop />
       <ChatWrapper />
-      <FloatingContact />
       <SocialProof />
       <CookieConsent />
     </>
