@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen relative flex items-center justify-center p-4">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-[#0055A5]/20 to-gray-900" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" />
 
       <div className="relative w-full max-w-md z-10">
         {/* Logo */}
@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8">
+        <div className="bg-gray-800 border border-gray-700 rounded-2xl p-8">
           <h1 className="text-2xl font-bold text-white text-center mb-2">
             Admin Login
           </h1>
@@ -85,7 +85,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#FBB62E] focus:ring-1 focus:ring-[#FBB62E] transition-colors"
+                  className="w-full bg-gray-900 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#FBB62E] focus:ring-1 focus:ring-[#FBB62E] transition-colors"
                   placeholder="admin@example.com"
                 />
               </div>
@@ -103,7 +103,7 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-12 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#FBB62E] focus:ring-1 focus:ring-[#FBB62E] transition-colors"
+                  className="w-full bg-gray-900 border border-gray-600 rounded-lg pl-10 pr-12 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#FBB62E] focus:ring-1 focus:ring-[#FBB62E] transition-colors"
                   placeholder="••••••••"
                 />
                 <button
