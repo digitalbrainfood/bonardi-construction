@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 const messages = [
@@ -12,11 +12,17 @@ const messages = [
   { name: "Angela", location: "Huntington", action: "viewed Paving Services" },
 ];
 
+function randomDelay() {
+  // 2-5 minutes in ms
+  return (120 + Math.random() * 180) * 1000;
+}
+
 export default function SocialProof() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dismissed, setDismissed] = useState(false);
+  const shuffled = useRef(false);
 
   // Don't show on admin pages
   if (pathname?.startsWith("/admin")) return null;
@@ -29,6 +35,14 @@ export default function SocialProof() {
     } catch {}
   }, []);
 
+  // Shuffle starting index once
+  useEffect(() => {
+    if (!shuffled.current) {
+      setCurrentIndex(Math.floor(Math.random() * messages.length));
+      shuffled.current = true;
+    }
+  }, []);
+
   useEffect(() => {
     // Check if permanently dismissed this session
     try {
@@ -38,29 +52,31 @@ export default function SocialProof() {
       }
     } catch {}
 
-    // Initial delay before first appearance
+    // Initial delay: 30-60 seconds
+    const initialDelay = (30 + Math.random() * 30) * 1000;
     const initialTimer = setTimeout(() => {
       setVisible(true);
-    }, 5000);
+    }, initialDelay);
 
     return () => clearTimeout(initialTimer);
   }, []);
 
-  // Auto-dismiss after 4 seconds, then cycle every 8 seconds
   useEffect(() => {
     if (dismissed) return;
 
     if (visible) {
+      // Show for 5 seconds then hide
       const hideTimer = setTimeout(() => {
         setVisible(false);
-      }, 4000);
+      }, 5000);
       return () => clearTimeout(hideTimer);
     } else {
-      // Show next notification after 8 seconds (from when previous hid)
+      // Wait 2-5 minutes before showing next
+      const delay = randomDelay();
       const showTimer = setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % messages.length);
         setVisible(true);
-      }, 8000);
+      }, delay);
       return () => clearTimeout(showTimer);
     }
   }, [visible, dismissed]);
