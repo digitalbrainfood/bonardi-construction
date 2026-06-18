@@ -99,7 +99,6 @@ export const serviceImages: Record<string, string> = {
   "construction-consultation": u("photo-1560250097-0b93528c311a", 1200, 675),
   "concrete-leveling": u("photo-1504307651254-35680f356dfd", 1200, 675),
   "soil-stabilization": u("photo-1564013799919-ab600027ffc6", 1200, 675),
-  "commercial-underpinning": u("photo-1503387762-592deb58ef4e", 1200, 675),
   "commercial-milling-paving": u("photo-1558618666-fcd25c85f7e7", 1200, 675),
   "commercial-parking-lot-maintenance": u("photo-1590496793929-36417d3117de", 1200, 675),
   "concreteblacktop-striping": u("photo-1517089596392-fb9a9033e05b", 1200, 675),

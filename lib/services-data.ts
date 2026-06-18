@@ -243,7 +243,7 @@ export const services: ServiceData[] = [
     bullets: [
       "Foundation crack injection and repair",
       "Wall anchoring and bracing systems",
-      "Piering and underpinning",
+      "Piering and foundation support",
       "Interior and exterior waterproofing",
       "Sump pump installation",
       "Drainage correction around foundation",
@@ -267,7 +267,7 @@ export const services: ServiceData[] = [
       {
         question: "How much does foundation repair cost in New York?",
         answer:
-          "Foundation repair costs vary widely based on the type of problem. Simple crack injections may start around $500 to $1,500, while more complex work like underpinning or wall anchoring can range from $5,000 to $25,000 or more. We provide free inspections and detailed estimates so you know exactly what to expect.",
+          "Foundation repair costs vary widely based on the type of problem. Simple crack injections may start around $500 to $1,500, while more complex work like piering or wall anchoring can range from $5,000 to $25,000 or more. We provide free inspections and detailed estimates so you know exactly what to expect.",
       },
     ],
   },
@@ -1115,38 +1115,6 @@ export const services: ServiceData[] = [
         question: "What soil stabilization methods do you use?",
         answer:
           "Bonardi Construction uses chemical stabilization, compaction grouting, and soil amendment techniques depending on the site conditions. We coordinate with geotechnical engineers to select the most effective method for each project.",
-      },
-    ],
-  },
-  {
-    slug: "commercial-underpinning",
-    name: "Commercial Underpinning",
-    tagline: "Strengthen and Deepen Foundations for Commercial Structures",
-    intro:
-      "When commercial foundations are compromised by settlement, adjacent excavation, or increased load requirements, underpinning restores structural integrity. Bonardi Construction performs commercial underpinning across the NYC metro area.",
-    bullets: [
-      "Mass concrete underpinning",
-      "Mini-pile and micro-pile underpinning",
-      "Pit underpinning for adjacent construction",
-      "Foundation depth extension",
-      "Structural monitoring during underpinning",
-      "Engineering coordination and documentation",
-    ],
-    whyUs:
-      "Commercial underpinning demands precision engineering and careful execution. Our crews work methodically, in sequences designed to maintain structural stability throughout the process.",
-    cta: "Discuss Underpinning Needs",
-    relatedSlugs: ["foundation-repair-restoration", "excavation", "soil-stabilization", "construction-management"],
-    tags: ["Commercial", "Structural"],
-    faqs: [
-      {
-        question: "What is underpinning and when is it needed?",
-        answer:
-          "Underpinning strengthens or deepens an existing foundation. It is needed when a foundation has settled, when adjacent excavation threatens stability, or when additional load capacity is required for a renovation or addition.",
-      },
-      {
-        question: "Is underpinning disruptive to building operations?",
-        answer:
-          "Underpinning is performed in carefully planned sequences to maintain structural stability. While some disruption is unavoidable, Bonardi Construction minimizes impact through phased work and continuous structural monitoring.",
       },
     ],
   },

@@ -136,7 +136,6 @@ const serviceColumns = [
       { name: "Construction Management", href: "/services/construction-management" },
       { name: "Office Buildouts", href: "/services/office-buildouts" },
       { name: "Commercial Milling & Paving", href: "/services/commercial-milling-paving" },
-      { name: "Commercial Underpinning", href: "/services/commercial-underpinning" },
       { name: "Parking Lot Maintenance", href: "/services/commercial-parking-lot-maintenance" },
       { name: "Demolition", href: "/services/demolition" },
       { name: "Fire Damage Restoration", href: "/services/fire-damage-restoration" },

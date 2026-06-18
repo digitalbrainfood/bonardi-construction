@@ -16,7 +16,7 @@
 | Thank You | `/thank-you` | `app/thank-you/page.tsx` |
 | 404 Not Found | (auto) | `app/not-found.tsx` |
 
-### Service Detail Pages (35 pages)
+### Service Detail Pages (34 pages)
 | Service | Route |
 |---------|-------|
 | Asphalt Services | `/services/asphalt` |
@@ -51,7 +51,6 @@
 | Parapet Wall Repair & Rebuild | `/services/parapet-wall-repair-rebuild` |
 | Concrete Leveling | `/services/concrete-leveling` |
 | Soil Stabilization | `/services/soil-stabilization` |
-| Commercial Underpinning | `/services/commercial-underpinning` |
 | Commercial Milling & Paving | `/services/commercial-milling-paving` |
 | Commercial Parking Lot Maintenance | `/services/commercial-parking-lot-maintenance` |
 

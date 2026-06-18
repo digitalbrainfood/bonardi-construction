@@ -506,7 +506,7 @@ export const posts: BlogPost[] = [
       </ul>
 
       <h2>Bonardi Construction Foundation Repair Services</h2>
-      <p>At Bonardi Construction, we specialize in commercial foundation assessment, repair, and stabilization. Our team has extensive experience with underpinning, waterproofing, drainage correction, and structural reinforcement for commercial buildings throughout Queens, Brooklyn, Nassau County, Suffolk County, and Long Island.</p>
+      <p>At Bonardi Construction, we specialize in commercial foundation assessment, repair, and stabilization. Our team has extensive experience with foundation stabilization, waterproofing, drainage correction, and structural reinforcement for commercial buildings throughout Queens, Brooklyn, Nassau County, Suffolk County, and Long Island.</p>
       <p>If you've noticed signs of foundation damage in your commercial building, don't wait. Contact us today for a free foundation inspection and repair estimate. Early intervention is always less expensive than emergency repairs.</p>
     `,
   },

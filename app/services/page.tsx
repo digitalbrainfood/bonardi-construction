@@ -227,12 +227,6 @@ const categories: { label: string; color: string; services: Service[] }[] = [
         tags: ["Commercial", "Exterior"],
       },
       {
-        name: "Commercial Underpinning",
-        slug: "commercial-underpinning",
-        desc: "Foundation strengthening and depth extension for commercial structures.",
-        tags: ["Commercial", "Structural"],
-      },
-      {
         name: "Commercial Parking Lot Maintenance",
         slug: "commercial-parking-lot-maintenance",
         desc: "Comprehensive parking lot maintenance programs including crack sealing, striping, and sealcoating.",
