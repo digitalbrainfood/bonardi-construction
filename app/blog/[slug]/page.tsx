@@ -218,7 +218,7 @@ export default async function BlogPostPage({ params }: Props) {
                             src={related.image}
                             alt={related.title}
                             fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out transform-gpu will-change-transform"
                             sizes="64px"
                           />
                         </div>
@@ -275,7 +275,7 @@ export default async function BlogPostPage({ params }: Props) {
                     src={related.image}
                     alt={related.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out transform-gpu will-change-transform"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>

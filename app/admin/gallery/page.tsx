@@ -455,7 +455,7 @@ export default function AdminGalleryPage() {
                 <img
                   src={img.url}
                   alt={img.title || "Gallery image"}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out transform-gpu will-change-transform"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                   <button

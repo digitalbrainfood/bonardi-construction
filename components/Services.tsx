@@ -191,7 +191,7 @@ export default function Services() {
                     <Link
                       key={service.name}
                       href={service.href}
-                      className="group relative block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover dark:hover:shadow-gray-900/20 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                      className="group relative block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover dark:hover:shadow-gray-900/20 hover:-translate-y-1 transition-all duration-300 ease-out transform-gpu will-change-transform overflow-hidden"
                     >
                       <div className="p-6 flex flex-col h-full">
                         <div className="flex items-start justify-between mb-4">

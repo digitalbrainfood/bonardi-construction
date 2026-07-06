@@ -160,12 +160,12 @@ export default function GalleryClient({
                     src={project.src}
                     alt={project.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out transform-gpu will-change-transform"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-brand/85 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-start justify-end p-5">
+                  <div className="absolute inset-0 bg-brand/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start justify-end p-5">
                     <span className="text-[10px] font-mono text-white/80 tracking-widest mb-2">{project.category}</span>
                     <h3 className="font-body font-semibold text-white text-sm leading-tight">{project.title}</h3>
                   </div>
@@ -237,7 +237,7 @@ export default function GalleryClient({
 
           {/* Lightbox content */}
           <div
-            className={`max-w-4xl w-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-xl transition-all duration-300 ${
+            className={`max-w-4xl w-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-xl transition-[opacity,transform] duration-300 ease-out transform-gpu ${
               lightboxVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
             }`}
             onClick={(e) => e.stopPropagation()}

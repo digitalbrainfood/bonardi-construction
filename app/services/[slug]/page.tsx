@@ -160,7 +160,7 @@ export default function ServiceDetailPage({ params }: Props) {
                   src={serviceImages[service.slug] || serviceImages["asphalt"]}
                   alt={`${service.name} project by Bonardi Construction`}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out transform-gpu will-change-transform"
                   sizes="(max-width: 1024px) 100vw, 58vw"
                 />
               </div>

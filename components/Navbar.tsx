@@ -405,7 +405,7 @@ export default function Navbar() {
                         <img
                           src={categoryImages[col.heading]}
                           alt={col.heading}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                         <h3 className="absolute bottom-3 left-3 text-white text-sm font-display font-bold tracking-wide">
@@ -485,7 +485,7 @@ export default function Navbar() {
                     <img
                       src={currentFeaturedImage}
                       alt={currentFeaturedTitle}
-                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 

@@ -302,7 +302,7 @@ export default function ServicesPage() {
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}`}
-                    className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 p-8 flex flex-col"
+                    className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ease-out transform-gpu will-change-transform p-8 flex flex-col"
                   >
                     <div className="flex items-start justify-between mb-5">
                       <div className="flex flex-wrap gap-1.5">
