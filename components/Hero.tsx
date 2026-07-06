@@ -91,7 +91,7 @@ export default function Hero() {
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-white dark:bg-gray-900">
       {/* Background construction image with parallax */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-x-0 -top-1/4 bottom-0 pointer-events-none"
         style={
           !reducedMotion
             ? { transform: `translateY(${scrollY * 0.3}px)` }
@@ -102,11 +102,15 @@ export default function Hero() {
           src={heroImages.main}
           alt=""
           fill
-          className="object-cover opacity-[0.06]"
+          className="object-cover opacity-[0.4] dark:opacity-[0.12]"
           priority
           sizes="100vw"
         />
       </div>
+
+      {/* Readability scrim — solid behind the text column, revealing the photo to the right */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white via-white/90 to-white/40 lg:to-white/15 dark:from-gray-900 dark:via-gray-900/90 dark:to-gray-900/40 dark:lg:to-gray-900/15" />
+      <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-white to-transparent dark:from-gray-900" />
 
       {/* Uncomment to use video background instead of image:
       <video
