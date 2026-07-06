@@ -102,14 +102,14 @@ export default function Hero() {
           src={heroImages.main}
           alt=""
           fill
-          className="object-cover opacity-[0.4] dark:opacity-[0.12]"
+          className="object-cover opacity-[0.55] dark:opacity-[0.12]"
           priority
           sizes="100vw"
         />
       </div>
 
       {/* Readability scrim — solid behind the text column, revealing the photo to the right */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white via-white/90 to-white/40 lg:to-white/15 dark:from-gray-900 dark:via-gray-900/90 dark:to-gray-900/40 dark:lg:to-gray-900/15" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white via-white/85 to-white/30 lg:to-white/5 dark:from-gray-900 dark:via-gray-900/90 dark:to-gray-900/40 dark:lg:to-gray-900/15" />
       <div className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-white to-transparent dark:from-gray-900" />
 
       {/* Uncomment to use video background instead of image:
@@ -159,14 +159,6 @@ export default function Hero() {
         <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-brand/[0.03] rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-50 dark:bg-brand-900/20 rounded-full blur-[120px] opacity-60" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-gradient-radial from-brand/[0.02] to-transparent rounded-full blur-[80px]" />
-      </div>
-
-      {/* Vertical structural accent lines */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-[8.333%] bottom-0 w-px bg-brand/[0.06]" />
-        <div className="absolute top-0 left-[33.333%] bottom-0 w-px bg-brand/[0.04]" />
-        <div className="absolute top-0 right-[25%] bottom-0 w-px bg-brand/[0.04]" />
-        <div className="absolute top-0 right-[8.333%] bottom-0 w-px bg-brand/[0.06]" />
       </div>
 
       {/* Hero content */}
