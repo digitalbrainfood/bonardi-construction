@@ -88,6 +88,12 @@ const hoverPreviewImages: Record<string, string> = {
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&auto=format&q=80",
 };
 
+// All preview images, deduped — rendered stacked so hover swaps are a
+// GPU crossfade instead of a src swap (no refetch/decode flicker).
+const allPreviewImages = Array.from(
+  new Set([featuredImage, ...Object.values(hoverPreviewImages)])
+);
+
 /* ─── Service data for mega menu ─── */
 const serviceColumns = [
   {
@@ -369,10 +375,10 @@ export default function Navbar() {
             PREMIUM MEGA MENU (desktop)
             ════════════════════════════════════════════════════════ */}
         <div
-          className={`absolute left-0 right-0 top-full z-40 transition-all duration-300 ease-out ${
+          className={`absolute left-0 right-0 top-full z-40 transition-[opacity,transform] duration-200 ease-out transform-gpu will-change-[opacity,transform] ${
             megaOpen
               ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-3 pointer-events-none"
+              : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
           onMouseEnter={openMega}
           onMouseLeave={closeMega}
@@ -380,8 +386,8 @@ export default function Navbar() {
           {/* Top gradient border line */}
           <div className="h-[2px] bg-gradient-to-r from-brand via-brand to-accent" />
 
-          {/* Frosted glass panel */}
-          <div className="bg-white/[0.97] dark:bg-gray-900/[0.97] backdrop-blur-xl shadow-2xl border-b border-gray-200/50 dark:border-gray-700/50">
+          {/* Panel */}
+          <div className="bg-white dark:bg-gray-900 shadow-2xl border-b border-gray-200/50 dark:border-gray-700/50">
             <div className="max-w-7xl mx-auto px-6 py-8">
               {/* 4-column layout: 3 service cols + 1 featured/CTA */}
               <div className="grid grid-cols-4 gap-6">
@@ -391,21 +397,24 @@ export default function Navbar() {
                   return (
                     <div
                       key={col.heading}
-                      className="transition-all duration-500 ease-out"
+                      className="transition-[opacity,transform] duration-300 ease-out transform-gpu"
                       style={{
-                        transitionDelay: megaOpen ? `${colIdx * 60}ms` : "0ms",
+                        transitionDelay: megaOpen ? `${colIdx * 50}ms` : "0ms",
                         opacity: megaOpen ? 1 : 0,
                         transform: megaOpen
                           ? "translateY(0)"
-                          : "translateY(12px)",
+                          : "translateY(8px)",
+                        willChange: "opacity, transform",
                       }}
                     >
                       {/* Category header image */}
                       <div className="relative h-[100px] rounded-lg overflow-hidden mb-3 group">
-                        <img
+                        <Image
                           src={categoryImages[col.heading]}
                           alt={col.heading}
-                          className="w-full h-full object-cover transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105"
+                          fill
+                          sizes="300px"
+                          className="object-cover transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                         <h3 className="absolute bottom-3 left-3 text-white text-sm font-display font-bold tracking-wide">
@@ -466,13 +475,14 @@ export default function Navbar() {
 
                 {/* ─── Fourth Column: Featured / CTA ─── */}
                 <div
-                  className="transition-all duration-500 ease-out"
+                  className="transition-[opacity,transform] duration-300 ease-out transform-gpu"
                   style={{
-                    transitionDelay: megaOpen ? "180ms" : "0ms",
+                    transitionDelay: megaOpen ? "150ms" : "0ms",
                     opacity: megaOpen ? 1 : 0,
                     transform: megaOpen
                       ? "translateY(0)"
-                      : "translateY(12px)",
+                      : "translateY(8px)",
+                    willChange: "opacity, transform",
                   }}
                 >
                   {/* Featured Project header */}
@@ -480,13 +490,22 @@ export default function Navbar() {
                     Featured Project
                   </p>
 
-                  {/* Featured project card */}
+                  {/* Featured project card — stacked images crossfade on hover */}
                   <div className="relative h-[180px] rounded-lg overflow-hidden mb-4 group cursor-pointer">
-                    <img
-                      src={currentFeaturedImage}
-                      alt={currentFeaturedTitle}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105"
-                    />
+                    <div className="absolute inset-0 transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105">
+                      {allPreviewImages.map((src) => (
+                        <Image
+                          key={src}
+                          src={src}
+                          alt={src === currentFeaturedImage ? currentFeaturedTitle : ""}
+                          fill
+                          sizes="320px"
+                          className={`object-cover transition-opacity duration-300 ease-out ${
+                            src === currentFeaturedImage ? "opacity-100" : "opacity-0"
+                          }`}
+                        />
+                      ))}
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                     {/* Location badge */}
