@@ -1,12 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from '@supabase/supabase-js';
-
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
+import { getAdminUser, unauthorized, createServiceClient } from "@/lib/supabase/api-auth";
 
 const defaultBonardiSettings = {
   companyName: "Bonardi Construction",
@@ -31,8 +24,10 @@ const defaultBonardiSettings = {
 
 // GET - Get site settings
 export async function GET() {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const { data, error } = await supabase
       .from('settings')
       .select('*')
@@ -52,8 +47,10 @@ export async function GET() {
 
 // POST - Save site settings
 export async function POST(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const body = await request.json();
 
     // Check if settings row exists

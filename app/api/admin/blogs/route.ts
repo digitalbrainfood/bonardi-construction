@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
+import { getAdminUser, unauthorized, createServiceClient } from '@/lib/supabase/api-auth';
 
 // GET - List all blogs or get single blog by slug/id
 export async function GET(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get('slug');
     const id = searchParams.get('id');
@@ -51,8 +46,10 @@ export async function GET(request: NextRequest) {
 
 // POST - Create new blog
 export async function POST(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const body = await request.json();
     const {
       title,
@@ -104,8 +101,10 @@ export async function POST(request: NextRequest) {
 
 // PUT - Update blog
 export async function PUT(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const body = await request.json();
     const { id, ...updates } = body;
 
@@ -154,8 +153,10 @@ export async function PUT(request: NextRequest) {
 
 // DELETE - Delete blog
 export async function DELETE(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
 

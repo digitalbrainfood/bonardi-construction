@@ -19,10 +19,10 @@ import {
 } from "lucide-react";
 
 interface DashboardStats {
-  pages: number;
-  blogs: number;
-  reviews: number;
-  chats: number;
+  pages: number | null;
+  blogs: number | null;
+  reviews: number | null;
+  chats: number | null;
 }
 
 const quickActions = [
@@ -103,39 +103,40 @@ const adminSections = [
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState<DashboardStats>({
-    pages: 0,
-    blogs: 0,
-    reviews: 0,
-    chats: 0,
+    pages: null,
+    blogs: null,
+    reviews: null,
+    chats: null,
   });
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<{ email?: string } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const supabase = createClient();
-
-      // Get user
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-
-      // Get stats
+      // Get user (non-fatal if the auth backend is unreachable)
       try {
-        const [pagesRes, blogsRes, reviewsRes, chatsRes] = await Promise.all([
-          supabase.from("pages").select("id", { count: "exact", head: true }),
-          supabase.from("blogs").select("id", { count: "exact", head: true }),
-          supabase.from("reviews").select("id", { count: "exact", head: true }),
-          supabase.from("chat_sessions").select("id", { count: "exact", head: true }),
-        ]);
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch {
+        setUser(null);
+      }
 
+      // Get stats from the server (service role sees all rows; browser anon key
+      // undercounts due to RLS)
+      try {
+        const res = await fetch("/api/admin/stats");
+        if (!res.ok) throw new Error("Failed to fetch stats");
+        const data = await res.json();
         setStats({
-          pages: pagesRes.count || 0,
-          blogs: blogsRes.count || 0,
-          reviews: reviewsRes.count || 0,
-          chats: chatsRes.count || 0,
+          pages: typeof data.pages === "number" ? data.pages : null,
+          blogs: typeof data.blogs === "number" ? data.blogs : null,
+          reviews: typeof data.reviews === "number" ? data.reviews : null,
+          chats: typeof data.chats === "number" ? data.chats : null,
         });
       } catch (error) {
         console.error("Error fetching stats:", error);
+        setStats({ pages: null, blogs: null, reviews: null, chats: null });
       }
 
       setIsLoading(false);
@@ -171,7 +172,7 @@ export default function AdminDashboard() {
               {isLoading ? (
                 <Loader2 className="w-4 h-4 text-white/40 animate-spin" />
               ) : (
-                <span className="text-2xl font-bold text-white">{stat.value}</span>
+                <span className="text-2xl font-bold text-white">{stat.value ?? "—"}</span>
               )}
             </div>
             <p className="text-white/60 text-sm mt-2">{stat.label}</p>
@@ -222,7 +223,7 @@ export default function AdminDashboard() {
                     {isLoading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
                     ) : (
-                      `${stats[section.stats as keyof DashboardStats]} items`
+                      `${stats[section.stats as keyof DashboardStats] ?? "—"} items`
                     )}
                   </span>
                 )}

@@ -10,7 +10,9 @@ import {
   Calendar,
   Shield,
   X,
+  AlertTriangle,
 } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 interface AdminUser {
   id: string;
@@ -20,19 +22,11 @@ interface AdminUser {
   last_sign_in_at: string | null;
 }
 
-const initialUsers: AdminUser[] = [
-  {
-    id: "1",
-    email: "admin@bonardiconstruction.com",
-    role: "admin",
-    created_at: "2024-01-15T00:00:00Z",
-    last_sign_in_at: "2026-04-05T09:00:00Z",
-  },
-];
-
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<AdminUser[]>([]);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [showInvite, setShowInvite] = useState(false);
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteRole, setInviteRole] = useState("editor");
@@ -42,17 +36,39 @@ export default function AdminUsersPage() {
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchUsers();
+    const init = async () => {
+      // Identify the logged-in user so we can mark "You" and prevent
+      // self-deletion (real Supabase user IDs are UUIDs).
+      try {
+        const supabase = createClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        setCurrentUserId(user?.id ?? null);
+      } catch {
+        setCurrentUserId(null);
+      }
+      await fetchUsers();
+    };
+    init();
   }, []);
 
   const fetchUsers = async () => {
+    setLoadError("");
     try {
       const res = await fetch("/api/admin/users");
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      setUsers(data.users && data.users.length > 0 ? data.users : initialUsers);
-    } catch {
-      setUsers(initialUsers);
+      if (!res.ok || data.error) {
+        throw new Error(data.error || "Failed to load users");
+      }
+      setUsers(Array.isArray(data.users) ? data.users : []);
+    } catch (err) {
+      setUsers([]);
+      setLoadError(
+        err instanceof Error && err.message
+          ? `Couldn't load users: ${err.message}`
+          : "Couldn't load users. Please try again later."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -75,15 +91,8 @@ export default function AdminUsersPage() {
       const data = await res.json();
       if (data.error) throw new Error(data.error);
 
-      // Add to local state
-      const newUser: AdminUser = {
-        id: String(Date.now()),
-        email: inviteEmail,
-        role: inviteRole,
-        created_at: new Date().toISOString(),
-        last_sign_in_at: null,
-      };
-      setUsers((prev) => [...prev, newUser]);
+      // Re-fetch from the API so the list shows the real user record
+      await fetchUsers();
 
       setSuccess(`Invitation sent to ${inviteEmail}`);
       setShowInvite(false);
@@ -139,6 +148,21 @@ export default function AdminUsersPage() {
         </button>
       </div>
 
+      {loadError && (
+        <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-red-200 flex items-center gap-3">
+          <AlertTriangle className="w-5 h-5 shrink-0" />
+          <span>{loadError}</span>
+          <button
+            onClick={() => {
+              setIsLoading(true);
+              fetchUsers();
+            }}
+            className="ml-auto text-sm underline hover:text-white"
+          >
+            Try again
+          </button>
+        </div>
+      )}
       {error && (
         <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-red-200">
           {error}
@@ -303,7 +327,7 @@ export default function AdminUsersPage() {
                       </div>
                       <div>
                         <p className="text-white font-medium">{user.email}</p>
-                        {user.id === "1" && (
+                        {currentUserId !== null && user.id === currentUserId && (
                           <p className="text-xs text-accent">You</p>
                         )}
                       </div>
@@ -333,7 +357,7 @@ export default function AdminUsersPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    {user.id !== "1" && (
+                    {(currentUserId === null || user.id !== currentUserId) && (
                       <button
                         onClick={() => setDeleteConfirm(user.id)}
                         className="p-2 text-white/60 hover:text-red-400 transition-colors"

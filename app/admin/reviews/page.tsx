@@ -197,10 +197,13 @@ export default function AdminReviewsPage() {
           )
         );
       } else {
+        // Use the inserted row returned by the API so immediate edit/delete
+        // targets the real DB id (not a locally invented one)
         const newReview: Review = {
-          id: String(Date.now()),
           ...formData,
-          created_at: new Date().toISOString(),
+          ...data,
+          id: String(data.id),
+          created_at: data.created_at || new Date().toISOString(),
         };
         setReviews((prev) => [newReview, ...prev]);
       }

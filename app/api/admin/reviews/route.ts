@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from '@supabase/supabase-js';
-
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
+import { getAdminUser, unauthorized, createServiceClient } from "@/lib/supabase/api-auth";
 
 // GET - List all reviews
 export async function GET() {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const { data, error } = await supabase
       .from('reviews')
       .select('*')
@@ -28,8 +23,10 @@ export async function GET() {
 
 // POST - Create new review
 export async function POST(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const body = await request.json();
     const { name, location, rating, text, service, featured = false } = body;
 
@@ -65,8 +62,10 @@ export async function POST(request: NextRequest) {
 
 // PUT - Update review
 export async function PUT(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const body = await request.json();
     const { id, ...updates } = body;
 
@@ -95,8 +94,10 @@ export async function PUT(request: NextRequest) {
 
 // DELETE - Delete review
 export async function DELETE(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
-    const supabase = getSupabase();
+    const supabase = createServiceClient();
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 

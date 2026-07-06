@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
+import { getAdminUser, unauthorized } from '@/lib/supabase/api-auth';
 
 function getSupabase() {
   return createClient(
@@ -112,8 +113,10 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// DELETE - Delete chat session
+// DELETE - Delete chat session (admin only)
 export async function DELETE(request: NextRequest) {
+  const user = await getAdminUser();
+  if (!user) return unauthorized();
   try {
     const supabase = getSupabase();
     const { searchParams } = new URL(request.url);
