@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { posts, getPostBySlug, getRelatedPosts } from "@/lib/blog-data";
+import { posts } from "@/lib/blog-data";
+import { getAllPosts, getPostBySlug, getRelatedFrom } from "@/lib/blog";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import QuoteForm from "@/components/QuoteForm";
@@ -11,12 +12,14 @@ type Props = {
   params: { slug: string };
 };
 
+export const revalidate = 300;
+
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     return { title: "Post Not Found" };
@@ -45,15 +48,16 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post.slug, post.category, 3);
-  const sidebarRelated = getRelatedPosts(post.slug, post.category, 2);
+  const allPosts = await getAllPosts();
+  const relatedPosts = getRelatedFrom(allPosts, post.slug, post.category, 3);
+  const sidebarRelated = getRelatedFrom(allPosts, post.slug, post.category, 2);
 
   const blogPostingSchema = {
     "@context": "https://schema.org",

@@ -150,7 +150,7 @@ export default function Hero() {
 
         {/* Gradient overlays for depth */}
         <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-brand/[0.03] rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-50 rounded-full blur-[120px] opacity-60" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-50 dark:bg-brand-900/20 rounded-full blur-[120px] opacity-60" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-gradient-radial from-brand/[0.02] to-transparent rounded-full blur-[80px]" />
       </div>
 

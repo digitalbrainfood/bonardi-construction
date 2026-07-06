@@ -21,3 +21,14 @@ npm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw photo dumps — too large for git/GitHub (HEIC/MOV/multi-MB originals).
+# web-optimized copies used by the site live in public/images/web
+/public/images/Asphalt Milling & Paving Commercial/
+/public/images/Asphalt Paving Residential/
+/public/images/Bonardi Commercial Brochure/
+/public/images/Commercial Office Buildouts/
+/public/images/Drywell & Drainage/
+/public/images/NYC Sidewalk Violation Removal/
+/public/images/Residential Home Extensions/
+/public/images/Residential Roofing/

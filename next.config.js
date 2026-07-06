@@ -6,6 +6,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        // Supabase Storage (admin gallery uploads)
+        protocol: "https",
+        hostname: "**.supabase.co",
+      },
     ],
   },
   async redirects() {

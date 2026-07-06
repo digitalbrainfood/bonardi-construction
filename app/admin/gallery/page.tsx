@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   Upload,
   Trash2,
@@ -10,162 +10,35 @@ import {
   Search,
   Filter,
   Image as ImageIcon,
+  Loader2,
+  X,
+  RefreshCw,
 } from "lucide-react";
 
 interface GalleryImage {
   id: string;
-  title: string;
+  title: string | null;
   url: string;
-  category: string;
+  category: string | null;
   created_at: string;
 }
 
-const categories = [
-  "All",
-  "Asphalt & Paving",
-  "Concrete & Masonry",
+const uploadCategories = [
+  "Commercial Paving",
+  "Residential Paving",
   "Roofing",
-  "New Construction",
-  "Hardscaping",
-  "Restoration",
-  "Commercial",
+  "Office Buildouts",
+  "Home Extensions",
+  "Drainage & Drywells",
+  "Commercial Projects",
 ];
 
-// Pre-populated gallery images from lib/images.ts Unsplash URLs
-const u = (id: string, w = 800, h = 600) =>
-  `https://images.unsplash.com/${id}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
-
-const initialImages: GalleryImage[] = [
-  // Asphalt & Paving
-  {
-    id: "1",
-    title: "Commercial Parking Lot Paving",
-    url: u("photo-1558618666-fcd25c85f7e7"),
-    category: "Asphalt & Paving",
-    created_at: "2025-10-01T00:00:00Z",
-  },
-  {
-    id: "2",
-    title: "Driveway Resurfacing",
-    url: u("photo-1590496793929-36417d3117de"),
-    category: "Asphalt & Paving",
-    created_at: "2025-09-15T00:00:00Z",
-  },
-  {
-    id: "3",
-    title: "Asphalt Sealcoating",
-    url: u("photo-1517089596392-fb9a9033e05b"),
-    category: "Asphalt & Paving",
-    created_at: "2025-09-01T00:00:00Z",
-  },
-  // Concrete & Masonry
-  {
-    id: "4",
-    title: "Foundation Work",
-    url: u("photo-1541888946425-d81bb19240f5"),
-    category: "Concrete & Masonry",
-    created_at: "2025-08-20T00:00:00Z",
-  },
-  {
-    id: "5",
-    title: "Concrete Sidewalk Installation",
-    url: u("photo-1504307651254-35680f356dfd"),
-    category: "Concrete & Masonry",
-    created_at: "2025-08-10T00:00:00Z",
-  },
-  {
-    id: "6",
-    title: "Brick Pointing Restoration",
-    url: u("photo-1587582423116-ec07293f0395"),
-    category: "Concrete & Masonry",
-    created_at: "2025-07-25T00:00:00Z",
-  },
-  // Roofing
-  {
-    id: "7",
-    title: "Residential Roof Replacement",
-    url: u("photo-1632759145351-1d592919f522"),
-    category: "Roofing",
-    created_at: "2025-07-15T00:00:00Z",
-  },
-  {
-    id: "8",
-    title: "Flat Roof Installation",
-    url: u("photo-1625722662825-d9b7837a5bf0"),
-    category: "Roofing",
-    created_at: "2025-07-01T00:00:00Z",
-  },
-  {
-    id: "9",
-    title: "Commercial Roofing Project",
-    url: u("photo-1600585154340-be6161a56a0c"),
-    category: "Roofing",
-    created_at: "2025-06-20T00:00:00Z",
-  },
-  // New Construction
-  {
-    id: "10",
-    title: "Custom Home Build",
-    url: u("photo-1503387762-592deb58ef4e"),
-    category: "New Construction",
-    created_at: "2025-06-10T00:00:00Z",
-  },
-  {
-    id: "11",
-    title: "Commercial Building Construction",
-    url: u("photo-1486406146926-c627a92ad1ab"),
-    category: "New Construction",
-    created_at: "2025-05-25T00:00:00Z",
-  },
-  // Hardscaping
-  {
-    id: "12",
-    title: "Paver Patio Installation",
-    url: u("photo-1600585154526-990dced4db0d"),
-    category: "Hardscaping",
-    created_at: "2025-05-15T00:00:00Z",
-  },
-  {
-    id: "13",
-    title: "Retaining Wall Construction",
-    url: u("photo-1600566753190-17f0baa2a6c3"),
-    category: "Hardscaping",
-    created_at: "2025-05-01T00:00:00Z",
-  },
-  // Restoration
-  {
-    id: "14",
-    title: "Fire Damage Restoration",
-    url: u("photo-1585128903994-9788298932a5"),
-    category: "Restoration",
-    created_at: "2025-04-20T00:00:00Z",
-  },
-  {
-    id: "15",
-    title: "Water Damage Repair",
-    url: u("photo-1517581177684-1a54ed4f51bf"),
-    category: "Restoration",
-    created_at: "2025-04-10T00:00:00Z",
-  },
-  // Commercial
-  {
-    id: "16",
-    title: "Office Buildout",
-    url: u("photo-1497366216548-37526070297c"),
-    category: "Commercial",
-    created_at: "2025-03-28T00:00:00Z",
-  },
-  {
-    id: "17",
-    title: "Commercial Parking Lot Maintenance",
-    url: u("photo-1621922688758-1e16a9c0d71a"),
-    category: "Commercial",
-    created_at: "2025-03-15T00:00:00Z",
-  },
-];
+const categories = ["All", ...uploadCategories];
 
 export default function AdminGalleryPage() {
-  const [images, setImages] = useState<GalleryImage[]>(initialImages);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
@@ -173,20 +46,130 @@ export default function AdminGalleryPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  // Upload form state
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [uploadTitle, setUploadTitle] = useState("");
+  const [uploadCategory, setUploadCategory] = useState(uploadCategories[0]);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const fetchImages = useCallback(async () => {
+    setLoading(true);
+    setLoadError("");
+    try {
+      const res = await fetch("/api/admin/gallery");
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        throw new Error(
+          (data && data.error) || `Request failed (${res.status})`
+        );
+      }
+      setImages(Array.isArray(data) ? data : []);
+    } catch (err: unknown) {
+      setImages([]);
+      setLoadError(err instanceof Error ? err.message : "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchImages();
+  }, [fetchImages]);
+
   const filteredImages = images.filter((img) => {
     const matchesCategory =
       activeCategory === "All" || img.category === activeCategory;
-    const matchesSearch = img.title
+    const matchesSearch = (img.title || "")
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-  const deleteImage = (id: string) => {
+  const selectFile = (file: File | undefined | null) => {
+    if (!file || uploading) return;
+    if (!file.type.startsWith("image/")) {
+      setError("Please choose an image file (JPG, PNG, WebP).");
+      setTimeout(() => setError(""), 5000);
+      return;
+    }
+    setPendingFile(file);
+    // Default the title to the filename (without extension)
+    setUploadTitle(file.name.replace(/\.[^.]+$/, ""));
+    setError("");
+  };
+
+  const cancelUpload = () => {
+    if (uploading) return;
+    setPendingFile(null);
+    setUploadTitle("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleUpload = async () => {
+    if (!pendingFile || uploading) return;
+    setUploading(true);
+    setError("");
+    try {
+      const formData = new FormData();
+      formData.append("file", pendingFile);
+      formData.append("title", uploadTitle.trim() || pendingFile.name);
+      formData.append("category", uploadCategory);
+
+      const res = await fetch("/api/admin/gallery", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        throw new Error(
+          (data && data.error) || `Upload failed (${res.status})`
+        );
+      }
+
+      setPendingFile(null);
+      setUploadTitle("");
+      setShowUpload(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      setSuccess("Image uploaded");
+      setTimeout(() => setSuccess(""), 3000);
+      await fetchImages();
+    } catch (err: unknown) {
+      setError(
+        err instanceof Error
+          ? `Upload failed: ${err.message}`
+          : "Upload failed. Please try again."
+      );
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const deleteImage = async (id: string) => {
     if (!confirm("Delete this image?")) return;
-    setImages((prev) => prev.filter((img) => img.id !== id));
-    setSuccess("Image deleted");
-    setTimeout(() => setSuccess(""), 3000);
+    setError("");
+    try {
+      const res = await fetch(
+        `/api/admin/gallery?id=${encodeURIComponent(id)}`,
+        { method: "DELETE" }
+      );
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        throw new Error(
+          (data && data.error) || `Delete failed (${res.status})`
+        );
+      }
+      setImages((prev) => prev.filter((img) => img.id !== id));
+      setSuccess("Image deleted");
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err: unknown) {
+      setError(
+        err instanceof Error
+          ? `Delete failed: ${err.message}`
+          : "Delete failed. Please try again."
+      );
+      setTimeout(() => setError(""), 5000);
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -197,11 +180,7 @@ export default function AdminGalleryPage() {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: Implement actual upload with Supabase storage
-    setError(
-      "Upload not yet connected. Configure Supabase storage to enable uploads."
-    );
-    setTimeout(() => setError(""), 5000);
+    selectFile(e.dataTransfer.files?.[0]);
   };
 
   return (
@@ -246,6 +225,22 @@ export default function AdminGalleryPage() {
         </div>
       </div>
 
+      {loadError && (
+        <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-red-200">
+          <p className="font-medium">
+            Could not reach the database. Gallery images can&apos;t be loaded
+            right now.
+          </p>
+          <p className="text-sm mt-1 text-red-200/70">{loadError}</p>
+          <button
+            onClick={fetchImages}
+            className="mt-3 inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            Retry
+          </button>
+        </div>
+      )}
       {error && (
         <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-red-200">
           {error}
@@ -259,41 +254,114 @@ export default function AdminGalleryPage() {
 
       {/* Upload Area */}
       {showUpload && (
-        <div
-          onDragOver={handleDragOver}
-          onDrop={handleDrop}
-          className="border-2 border-dashed border-white/20 rounded-xl p-12 text-center hover:border-accent/50 transition-colors cursor-pointer"
-        >
-          <Upload className="w-12 h-12 text-white/20 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-white mb-2">
-            Upload Images
-          </h3>
-          <p className="text-white/60 mb-4">
-            Drag and drop images here, or click to browse
-          </p>
-          <p className="text-white/40 text-sm">
-            Supports: JPG, PNG, WebP (max 5MB each)
-          </p>
-        </div>
-      )}
+        <div className="space-y-4">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => selectFile(e.target.files?.[0])}
+          />
 
-      {/* Setup Notice */}
-      {showUpload && (
-        <div className="bg-brand/10 border border-brand/20 rounded-xl p-6">
-          <h3 className="font-semibold text-white mb-2">
-            Gallery Setup Required
-          </h3>
-          <p className="text-white/60 text-sm">
-            To enable uploads, you need to:
-          </p>
-          <ol className="list-decimal list-inside text-white/60 text-sm mt-2 space-y-1">
-            <li>
-              Create a Supabase storage bucket named
-              &quot;gallery-images&quot;
-            </li>
-            <li>Set the bucket to public access</li>
-            <li>Configure RLS policies for authenticated uploads</li>
-          </ol>
+          {!pendingFile ? (
+            <div
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+              className="border-2 border-dashed border-white/20 rounded-xl p-12 text-center hover:border-accent/50 transition-colors cursor-pointer"
+            >
+              <Upload className="w-12 h-12 text-white/20 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Upload Images
+              </h3>
+              <p className="text-white/60 mb-4">
+                Drag and drop an image here, or click to browse
+              </p>
+              <p className="text-white/40 text-sm">
+                Supports: JPG, PNG, WebP (max 5MB each)
+              </p>
+            </div>
+          ) : (
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3 min-w-0">
+                  <ImageIcon className="w-5 h-5 text-accent flex-shrink-0" />
+                  <p className="text-white text-sm truncate">
+                    {pendingFile.name}
+                    <span className="text-white/40 ml-2">
+                      {(pendingFile.size / 1024 / 1024).toFixed(2)} MB
+                    </span>
+                  </p>
+                </div>
+                <button
+                  onClick={cancelUpload}
+                  disabled={uploading}
+                  className="p-2 text-white/60 hover:text-white disabled:opacity-50"
+                  aria-label="Remove selected file"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-white/60 text-sm mb-1.5">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    value={uploadTitle}
+                    onChange={(e) => setUploadTitle(e.target.value)}
+                    disabled={uploading}
+                    placeholder="Image title"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent disabled:opacity-50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-white/60 text-sm mb-1.5">
+                    Category
+                  </label>
+                  <select
+                    value={uploadCategory}
+                    onChange={(e) => setUploadCategory(e.target.value)}
+                    disabled={uploading}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent disabled:opacity-50 [&>option]:bg-gray-900 [&>option]:text-white"
+                  >
+                    {uploadCategories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleUpload}
+                  disabled={uploading}
+                  className="bg-accent hover:bg-accent/90 text-gray-900 font-medium px-6 py-2 rounded-lg inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {uploading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="w-4 h-4" />
+                      Upload
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={cancelUpload}
+                  disabled={uploading}
+                  className="bg-white/5 hover:bg-white/10 text-white/80 font-medium px-6 py-2 rounded-lg disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -348,24 +416,33 @@ export default function AdminGalleryPage() {
       </div>
 
       {/* Image Grid / List */}
-      {filteredImages.length === 0 ? (
+      {loading ? (
+        <div className="bg-white/5 border border-white/10 rounded-xl p-12 text-center">
+          <Loader2 className="w-8 h-8 text-white/40 mx-auto mb-4 animate-spin" />
+          <p className="text-white/60">Loading gallery...</p>
+        </div>
+      ) : filteredImages.length === 0 ? (
         <div className="bg-white/5 border border-white/10 rounded-xl p-12 text-center">
           <ImageIcon className="w-12 h-12 text-white/20 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-white mb-2">
             No images found
           </h3>
           <p className="text-white/60 mb-4">
-            {searchQuery || activeCategory !== "All"
+            {loadError
+              ? "Images will appear here once the database is reachable again."
+              : searchQuery || activeCategory !== "All"
               ? "Try adjusting your filters"
               : "Upload your first project photos to build your gallery"}
           </p>
-          <button
-            onClick={() => setShowUpload(true)}
-            className="bg-accent hover:bg-accent/90 text-gray-900 font-medium px-6 py-2 rounded-lg inline-flex items-center gap-2"
-          >
-            <Plus className="w-4 h-4" />
-            Upload Images
-          </button>
+          {!loadError && (
+            <button
+              onClick={() => setShowUpload(true)}
+              className="bg-accent hover:bg-accent/90 text-gray-900 font-medium px-6 py-2 rounded-lg inline-flex items-center gap-2"
+            >
+              <Plus className="w-4 h-4" />
+              Upload Images
+            </button>
+          )}
         </div>
       ) : viewMode === "grid" ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -377,7 +454,7 @@ export default function AdminGalleryPage() {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                   src={img.url}
-                  alt={img.title}
+                  alt={img.title || "Gallery image"}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
@@ -391,9 +468,11 @@ export default function AdminGalleryPage() {
               </div>
               <div className="p-3">
                 <p className="text-white text-sm font-medium truncate">
-                  {img.title}
+                  {img.title || "Untitled"}
                 </p>
-                <p className="text-accent text-xs mt-1">{img.category}</p>
+                <p className="text-accent text-xs mt-1">
+                  {img.category || "Uncategorized"}
+                </p>
               </div>
             </div>
           ))}
@@ -426,15 +505,19 @@ export default function AdminGalleryPage() {
                   <td className="px-6 py-3">
                     <img
                       src={img.url}
-                      alt={img.title}
+                      alt={img.title || "Gallery image"}
                       className="w-16 h-12 object-cover rounded-lg"
                     />
                   </td>
                   <td className="px-6 py-3">
-                    <p className="text-white font-medium">{img.title}</p>
+                    <p className="text-white font-medium">
+                      {img.title || "Untitled"}
+                    </p>
                   </td>
                   <td className="px-6 py-3 hidden md:table-cell">
-                    <span className="text-accent text-sm">{img.category}</span>
+                    <span className="text-accent text-sm">
+                      {img.category || "Uncategorized"}
+                    </span>
                   </td>
                   <td className="px-6 py-3 text-right">
                     <button
@@ -459,7 +542,7 @@ export default function AdminGalleryPage() {
         </div>
         <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
           <p className="text-2xl font-bold text-white">
-            {new Set(images.map((i) => i.category)).size}
+            {new Set(images.map((i) => i.category).filter(Boolean)).size}
           </p>
           <p className="text-white/60 text-sm">Categories</p>
         </div>
@@ -470,7 +553,7 @@ export default function AdminGalleryPage() {
           <p className="text-white/60 text-sm">Showing</p>
         </div>
         <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-accent">Unsplash</p>
+          <p className="text-2xl font-bold text-accent">Supabase</p>
           <p className="text-white/60 text-sm">Image Source</p>
         </div>
       </div>

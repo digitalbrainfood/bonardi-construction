@@ -6,10 +6,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 export default function ContactCTA() {
   return (
     <section className="relative py-28 bg-brand overflow-hidden">
-      {/* Subtle background shapes */}
+      {/* Subtle background shading */}
       <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-white/[0.04] to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 border border-white/10 rounded-full -translate-x-32 translate-y-16 pointer-events-none" />
-      <div className="absolute top-0 right-16 w-32 h-32 border border-white/10 rounded-full -translate-y-16 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="grid lg:grid-cols-12 gap-12 items-center">

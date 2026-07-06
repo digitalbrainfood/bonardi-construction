@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { aboutImages } from "@/lib/images";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -88,34 +86,21 @@ export default function AboutPage() {
       {/* Gary Bonelli bio */}
       <section className="py-20 bg-white dark:bg-gray-900 border-t border-b border-gray-200 dark:border-gray-700" id="gary-m-bonelli">
         <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-px bg-brand" />
+            <span className="section-label">Leadership</span>
+          </div>
+          <h2 className="font-display font-bold text-display-lg text-black dark:text-white mb-2">
+            Gary M. Bonelli
+          </h2>
+          <p className="font-mono text-brand text-xs tracking-widest mb-10">
+            OWNER &amp; PRINCIPAL CONTRACTOR
+          </p>
+
           <div className="grid lg:grid-cols-12 gap-12 items-start">
-            {/* Photo */}
-            <div className="lg:col-span-4">
-              <div className="aspect-[4/5] relative rounded-lg overflow-hidden">
-                <Image
-                  src={aboutImages.gary}
-                  alt="Gary M. Bonelli — Owner & Principal Contractor"
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                />
-              </div>
-            </div>
-
             {/* Bio content */}
-            <div className="lg:col-span-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-px bg-brand" />
-                <span className="section-label">Leadership</span>
-              </div>
-              <h2 className="font-display font-bold text-display-lg text-black dark:text-white mb-2">
-                Gary M. Bonelli
-              </h2>
-              <p className="font-mono text-brand text-xs tracking-widest mb-8">
-                OWNER &amp; PRINCIPAL CONTRACTOR
-              </p>
-
-              <div className="space-y-5 font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">
+            <div className="lg:col-span-7">
+              <div className="space-y-5 font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed border-l-2 border-brand pl-6">
                 <p>
                   Gary M. Bonelli founded Bonardi Construction with a commitment to delivering
                   exceptional craftsmanship and genuine reliability to every client. With over
@@ -136,9 +121,11 @@ export default function AboutPage() {
                   Lead-Safe Certified Firm and authorized Generac dealer and installer.
                 </p>
               </div>
+            </div>
 
-              {/* Credential grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10">
+            {/* Credential grid */}
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-4">
                 {[
                   { label: "NYC License", value: "#1274180" },
                   { label: "Nassau County", value: "#H0446880000" },
@@ -147,7 +134,7 @@ export default function AboutPage() {
                   { label: "Certification", value: "Lead-Safe Firm" },
                   { label: "Authorized Dealer", value: "Generac" },
                 ].map(({ label, value }) => (
-                  <div key={label} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <div key={label} className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
                     <p className="text-gray-400 dark:text-gray-500 text-xs font-mono mb-1">{label}</p>
                     <p className="text-black dark:text-white text-sm font-body font-medium">{value}</p>
                   </div>

@@ -10,12 +10,37 @@ import Testimonials from "@/components/Testimonials";
 import SectionDivider from "@/components/SectionDivider";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/schema";
+import { createPublicClient } from "@/lib/supabase/public";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export default function Home() {
+export const revalidate = 300;
+
+async function getReviewItems() {
+  try {
+    const supabase = createPublicClient();
+    const { data } = await supabase
+      .from("reviews")
+      .select("name,location,rating,text,service")
+      .order("featured", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(9);
+    return (data ?? []).map((r) => ({
+      quote: r.text as string,
+      name: r.name as string,
+      projectType: (r.service as string) ?? "",
+      location: (r.location as string) ?? "",
+      rating: (r.rating as number) ?? 5,
+    }));
+  } catch {
+    return []; // Testimonials falls back to its built-in list
+  }
+}
+
+export default async function Home() {
+  const reviewItems = await getReviewItems();
   const org = organizationSchema();
   const homeSchema = {
     ...org,
@@ -59,12 +84,10 @@ export default function Home() {
       <Hero />
       <TrustBadges />
       <Stats />
-      <SectionDivider variant="wave" />
       <Services />
       <SectionDivider variant="dots" />
       <WhyUs />
-      <Testimonials />
-      <SectionDivider variant="wave" flip />
+      <Testimonials items={reviewItems} />
       <ServiceAreas />
       <ContactCTA />
     </>

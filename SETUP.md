@@ -38,14 +38,21 @@ NEXT_PUBLIC_SITE_URL=https://bonardiconst.com
 
 ## Connecting Supabase
 
+> **Quick path:** restore/create the project in the Supabase dashboard, paste
+> `scripts/schema.sql` into the SQL Editor, then run `node scripts/provision.js`
+> — it verifies tables, creates the public `gallery` storage bucket, creates the
+> admin test login, and seeds the reviews table.
+
 ### 1. Create Supabase Project
 - Go to https://supabase.com/dashboard
 - Create new project
 - Copy the URL, anon key, and service role key into `.env.local`
+- Note: free-tier projects are **paused** after ~1 week of inactivity and their
+  URL stops resolving — restore them from the dashboard.
 
 ### 2. Create Database Tables
 
-Run this SQL in the Supabase SQL Editor:
+Run `scripts/schema.sql` (idempotent) in the Supabase SQL Editor, or this SQL:
 
 ```sql
 -- Chat sessions

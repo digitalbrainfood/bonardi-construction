@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { posts } from "@/lib/blog-data";
+import { getAllPosts } from "@/lib/blog";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -12,7 +12,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogPage() {
+export const revalidate = 300;
+
+export default async function BlogPage() {
+  const posts = await getAllPosts();
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",

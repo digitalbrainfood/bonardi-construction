@@ -1,5 +1,5 @@
 interface SectionDividerProps {
-  variant: "gradient" | "wave" | "angle" | "dots";
+  variant: "gradient" | "angle" | "dots";
   flip?: boolean;
   className?: string;
 }
@@ -21,31 +21,6 @@ export default function SectionDivider({
         role="separator"
         aria-hidden="true"
       />
-    );
-  }
-
-  /* ── Wave ── */
-  if (variant === "wave") {
-    return (
-      <div
-        className={`w-full leading-[0] ${className}`}
-        style={{ transform: flip ? "rotate(180deg)" : undefined }}
-        role="separator"
-        aria-hidden="true"
-      >
-        <svg
-          className="block h-10 w-full"
-          viewBox="0 0 1440 40"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 20C240 0 480 40 720 20C960 0 1200 40 1440 20V40H0V20Z"
-            fill="currentColor"
-            className="text-gray-50 dark:text-gray-800"
-          />
-        </svg>
-      </div>
     );
   }
 

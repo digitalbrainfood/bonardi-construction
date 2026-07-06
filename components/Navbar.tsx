@@ -6,18 +6,14 @@ import Link from "next/link";
 import Image from "next/image";
 import ThemeToggle from "@/components/ThemeToggle";
 
-/* ─── Category header images (Unsplash) ─── */
+/* ─── Category header images (real project photos) ─── */
 const categoryImages: Record<string, string> = {
-  Residential:
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=200&fit=crop&auto=format&q=80",
-  "Exterior & Site Work":
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=200&fit=crop&auto=format&q=80",
-  "Commercial & Specialty":
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop&auto=format&q=80",
+  Residential: "/images/web/roofing/04.jpg",
+  "Exterior & Site Work": "/images/web/asphalt-commercial/01.jpg",
+  "Commercial & Specialty": "/images/web/commercial/03.jpg",
 };
 
-const featuredImage =
-  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop&auto=format&q=80";
+const featuredImage = "/images/web/asphalt-residential/01.jpg";
 
 /* ─── Category descriptions ─── */
 const categoryDescriptions: Record<string, string> = {
@@ -81,16 +77,12 @@ const popularPills = [
 
 /* ─── Hover preview images keyed by service name ─── */
 const hoverPreviewImages: Record<string, string> = {
-  "Home Additions & Extensions":
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&auto=format&q=80",
-  "Roofing Services":
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&auto=format&q=80",
+  "Home Additions & Extensions": "/images/web/home-extensions/01.jpg",
+  "Roofing Services": "/images/web/roofing/01.jpg",
   "Kitchen Remodeling":
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&auto=format&q=80",
-  "Asphalt Services":
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop&auto=format&q=80",
-  "Construction Management":
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&auto=format&q=80",
+    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&q=80",
+  "Asphalt Services": "/images/web/asphalt-commercial/03.jpg",
+  "Construction Management": "/images/web/commercial/03.jpg",
   Demolition:
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&auto=format&q=80",
 };

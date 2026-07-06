@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { aboutImages } from "@/lib/images";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -66,22 +64,9 @@ export default function GaryBonelliPage() {
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
-            {/* Photo */}
-            <div className="lg:col-span-4">
-              <div className="aspect-[4/5] relative rounded-lg overflow-hidden">
-                <Image
-                  src={aboutImages.gary}
-                  alt="Gary M. Bonelli — Owner & Principal Contractor"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                />
-              </div>
-            </div>
-
             {/* Bio content */}
-            <div className="lg:col-span-8">
-              <div className="space-y-5 font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">
+            <div className="lg:col-span-7">
+              <div className="space-y-5 font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed border-l-2 border-brand pl-6">
                 <p>
                   Gary M. Bonelli founded Bonardi Construction with a commitment to delivering
                   exceptional craftsmanship and genuine reliability to every client. With over
@@ -102,9 +87,11 @@ export default function GaryBonelliPage() {
                   Lead-Safe Certified Firm and authorized Generac dealer and installer.
                 </p>
               </div>
+            </div>
 
-              {/* Credential grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10">
+            {/* Credential grid */}
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-4">
                 {[
                   { label: "NYC License", value: "#1274180" },
                   { label: "Nassau County", value: "#H0446880000" },

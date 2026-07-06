@@ -80,8 +80,9 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
-export default function Testimonials() {
-  const totalPages = Math.ceil(testimonials.length / 3);
+export default function Testimonials({ items }: { items?: Testimonial[] }) {
+  const list = items && items.length > 0 ? items : testimonials;
+  const totalPages = Math.ceil(list.length / 3);
   const [currentPage, setCurrentPage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -100,7 +101,7 @@ export default function Testimonials() {
     };
   }, [isPaused, nextPage]);
 
-  const visibleTestimonials = testimonials.slice(
+  const visibleTestimonials = list.slice(
     currentPage * 3,
     currentPage * 3 + 3
   );

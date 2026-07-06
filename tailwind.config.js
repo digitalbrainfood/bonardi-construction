@@ -82,6 +82,10 @@ module.exports = {
           "50%": { transform: "scale(1.6)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "0" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease forwards",
@@ -91,6 +95,7 @@ module.exports = {
         "scale-in": "scale-in 0.5s ease forwards",
         shimmer: "shimmer 2.5s infinite linear",
         "floating-pulse": "floating-pulse 3s ease-out infinite",
+        marquee: "marquee 40s linear infinite",
       },
     },
   },
