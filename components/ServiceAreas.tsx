@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ScrollReveal";
+import { getSettings } from "@/lib/settings";
 
 const areas = [
   { name: "Queens, NY", primary: true },
@@ -15,7 +16,8 @@ const areas = [
   { name: "Long Island", primary: false },
 ];
 
-export default function ServiceAreas() {
+export default async function ServiceAreas() {
+  const settings = await getSettings();
   return (
     <section className="py-24 bg-white dark:bg-gray-900" id="service-areas">
       <div className="max-w-7xl mx-auto px-6">
@@ -43,9 +45,9 @@ export default function ServiceAreas() {
               {/* License badges */}
               <div className="space-y-3">
                 {[
-                  { label: "NYC License", value: "#1274180" },
-                  { label: "Nassau County", value: "#H0446880000" },
-                  { label: "Suffolk County", value: "#57853-H" },
+                  { label: "NYC License", value: settings.licenseNYC },
+                  { label: "Nassau County", value: settings.licenseNassau },
+                  { label: "Suffolk County", value: settings.licenseSuffolk },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex items-center gap-4">
                     <div className="w-2 h-2 bg-brand rotate-45 flex-shrink-0" />

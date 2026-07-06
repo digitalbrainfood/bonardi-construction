@@ -2,8 +2,11 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
+import { useSiteSettings } from "@/components/SettingsProvider";
 
 export default function FloatingContact() {
+  const settings = useSiteSettings();
+  const phoneDigits = settings.phone.replace(/\D/g, "");
   const [expanded, setExpanded] = useState(false);
   const [hidden, setHidden] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -64,7 +67,7 @@ export default function FloatingContact() {
       ),
     },
     {
-      href: "mailto:Info@bonardiconst.com",
+      href: `mailto:${settings.email}`,
       type: "anchor" as const,
       label: "Email Us",
       icon: (
@@ -84,9 +87,9 @@ export default function FloatingContact() {
       ),
     },
     {
-      href: "tel:7187623400",
+      href: `tel:${phoneDigits}`,
       type: "anchor" as const,
-      label: "718.762.3400",
+      label: settings.phone,
       icon: (
         <svg
           className="h-5 w-5 text-brand"

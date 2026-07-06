@@ -15,51 +15,7 @@ import {
   Shield,
   Search,
 } from "lucide-react";
-
-interface SiteSettings {
-  // Company Info
-  companyName: string;
-  phone: string;
-  fax: string;
-  email: string;
-  address: string;
-  // Social Links
-  facebook: string;
-  instagram: string;
-  // Business Hours
-  hoursWeekday: string;
-  hoursSaturday: string;
-  hoursSunday: string;
-  // License Numbers
-  licenseNYC: string;
-  licenseNassau: string;
-  licenseSuffolk: string;
-  // SEO Defaults
-  defaultMetaTitle: string;
-  defaultMetaDescription: string;
-  ogImage: string;
-}
-
-const defaultSettings: SiteSettings = {
-  companyName: "Bonardi Construction",
-  phone: "(718) 507-6543",
-  fax: "(718) 507-6544",
-  email: "info@bonardiconstruction.com",
-  address: "Queens, NY",
-  facebook: "https://www.facebook.com/BonardiConstruction",
-  instagram: "https://www.instagram.com/bonardiconstruction",
-  hoursWeekday: "Mon-Fri: 7:00 AM - 6:00 PM",
-  hoursSaturday: "Sat: 8:00 AM - 2:00 PM",
-  hoursSunday: "Sun: Closed",
-  licenseNYC: "LIC# 2049498-DCA",
-  licenseNassau: "LIC# H1809170000",
-  licenseSuffolk: "LIC# 54109-H",
-  defaultMetaTitle:
-    "Bonardi Construction | NYC & Long Island General Contractor",
-  defaultMetaDescription:
-    "Over 60 years of construction excellence. Bonardi Construction provides asphalt paving, concrete, roofing, masonry, new construction, and restoration services across NYC, Nassau & Suffolk County.",
-  ogImage: "/images/bonardi-og.jpg",
-};
+import { defaultSettings, type SiteSettings } from "@/lib/settings";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);

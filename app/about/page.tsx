@@ -2,13 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema, breadcrumbSchema } from "@/lib/schema";
+import { getSitePage, orDefault } from "@/lib/site-pages";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Learn about Bonardi Construction, Inc. — 30+ years of general contracting excellence across Queens, Brooklyn, Nassau and Suffolk County.",
-  alternates: { canonical: "/about" },
-};
+export const revalidate = 300;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getSitePage("about");
+  return {
+    title: orDefault(content.seo?.title, "About Us"),
+    description: orDefault(
+      content.seo?.description,
+      "Learn about Bonardi Construction, Inc. — 30+ years of general contracting excellence across Queens, Brooklyn, Nassau and Suffolk County."
+    ),
+    alternates: { canonical: "/about" },
+  };
+}
 
 const values = [
   {
@@ -25,7 +33,25 @@ const values = [
   },
 ];
 
-export default function AboutPage() {
+const partners = [
+  { name: "Lead-Safe\nCertified Firm", sub: "EPA Certified" },
+  { name: "Generac", sub: "Authorized Dealer & Installer" },
+  { name: "Cambridge", sub: "Certified Partner" },
+  { name: "Nicolock", sub: "Certified Partner" },
+  { name: "Unilock", sub: "Certified Partner" },
+];
+
+export default async function AboutPage() {
+  const content = await getSitePage("about");
+
+  const displayValues = content.values?.length
+    ? content.values.map((v) => ({ title: v.title, body: v.description }))
+    : values;
+
+  const displayPartners = content.certifications?.length
+    ? content.certifications.map((c) => ({ name: c.title, sub: c.description }))
+    : partners;
+
   return (
     <>
       <JsonLd data={organizationSchema()} />
@@ -46,16 +72,23 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-end">
             <div>
               <h1 className="font-display font-bold text-display-xl text-black dark:text-white">
-                Three Decades of
-                <br />
-                <em className="italic text-brand">Building Trust.</em>
+                {content.hero?.title?.trim() ? (
+                  content.hero.title
+                ) : (
+                  <>
+                    Three Decades of
+                    <br />
+                    <em className="italic text-brand">Building Trust.</em>
+                  </>
+                )}
               </h1>
             </div>
             <div>
               <p className="font-body text-gray-600 dark:text-gray-400 text-lg leading-relaxed border-l-2 border-brand pl-6">
-                Bonardi Construction, Inc. was founded on a simple belief: that clients deserve a
-                contractor who treats their project with the same care and urgency they would their own.
-                That philosophy has guided every job we&apos;ve taken since day one.
+                {orDefault(
+                  content.hero?.description,
+                  "Bonardi Construction, Inc. was founded on a simple belief: that clients deserve a contractor who treats their project with the same care and urgency they would their own. That philosophy has guided every job we've taken since day one."
+                )}
               </p>
             </div>
           </div>
@@ -70,7 +103,7 @@ export default function AboutPage() {
             <span className="section-label">Our Core Values</span>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {values.map((v, i) => (
+            {displayValues.map((v, i) => (
               <div key={v.title} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-10">
                 <span className="font-mono text-xs text-brand tracking-widest mb-4 block">
                   0{i + 1}
@@ -82,6 +115,28 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Our Story (admin-managed, only rendered when saved in /admin/site-pages) */}
+      {content.story?.content?.trim() ? (
+        <section className="py-20 bg-white dark:bg-gray-900">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex items-center gap-3 mb-12">
+              <div className="w-8 h-px bg-brand" />
+              <span className="section-label">Our Story</span>
+            </div>
+            <div className="max-w-3xl">
+              {content.story.title?.trim() ? (
+                <h2 className="font-display font-bold text-display-md text-black dark:text-white mb-6">
+                  {content.story.title}
+                </h2>
+              ) : null}
+              <p className="font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed whitespace-pre-line">
+                {content.story.content}
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* Gary Bonelli bio */}
       <section className="py-20 bg-white dark:bg-gray-900 border-t border-b border-gray-200 dark:border-gray-700" id="gary-m-bonelli">
@@ -153,13 +208,7 @@ export default function AboutPage() {
             <span className="section-label">Certifications &amp; Partners</span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[
-              { name: "Lead-Safe\nCertified Firm", sub: "EPA Certified" },
-              { name: "Generac", sub: "Authorized Dealer & Installer" },
-              { name: "Cambridge", sub: "Certified Partner" },
-              { name: "Nicolock", sub: "Certified Partner" },
-              { name: "Unilock", sub: "Certified Partner" },
-            ].map(({ name, sub }) => (
+            {displayPartners.map(({ name, sub }) => (
               <div key={name} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg flex flex-col items-center justify-center py-10 px-6 text-center">
                 <span className="font-display font-semibold text-black dark:text-white text-base mb-2 whitespace-pre-line">{name}</span>
                 <span className="text-gray-500 dark:text-gray-400 text-xs font-body">{sub}</span>
@@ -174,15 +223,19 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h2 className="font-display font-bold text-2xl text-white mb-2">
-              Ready to start your project?
+              {orDefault(content.cta?.title, "Ready to start your project?")}
             </h2>
-            <p className="font-body text-white/80">
-              Call us at{" "}
-              <a href="tel:7187623400" className="text-white underline hover:text-accent transition-colors">
-                718.762.3400
-              </a>{" "}
-              or request a free quote online.
-            </p>
+            {content.cta?.description?.trim() ? (
+              <p className="font-body text-white/80">{content.cta.description}</p>
+            ) : (
+              <p className="font-body text-white/80">
+                Call us at{" "}
+                <a href="tel:7187623400" className="text-white underline hover:text-accent transition-colors">
+                  718.762.3400
+                </a>{" "}
+                or request a free quote online.
+              </p>
+            )}
           </div>
           <Link
             href="/contact-us"

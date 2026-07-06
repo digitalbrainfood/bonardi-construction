@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { heroImages } from "@/lib/images";
+import { useSiteSettings } from "@/components/SettingsProvider";
 
 const services = [
   "Asphalt & Paving",
@@ -51,6 +52,8 @@ const trustBadges = [
 ];
 
 export default function Hero() {
+  const settings = useSiteSettings();
+  const phoneDigits = settings.phone.replace(/\D/g, "");
   const [scrollY, setScrollY] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -280,10 +283,10 @@ export default function Hero() {
 
               <p className="section-label mb-3 pl-3">Reach Us Directly</p>
               <a
-                href="tel:7187623400"
+                href={`tel:${phoneDigits}`}
                 className="font-display text-3xl text-brand hover:text-brand-dark transition-colors block mb-1 pl-3"
               >
-                718.762.3400
+                {settings.phone}
               </a>
               <p className="text-gray-500 dark:text-gray-400 text-sm font-body mb-4 pl-3">
                 Queens, Brooklyn &amp; Long Island
@@ -293,7 +296,7 @@ export default function Hero() {
 
               <div className="flex gap-5 pl-3">
                 <a
-                  href="https://www.facebook.com/Bonardiconstruction/"
+                  href={settings.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-brand text-xs font-mono tracking-wider transition-colors"
@@ -304,7 +307,7 @@ export default function Hero() {
                   FACEBOOK
                 </a>
                 <a
-                  href="https://www.instagram.com/bonardiconstruction/"
+                  href={settings.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-brand text-xs font-mono tracking-wider transition-colors"

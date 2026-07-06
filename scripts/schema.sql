@@ -131,3 +131,23 @@ DROP POLICY IF EXISTS "Admins full access chat_sessions" ON chat_sessions;
 CREATE POLICY "Admins full access chat_sessions" ON chat_sessions FOR ALL USING (auth.role() = 'authenticated');
 DROP POLICY IF EXISTS "Admins full access chat_messages" ON chat_messages;
 CREATE POLICY "Admins full access chat_messages" ON chat_messages FOR ALL USING (auth.role() = 'authenticated');
+
+-- Leads (contact form submissions)
+CREATE TABLE IF NOT EXISTS leads (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT,
+  phone TEXT,
+  service TEXT,
+  project_type TEXT,
+  address TEXT,
+  message TEXT,
+  status TEXT DEFAULT 'new' CHECK (status IN ('new', 'contacted', 'closed')),
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE leads ENABLE ROW LEVEL SECURITY;
+
+-- No public policies: the contact form API writes with the service role.
+DROP POLICY IF EXISTS "Admins full access leads" ON leads;
+CREATE POLICY "Admins full access leads" ON leads FOR ALL USING (auth.role() = 'authenticated');

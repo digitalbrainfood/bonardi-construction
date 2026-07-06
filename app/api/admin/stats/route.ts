@@ -23,14 +23,15 @@ export async function GET() {
       }
     };
 
-    const [pages, blogs, reviews, chats] = await Promise.all([
+    const [pages, blogs, reviews, chats, leads] = await Promise.all([
       countTable("pages"),
       countTable("blogs"),
       countTable("reviews"),
       countTable("chat_sessions"),
+      countTable("leads"),
     ]);
 
-    return NextResponse.json({ pages, blogs, reviews, chats });
+    return NextResponse.json({ pages, blogs, reviews, chats, leads });
   } catch (error: unknown) {
     console.error("Fetch stats error:", error);
     return NextResponse.json({
@@ -38,6 +39,7 @@ export async function GET() {
       blogs: null,
       reviews: null,
       chats: null,
+      leads: null,
     });
   }
 }

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useSiteSettings } from "@/components/SettingsProvider";
 
 /* ─── Category header images (real project photos) ─── */
 const categoryImages: Record<string, string> = {
@@ -160,6 +161,8 @@ const mobileLinks = [
 ];
 
 export default function Navbar() {
+  const settings = useSiteSettings();
+  const phoneDigits = settings.phone.replace(/\D/g, "");
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -225,21 +228,20 @@ export default function Navbar() {
       <div className="hidden md:block bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between">
           <p className="text-gray-500 dark:text-gray-400 text-xs font-body tracking-wide">
-            NYC Lic: #1274180 &nbsp;&middot;&nbsp; Nassau: #H0446880000
-            &nbsp;&middot;&nbsp; Suffolk: #57853-H
+            NYC Lic: {settings.licenseNYC} &nbsp;&middot;&nbsp; Nassau: {settings.licenseNassau} &nbsp;&middot;&nbsp; Suffolk: {settings.licenseSuffolk}
           </p>
           <div className="flex items-center gap-6">
             <a
-              href="mailto:Info@bonardiconst.com"
+              href={`mailto:${settings.email}`}
               className="text-gray-500 dark:text-gray-400 text-xs font-body hover:text-brand transition-colors duration-200"
             >
-              Info@bonardiconst.com
+              {settings.email}
             </a>
             <a
-              href="tel:7187623400"
+              href={`tel:${phoneDigits}`}
               className="text-brand text-xs font-body font-semibold tracking-wide hover:text-brand-dark transition-colors duration-200"
             >
-              718.762.3400
+              {settings.phone}
             </a>
           </div>
         </div>
@@ -318,8 +320,8 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <div className="hidden lg:flex items-center gap-2">
                 <a
-                  href="tel:7187623400"
-                  aria-label="Call 718.762.3400"
+                  href={`tel:${phoneDigits}`}
+                  aria-label={`Call ${settings.phone}`}
                   className="w-9 h-9 rounded-md border border-gray-200 dark:border-gray-700 hover:border-brand flex items-center justify-center transition-colors duration-200 dark:bg-gray-800"
                 >
                   <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -712,7 +714,7 @@ export default function Navbar() {
               Get a Free Quote
             </Link>
             <a
-              href="tel:7187623400"
+              href={`tel:${phoneDigits}`}
               className="flex items-center justify-center gap-2 mt-3 text-brand font-body font-semibold text-base hover:text-brand-dark transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -722,10 +724,10 @@ export default function Navbar() {
                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
-              718.762.3400
+              {settings.phone}
             </a>
             <p className="text-gray-400 text-xs text-center font-mono mt-4">
-              NYC Lic: #1274180 &middot; Nassau: #H0446880000 &middot; Suffolk: #57853-H
+              NYC Lic: {settings.licenseNYC} &middot; Nassau: {settings.licenseNassau} &middot; Suffolk: {settings.licenseSuffolk}
             </p>
           </div>
         </div>

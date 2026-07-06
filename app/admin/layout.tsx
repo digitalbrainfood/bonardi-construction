@@ -18,6 +18,7 @@ import {
   Edit3,
   Users,
   Image as ImageIcon,
+  Inbox,
 } from "lucide-react";
 
 const navItems = [
@@ -28,6 +29,7 @@ const navItems = [
   { href: "/admin/reviews", label: "Reviews", icon: Star },
   { href: "/admin/gallery", label: "Gallery", icon: ImageIcon },
   { href: "/admin/chat", label: "Live Chat", icon: MessageSquare },
+  { href: "/admin/leads", label: "Leads", icon: Inbox },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];

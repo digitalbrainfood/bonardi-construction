@@ -16,6 +16,7 @@ import {
   Plus,
   ArrowRight,
   Loader2,
+  Inbox,
 } from "lucide-react";
 
 interface DashboardStats {
@@ -23,6 +24,7 @@ interface DashboardStats {
   blogs: number | null;
   reviews: number | null;
   chats: number | null;
+  leads: number | null;
 }
 
 const quickActions = [
@@ -99,6 +101,13 @@ const adminSections = [
     icon: MessageSquare,
     stats: "chats",
   },
+  {
+    title: "Leads",
+    description: "Contact form submissions and quote requests",
+    href: "/admin/leads",
+    icon: Inbox,
+    stats: "leads",
+  },
 ];
 
 export default function AdminDashboard() {
@@ -107,6 +116,7 @@ export default function AdminDashboard() {
     blogs: null,
     reviews: null,
     chats: null,
+    leads: null,
   });
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<{ email?: string } | null>(null);
@@ -133,10 +143,11 @@ export default function AdminDashboard() {
           blogs: typeof data.blogs === "number" ? data.blogs : null,
           reviews: typeof data.reviews === "number" ? data.reviews : null,
           chats: typeof data.chats === "number" ? data.chats : null,
+          leads: typeof data.leads === "number" ? data.leads : null,
         });
       } catch (error) {
         console.error("Error fetching stats:", error);
-        setStats({ pages: null, blogs: null, reviews: null, chats: null });
+        setStats({ pages: null, blogs: null, reviews: null, chats: null, leads: null });
       }
 
       setIsLoading(false);
@@ -156,12 +167,13 @@ export default function AdminDashboard() {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         {[
           { label: "Total Pages", value: stats.pages, icon: FileText, color: "text-[#0055A5]" },
           { label: "Blog Posts", value: stats.blogs, icon: BookOpen, color: "text-blue-400" },
           { label: "Reviews", value: stats.reviews, icon: Star, color: "text-[#FBB62E]" },
           { label: "Active Chats", value: stats.chats, icon: MessageSquare, color: "text-green-400" },
+          { label: "Leads", value: stats.leads, icon: Inbox, color: "text-purple-400" },
         ].map((stat) => (
           <div
             key={stat.label}

@@ -4,18 +4,25 @@ import Image from "next/image";
 import { getAllPosts } from "@/lib/blog";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
+import { getSitePage, orDefault } from "@/lib/site-pages";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Construction tips, project spotlights, and industry insights from the team at Bonardi Construction.",
-  alternates: { canonical: "/blog" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getSitePage("blog");
+  return {
+    title: orDefault(content.seo?.title, "Blog"),
+    description: orDefault(
+      content.seo?.description,
+      "Construction tips, project spotlights, and industry insights from the team at Bonardi Construction."
+    ),
+    alternates: { canonical: "/blog" },
+  };
+}
 
 export const revalidate = 300;
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
+  const content = await getSitePage("blog");
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -62,11 +69,22 @@ export default async function BlogPage() {
             <span className="section-label">Insights</span>
           </div>
           <h1 className="font-display font-bold text-display-xl text-black dark:text-white">
-            Construction{" "}
-            <em className="italic text-brand">Knowledge</em>
-            <br />
-            Worth Reading.
+            {content.hero?.title?.trim() ? (
+              content.hero.title
+            ) : (
+              <>
+                Construction{" "}
+                <em className="italic text-brand">Knowledge</em>
+                <br />
+                Worth Reading.
+              </>
+            )}
           </h1>
+          {content.hero?.description?.trim() ? (
+            <p className="font-body text-gray-600 dark:text-gray-400 text-lg mt-6 max-w-2xl">
+              {content.hero.description}
+            </p>
+          ) : null}
         </div>
       </section>
 

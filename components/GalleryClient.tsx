@@ -15,9 +15,20 @@ export interface GalleryProject {
 interface GalleryClientProps {
   projects: GalleryProject[];
   categories: string[];
+  heroTitle?: string;
+  heroDescription?: string;
+  ctaTitle?: string;
+  ctaDescription?: string;
 }
 
-export default function GalleryClient({ projects, categories }: GalleryClientProps) {
+export default function GalleryClient({
+  projects,
+  categories,
+  heroTitle,
+  heroDescription,
+  ctaTitle = "Want results like these?",
+  ctaDescription = "Let's build something you'll be proud to show off.",
+}: GalleryClientProps) {
   const [active, setActive] = useState("All");
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [lightboxVisible, setLightboxVisible] = useState(false);
@@ -91,10 +102,21 @@ export default function GalleryClient({ projects, categories }: GalleryClientPro
             <span className="section-label">Portfolio</span>
           </div>
           <h1 className="font-display font-bold text-display-xl text-black dark:text-white">
-            Our Work,
-            <br />
-            <em className="italic text-brand">Speaks for Itself.</em>
+            {heroTitle ? (
+              heroTitle
+            ) : (
+              <>
+                Our Work,
+                <br />
+                <em className="italic text-brand">Speaks for Itself.</em>
+              </>
+            )}
           </h1>
+          {heroDescription ? (
+            <p className="font-body text-gray-600 dark:text-gray-400 text-lg mt-6 max-w-2xl">
+              {heroDescription}
+            </p>
+          ) : null}
         </div>
       </section>
 
@@ -255,9 +277,9 @@ export default function GalleryClient({ projects, categories }: GalleryClientPro
       {/* CTA */}
       <section className="py-16 bg-brand">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-white/80 text-xs font-mono tracking-widest uppercase mb-4">Want results like these?</p>
+          <p className="text-white/80 text-xs font-mono tracking-widest uppercase mb-4">{ctaTitle}</p>
           <h2 className="font-display font-bold text-2xl text-white mb-6">
-            Let&apos;s build something you&apos;ll be proud to show off.
+            {ctaDescription}
           </h2>
           <Link
             href="/contact-us"

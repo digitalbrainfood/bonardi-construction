@@ -43,7 +43,7 @@ const supabase = createClient(URL_, SERVICE_KEY);
 
 const TABLES = [
   "pages", "blogs", "reviews", "settings", "site_pages",
-  "chat_sessions", "chat_messages", "gallery",
+  "chat_sessions", "chat_messages", "gallery", "leads",
 ];
 
 const SEED_REVIEWS = [

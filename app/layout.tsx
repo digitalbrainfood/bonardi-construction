@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
+import { getSettings } from "@/lib/settings";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -25,49 +26,51 @@ const dmMono = DM_Mono({
   weight: ["300", "400", "500"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://bonardiconst.com"),
-  title: {
-    default: "Bonardi Construction | General Contracting — Queens, NY",
-    template: "%s | Bonardi Construction",
-  },
-  description:
-    "Bonardi Construction, Inc. — 30 years of expert general contracting across Queens, Brooklyn, Nassau & Suffolk County. Residential, commercial, asphalt, masonry, roofing & more.",
-  keywords: [
-    "general contractor Queens NY",
-    "construction company Queens",
-    "asphalt paving Queens",
-    "masonry contractor NYC",
-    "roofing contractor Queens",
-    "Bonardi Construction",
-  ],
-  openGraph: {
-    siteName: "Bonardi Construction, Inc.",
-    locale: "en_US",
-    type: "website",
-    url: "/",
-    title: "Bonardi Construction | General Contracting — Queens, NY",
-    description:
-      "30 years of expert general contracting across Queens, Brooklyn, Nassau & Suffolk County.",
-    images: [],
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+  return {
+    metadataBase: new URL("https://bonardiconst.com"),
+    title: {
+      default: settings.defaultMetaTitle,
+      template: "%s | Bonardi Construction",
+    },
+    description: settings.defaultMetaDescription,
+    keywords: [
+      "general contractor Queens NY",
+      "construction company Queens",
+      "asphalt paving Queens",
+      "masonry contractor NYC",
+      "roofing contractor Queens",
+      "Bonardi Construction",
+    ],
+    openGraph: {
+      siteName: "Bonardi Construction, Inc.",
+      locale: "en_US",
+      type: "website",
+      url: "/",
+      title: settings.defaultMetaTitle,
+      description: settings.defaultMetaDescription,
+      images: settings.ogImage ? [settings.ogImage] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSettings();
   return (
     <html
       lang="en"
       className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body>
-        <LayoutShell>{children}</LayoutShell>
+        <LayoutShell settings={settings}>{children}</LayoutShell>
       </body>
     </html>
   );

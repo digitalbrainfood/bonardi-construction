@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useSiteSettings } from "@/components/SettingsProvider";
 
 export default function ContactCTA() {
+  const settings = useSiteSettings();
+  const phoneDigits = settings.phone.replace(/\D/g, "");
   return (
     <section className="relative py-28 bg-brand overflow-hidden">
       {/* Subtle background shading */}
@@ -41,10 +44,10 @@ export default function ContactCTA() {
                     Call or Text
                   </p>
                   <a
-                    href="tel:7187623400"
+                    href={`tel:${phoneDigits}`}
                     className="font-display text-3xl text-gray-900 dark:text-gray-100 hover:text-brand transition-colors"
                   >
-                    718.762.3400
+                    {settings.phone}
                   </a>
                 </div>
                 <hr className="border-gray-200 dark:border-gray-700" />
@@ -52,7 +55,7 @@ export default function ContactCTA() {
                   <p className="font-mono text-xs font-medium tracking-[0.2em] uppercase text-brand mb-2">
                     Fax
                   </p>
-                  <span className="font-body text-gray-600 dark:text-gray-400">718.762.8606</span>
+                  <span className="font-body text-gray-600 dark:text-gray-400">{settings.fax}</span>
                 </div>
                 <hr className="border-gray-200 dark:border-gray-700" />
                 <div>
@@ -60,10 +63,10 @@ export default function ContactCTA() {
                     Email
                   </p>
                   <a
-                    href="mailto:Info@bonardiconst.com"
+                    href={`mailto:${settings.email}`}
                     className="font-body text-gray-600 dark:text-gray-400 hover:text-brand transition-colors"
                   >
-                    Info@bonardiconst.com
+                    {settings.email}
                   </a>
                 </div>
                 <hr className="border-gray-200 dark:border-gray-700" />

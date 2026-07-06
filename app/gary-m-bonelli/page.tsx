@@ -2,15 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
+import { getSitePage, orDefault } from "@/lib/site-pages";
 
-export const metadata: Metadata = {
-  title: "Gary M. Bonelli — Owner & Principal Contractor",
-  description:
-    "Meet Gary M. Bonelli, owner and principal contractor of Bonardi Construction, Inc. — 30+ years of hands-on general contracting expertise across NYC and Long Island.",
-  alternates: { canonical: "/gary-m-bonelli" },
-};
+export const revalidate = 300;
 
-export default function GaryBonelliPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getSitePage("gary-m-bonelli");
+  return {
+    title: orDefault(content.seo?.title, "Gary M. Bonelli — Owner & Principal Contractor"),
+    description: orDefault(
+      content.seo?.description,
+      "Meet Gary M. Bonelli, owner and principal contractor of Bonardi Construction, Inc. — 30+ years of hands-on general contracting expertise across NYC and Long Island."
+    ),
+    alternates: { canonical: "/gary-m-bonelli" },
+  };
+}
+
+export default async function GaryBonelliPage() {
+  const content = await getSitePage("gary-m-bonelli");
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -52,10 +61,10 @@ export default function GaryBonelliPage() {
             <span className="section-label">Leadership</span>
           </div>
           <h1 className="font-display font-bold text-display-xl text-black dark:text-white">
-            Gary M. Bonelli
+            {orDefault(content.hero?.title, "Gary M. Bonelli")}
           </h1>
           <p className="font-mono text-brand text-xs tracking-widest mt-3">
-            OWNER &amp; PRINCIPAL CONTRACTOR
+            {orDefault(content.hero?.subtitle, "OWNER & PRINCIPAL CONTRACTOR")}
           </p>
         </div>
       </section>
@@ -67,25 +76,37 @@ export default function GaryBonelliPage() {
             {/* Bio content */}
             <div className="lg:col-span-7">
               <div className="space-y-5 font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed border-l-2 border-brand pl-6">
-                <p>
-                  Gary M. Bonelli founded Bonardi Construction with a commitment to delivering
-                  exceptional craftsmanship and genuine reliability to every client. With over
-                  30 years of hands-on experience across residential, commercial, and municipal
-                  projects throughout the New York City metro area, Gary brings a depth of
-                  expertise that few contractors can match.
-                </p>
-                <p>
-                  His career spans everything from ground-up residential construction to complex
-                  commercial demolition and restoration projects. Gary personally oversees
-                  project management processes, ensuring that every engagement meets the
-                  exacting standards Bonardi Construction has become known for across Queens,
-                  Brooklyn, Nassau County, and Suffolk County.
-                </p>
-                <p>
-                  Gary holds active general contractor licenses in New York City, Nassau County,
-                  and Suffolk County, and maintains Bonardi Construction&apos;s status as a
-                  Lead-Safe Certified Firm and authorized Generac dealer and installer.
-                </p>
+                {content.story?.content?.trim() ? (
+                  content.story.content
+                    .split(/\n{2,}/)
+                    .map((paragraph, i) => (
+                      <p key={i} className="whitespace-pre-line">
+                        {paragraph}
+                      </p>
+                    ))
+                ) : (
+                  <>
+                    <p>
+                      Gary M. Bonelli founded Bonardi Construction with a commitment to delivering
+                      exceptional craftsmanship and genuine reliability to every client. With over
+                      30 years of hands-on experience across residential, commercial, and municipal
+                      projects throughout the New York City metro area, Gary brings a depth of
+                      expertise that few contractors can match.
+                    </p>
+                    <p>
+                      His career spans everything from ground-up residential construction to complex
+                      commercial demolition and restoration projects. Gary personally oversees
+                      project management processes, ensuring that every engagement meets the
+                      exacting standards Bonardi Construction has become known for across Queens,
+                      Brooklyn, Nassau County, and Suffolk County.
+                    </p>
+                    <p>
+                      Gary holds active general contractor licenses in New York City, Nassau County,
+                      and Suffolk County, and maintains Bonardi Construction&apos;s status as a
+                      Lead-Safe Certified Firm and authorized Generac dealer and installer.
+                    </p>
+                  </>
+                )}
               </div>
             </div>
 
@@ -116,15 +137,19 @@ export default function GaryBonelliPage() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h2 className="font-display font-bold text-2xl text-white mb-2">
-              Ready to start your project?
+              {orDefault(content.cta?.title, "Ready to start your project?")}
             </h2>
-            <p className="font-body text-white/80">
-              Call us at{" "}
-              <a href="tel:7187623400" className="text-white underline hover:text-accent transition-colors">
-                718.762.3400
-              </a>{" "}
-              or request a free quote online.
-            </p>
+            {content.cta?.description?.trim() ? (
+              <p className="font-body text-white/80">{content.cta.description}</p>
+            ) : (
+              <p className="font-body text-white/80">
+                Call us at{" "}
+                <a href="tel:7187623400" className="text-white underline hover:text-accent transition-colors">
+                  718.762.3400
+                </a>{" "}
+                or request a free quote online.
+              </p>
+            )}
           </div>
           <Link
             href="/contact-us"

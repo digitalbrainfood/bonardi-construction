@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { createServiceClient } from "@/lib/supabase/api-auth";
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,6 +13,24 @@ export async function POST(req: NextRequest) {
         { error: "Missing required fields" },
         { status: 400 }
       );
+    }
+
+    // Best-effort: store the submission as a lead. Never block the email on a
+    // DB failure (e.g. paused/unreachable Supabase project).
+    try {
+      const supabase = createServiceClient();
+      const { error: dbError } = await supabase.from("leads").insert({
+        name,
+        email,
+        phone,
+        service: service ?? null,
+        project_type: type ?? null,
+        address: address ?? null,
+        message,
+      });
+      if (dbError) console.error("Lead insert failed:", dbError.message);
+    } catch (dbError) {
+      console.error("Lead insert failed:", dbError);
     }
 
     await resend.emails.send({

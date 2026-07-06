@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import PartnersCarousel from "@/components/PartnersCarousel";
+import type { SiteSettings } from "@/lib/settings";
 
 const serviceLinks = [
   { name: "Asphalt Services", href: "/services/asphalt" },
@@ -34,7 +35,8 @@ const partners = [
   "Unilock",
 ];
 
-export default function Footer() {
+export default function Footer({ settings }: { settings: SiteSettings }) {
+  const phoneDigits = settings.phone.replace(/\D/g, "");
   return (
     <footer className="bg-[#001a3a] text-white">
       {/* ── Main Footer ── */}
@@ -60,20 +62,20 @@ export default function Footer() {
             {/* Licenses */}
             <div className="mt-6 space-y-1">
               <p className="font-mono text-[11px] tracking-wide text-white/50">
-                NYC Lic #1274180
+                NYC Lic {settings.licenseNYC}
               </p>
               <p className="font-mono text-[11px] tracking-wide text-white/50">
-                Nassau #H0446880000
+                Nassau {settings.licenseNassau}
               </p>
               <p className="font-mono text-[11px] tracking-wide text-white/50">
-                Suffolk #57853-H
+                Suffolk {settings.licenseSuffolk}
               </p>
             </div>
 
             {/* Social Icons */}
             <div className="mt-6 flex items-center gap-3">
               <a
-                href="https://www.facebook.com/Bonardiconstruction/"
+                href={settings.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -84,7 +86,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/bonardiconstruction/"
+                href={settings.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -156,10 +158,10 @@ export default function Footer() {
                   Phone
                 </p>
                 <a
-                  href="tel:7187623400"
+                  href={`tel:${phoneDigits}`}
                   className="mt-0.5 block font-body text-sm text-white transition-colors hover:text-accent"
                 >
-                  718.762.3400
+                  {settings.phone}
                 </a>
               </div>
 
@@ -169,7 +171,7 @@ export default function Footer() {
                   Fax
                 </p>
                 <span className="mt-0.5 block font-body text-sm text-white/70">
-                  718.762.8606
+                  {settings.fax}
                 </span>
               </div>
 
@@ -179,10 +181,10 @@ export default function Footer() {
                   Email
                 </p>
                 <a
-                  href="mailto:Info@bonardiconst.com"
+                  href={`mailto:${settings.email}`}
                   className="mt-0.5 block font-body text-sm text-white transition-colors hover:text-accent"
                 >
-                  Info@bonardiconst.com
+                  {settings.email}
                 </a>
               </div>
 

@@ -1,26 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAdminUser, unauthorized, createServiceClient } from "@/lib/supabase/api-auth";
-
-const defaultBonardiSettings = {
-  companyName: "Bonardi Construction",
-  phone: "(718) 507-6543",
-  fax: "(718) 507-6544",
-  email: "info@bonardiconstruction.com",
-  address: "Queens, NY",
-  facebook: "https://www.facebook.com/BonardiConstruction",
-  instagram: "https://www.instagram.com/bonardiconstruction",
-  hoursWeekday: "Mon-Fri: 7:00 AM - 6:00 PM",
-  hoursSaturday: "Sat: 8:00 AM - 2:00 PM",
-  hoursSunday: "Sun: Closed",
-  licenseNYC: "LIC# 2049498-DCA",
-  licenseNassau: "LIC# H1809170000",
-  licenseSuffolk: "LIC# 54109-H",
-  defaultMetaTitle:
-    "Bonardi Construction | NYC & Long Island General Contractor",
-  defaultMetaDescription:
-    "Over 60 years of construction excellence. Bonardi Construction provides asphalt paving, concrete, roofing, masonry, new construction, and restoration services across NYC, Nassau & Suffolk County.",
-  ogImage: "/images/bonardi-og.jpg",
-};
+import { defaultSettings } from "@/lib/settings";
 
 // GET - Get site settings
 export async function GET() {
@@ -36,7 +16,7 @@ export async function GET() {
 
     if (error && error.code !== 'PGRST116') throw error;
 
-    return NextResponse.json(data || { id: 'default', data: defaultBonardiSettings });
+    return NextResponse.json(data || { id: 'default', data: defaultSettings });
   } catch (error: unknown) {
     console.error("Fetch settings error:", error);
     const message =

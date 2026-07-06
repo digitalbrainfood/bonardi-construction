@@ -3,15 +3,24 @@ import Link from "next/link";
 import { areas } from "@/lib/areas-data";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
+import { getSitePage, orDefault } from "@/lib/site-pages";
 
-export const metadata: Metadata = {
-  title: "Areas We Serve",
-  description:
-    "Bonardi Construction serves Queens, Brooklyn, Nassau County, Suffolk County, and Long Island with expert general contracting services.",
-  alternates: { canonical: "/areas-we-serve" },
-};
+export const revalidate = 300;
 
-export default function AreasWeServePage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getSitePage("areas-we-serve");
+  return {
+    title: orDefault(content.seo?.title, "Areas We Serve"),
+    description: orDefault(
+      content.seo?.description,
+      "Bonardi Construction serves Queens, Brooklyn, Nassau County, Suffolk County, and Long Island with expert general contracting services."
+    ),
+    alternates: { canonical: "/areas-we-serve" },
+  };
+}
+
+export default async function AreasWeServePage() {
+  const content = await getSitePage("areas-we-serve");
   const queens = areas.filter((a) => a.county === "Queens");
   const nassau = areas.filter((a) => a.county === "Nassau County");
 
@@ -32,14 +41,21 @@ export default function AreasWeServePage() {
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-end">
             <h1 className="font-display font-bold text-4xl md:text-5xl text-black dark:text-white">
-              Where We
-              <br />
-              <em className="italic text-brand">Build.</em>
+              {content.hero?.title?.trim() ? (
+                content.hero.title
+              ) : (
+                <>
+                  Where We
+                  <br />
+                  <em className="italic text-brand">Build.</em>
+                </>
+              )}
             </h1>
             <p className="font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-              Based in Queens, Bonardi Construction serves the full NYC metro area and extends
-              throughout Long Island. Our licensed team brings the same standard of excellence
-              to every neighborhood we work in.
+              {orDefault(
+                content.hero?.description,
+                "Based in Queens, Bonardi Construction serves the full NYC metro area and extends throughout Long Island. Our licensed team brings the same standard of excellence to every neighborhood we work in."
+              )}
             </p>
           </div>
         </div>
@@ -140,15 +156,19 @@ export default function AreasWeServePage() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h2 className="font-display font-bold text-2xl text-white mb-2">
-              Ready to start your project?
+              {orDefault(content.cta?.title, "Ready to start your project?")}
             </h2>
-            <p className="font-body text-white/80">
-              Call us at{" "}
-              <a href="tel:7187623400" className="text-accent hover:text-accent-light transition-colors">
-                718.762.3400
-              </a>{" "}
-              or request a free quote online.
-            </p>
+            {content.cta?.description?.trim() ? (
+              <p className="font-body text-white/80">{content.cta.description}</p>
+            ) : (
+              <p className="font-body text-white/80">
+                Call us at{" "}
+                <a href="tel:7187623400" className="text-accent hover:text-accent-light transition-colors">
+                  718.762.3400
+                </a>{" "}
+                or request a free quote online.
+              </p>
+            )}
           </div>
           <Link
             href="/contact-us"

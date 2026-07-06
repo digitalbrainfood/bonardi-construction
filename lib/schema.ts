@@ -1,15 +1,25 @@
+import { defaultSettings } from "@/lib/settings";
+
 const SITE_URL = "https://bonardiconst.com";
+
+// Format a 10-digit US number as +1-XXX-XXX-XXXX for schema.org output.
+function schemaPhone(value: string): string {
+  const digits = value.replace(/\D/g, "");
+  return digits.length === 10
+    ? `+1-${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`
+    : `+1-${digits}`;
+}
 
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "GeneralContractor"],
     "@id": `${SITE_URL}/#organization`,
-    name: "Bonardi Construction, Inc.",
+    name: defaultSettings.companyName,
     url: SITE_URL,
-    telephone: "+1-718-762-3400",
-    faxNumber: "+1-718-762-8606",
-    email: "Info@bonardiconst.com",
+    telephone: schemaPhone(defaultSettings.phone),
+    faxNumber: schemaPhone(defaultSettings.fax),
+    email: defaultSettings.email,
     image: `${SITE_URL}/opengraph-image.png`,
     logo: `${SITE_URL}/logo.png`,
     description:
@@ -58,10 +68,7 @@ export function organizationSchema() {
       jobTitle: "Owner & Principal Contractor",
       url: `${SITE_URL}/gary-m-bonelli`,
     },
-    sameAs: [
-      "https://www.facebook.com/Bonardiconstruction/",
-      "https://www.instagram.com/bonardiconstruction/",
-    ],
+    sameAs: [defaultSettings.facebook, defaultSettings.instagram],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -84,7 +91,7 @@ export function organizationSchema() {
           "@type": "Organization",
           name: "New York City",
         },
-        identifier: "#1274180",
+        identifier: defaultSettings.licenseNYC,
       },
       {
         "@type": "EducationalOccupationalCredential",
@@ -93,7 +100,7 @@ export function organizationSchema() {
           "@type": "Organization",
           name: "Nassau County",
         },
-        identifier: "#H0446880000",
+        identifier: defaultSettings.licenseNassau,
       },
       {
         "@type": "EducationalOccupationalCredential",
@@ -102,7 +109,7 @@ export function organizationSchema() {
           "@type": "Organization",
           name: "Suffolk County",
         },
-        identifier: "#57853-H",
+        identifier: defaultSettings.licenseSuffolk,
       },
     ],
     priceRange: "$$",
@@ -153,7 +160,7 @@ export function serviceSchema(service: {
     provider: {
       "@type": "LocalBusiness",
       "@id": `${SITE_URL}/#organization`,
-      name: "Bonardi Construction, Inc.",
+      name: defaultSettings.companyName,
     },
     areaServed: [
       { "@type": "City", name: "Queens" },
