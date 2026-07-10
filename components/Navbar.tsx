@@ -324,15 +324,13 @@ export default function Navbar() {
                           <Link
                             href={item.href}
                             onClick={() => setMegaOpen(false)}
-                            className={`group/link block py-[7px] text-[13px] font-body leading-snug transition-colors duration-150 ${
+                            className={`block py-[7px] text-[13px] font-body leading-snug transition-colors duration-150 ${
                               isActive(item.href)
                                 ? "text-brand font-medium"
                                 : "text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand-100"
                             }`}
                           >
-                            <span className="inline-block transition-transform duration-200 ease-out group-hover/link:translate-x-0.5">
-                              {item.name}
-                            </span>
+                            {item.name}
                           </Link>
                         </li>
                       ))}
