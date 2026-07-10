@@ -28,7 +28,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${base}/contact-us`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/gary-m-bonelli`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/thank-you`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/areas-we-serve`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/services/asphalt/sealcoating`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
