@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { heroImages } from "@/lib/images";
@@ -54,8 +54,8 @@ const trustBadges = [
 export default function Hero() {
   const settings = useSiteSettings();
   const phoneDigits = settings.phone.replace(/\D/g, "");
-  const [scrollY, setScrollY] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Check for prefers-reduced-motion
@@ -76,27 +76,38 @@ export default function Hero() {
     return () => mql.removeEventListener("change", handleChange);
   }, []);
 
-  // Parallax scroll listener (only if reduced motion is not preferred)
+  // Parallax via rAF + direct DOM write — a React re-render per scroll
+  // event can't keep up with the compositor and reads as stutter
   useEffect(() => {
-    if (reducedMotion) return;
+    const el = parallaxRef.current;
+    if (!el) return;
+    if (reducedMotion) {
+      el.style.transform = "";
+      return;
+    }
 
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      el.style.transform = `translate3d(0, ${window.scrollY * 0.3}px, 0)`;
+    };
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!raf) raf = requestAnimationFrame(update);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    update();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, [reducedMotion]);
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-white dark:bg-gray-900">
       {/* Background construction image with parallax */}
       <div
-        className="absolute inset-x-0 -top-1/4 bottom-0 pointer-events-none"
-        style={
-          !reducedMotion
-            ? { transform: `translateY(${scrollY * 0.3}px)` }
-            : undefined
-        }
+        ref={parallaxRef}
+        className="absolute inset-x-0 -top-1/4 bottom-0 pointer-events-none will-change-transform"
       >
         <Image
           src={heroImages.main}

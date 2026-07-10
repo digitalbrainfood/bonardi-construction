@@ -49,7 +49,7 @@ export default function ScrollReveal({
     <div
       ref={ref}
       className={`${animationClass} ${className}`}
-      style={{ animationDelay: isVisible ? `${delay}ms` : undefined, animationFillMode: "forwards" }}
+      style={{ animationDelay: isVisible ? `${delay}ms` : undefined, animationFillMode: "both" }}
     >
       {children}
     </div>

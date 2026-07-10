@@ -7,92 +7,8 @@ import Image from "next/image";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useSiteSettings } from "@/components/SettingsProvider";
 
-/* ─── Category header images (real project photos) ─── */
-const categoryImages: Record<string, string> = {
-  Residential: "/images/web/roofing/04.jpg",
-  "Exterior & Site Work": "/images/web/asphalt-commercial/01.jpg",
-  "Commercial & Specialty": "/images/web/commercial/03.jpg",
-};
-
-const featuredImage = "/images/web/asphalt-residential/01.jpg";
-
-/* ─── Category descriptions ─── */
-const categoryDescriptions: Record<string, string> = {
-  Residential: "Full-service residential construction & renovation",
-  "Exterior & Site Work": "Expert exterior, paving & site development",
-  "Commercial & Specialty": "Large-scale commercial & specialty projects",
-};
-
-/* ─── Service descriptions (top 3 per column) ─── */
-const serviceDescriptions: Record<string, string> = {
-  "Home Additions & Extensions": "Custom additions, dormers & extensions",
-  "Roofing Services": "Installation, repair & replacement",
-  "Kitchen Remodeling": "Full-service kitchen renovations",
-  "Asphalt Services": "Paving, milling & sealcoating",
-  "Masonry & Brick Pointing": "Tuckpointing, restoration & repair",
-  "Concrete & Blacktop": "Foundations, driveways & walkways",
-  "Construction Management": "End-to-end project oversight",
-  "Office Buildouts": "Shell to finished workspace",
-  Demolition: "Selective & full-site demolition",
-};
-
-/* ─── Popular services (badge) ─── */
-const popularServices = new Set([
-  "Home Additions & Extensions",
-  "Roofing Services",
-  "Kitchen Remodeling",
-  "Asphalt Services",
-  "Masonry & Brick Pointing",
-  "Hardscaping",
-  "Construction Management",
-  "Demolition",
-]);
-
-/* ─── Top 3 per column (get descriptions) ─── */
-const top3PerColumn: Record<string, string[]> = {
-  Residential: [
-    "Home Additions & Extensions",
-    "Roofing Services",
-    "Kitchen Remodeling",
-  ],
-  "Exterior & Site Work": [
-    "Asphalt Services",
-    "Masonry & Brick Pointing",
-    "Concrete & Blacktop",
-  ],
-  "Commercial & Specialty": [
-    "Construction Management",
-    "Office Buildouts",
-    "Demolition",
-  ],
-};
-
-/* ─── Popular pill services ─── */
-const popularPills = [
-  { name: "Kitchen Remodeling", href: "/services/kitchen-remodeling" },
-  { name: "Roofing", href: "/services/roofing-services" },
-  { name: "Asphalt", href: "/services/asphalt" },
-  { name: "Masonry", href: "/services/masonry-brick-pointing" },
-  { name: "Demolition", href: "/services/demolition" },
-];
-
-/* ─── Hover preview images keyed by service name ─── */
-const hoverPreviewImages: Record<string, string> = {
-  "Home Additions & Extensions": "/images/web/home-extensions/01.jpg",
-  "Roofing Services": "/images/web/roofing/01.jpg",
-  "Kitchen Remodeling":
-    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&q=80",
-  "Asphalt Services": "/images/web/asphalt-commercial/03.jpg",
-  "Construction Management": "/images/web/commercial/03.jpg",
-  Demolition:
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&auto=format&q=80",
-};
-
-// All preview images, deduped — rendered stacked so hover swaps are a
-// GPU crossfade instead of a src swap (no refetch/decode flicker).
-const allPreviewImages = Array.from(
-  new Set([featuredImage, ...Object.values(hoverPreviewImages)])
-);
+/* ─── Mega menu rail photo (real project) ─── */
+const railImage = "/images/web/asphalt-commercial/01.jpg";
 
 /* ─── Service data for mega menu ─── */
 const serviceColumns = [
@@ -174,7 +90,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [hoveredService, setHoveredService] = useState<string | null>(null);
   const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /* ─── Scroll listener ─── */
@@ -183,6 +98,23 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  /* ─── Close menus on Escape / route change ─── */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMegaOpen(false);
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  useEffect(() => {
+    setMegaOpen(false);
+    setMobileOpen(false);
+  }, [pathname]);
 
   /* ─── Lock body scroll when mobile menu is open ─── */
   useEffect(() => {
@@ -213,18 +145,6 @@ export default function Navbar() {
   const closeMega = () => {
     megaTimeout.current = setTimeout(() => setMegaOpen(false), 150);
   };
-
-  /* ─── Featured image based on hover state ─── */
-  const currentFeaturedImage =
-    hoveredService && hoverPreviewImages[hoveredService]
-      ? hoverPreviewImages[hoveredService]
-      : featuredImage;
-
-  const currentFeaturedTitle =
-    hoveredService || "Commercial Office Renovation";
-
-  const currentFeaturedLocation =
-    hoveredService ? "New York, NY" : "Manhattan, NY";
 
   return (
     <>
@@ -257,7 +177,7 @@ export default function Navbar() {
           MAIN NAVBAR
           ════════════════════════════════════════════════════════ */}
       <nav
-        className={`sticky top-0 z-50 transition-all duration-300 bg-white dark:bg-gray-900 ${
+        className={`sticky top-0 z-50 transition-[box-shadow,border-color] duration-300 bg-white dark:bg-gray-900 ${
           scrolled
             ? "shadow-md backdrop-blur-md border-b border-gray-100 dark:border-gray-800"
             : "border-b border-gray-200 dark:border-gray-700"
@@ -295,6 +215,8 @@ export default function Navbar() {
                       }`}
                       onClick={() => setMegaOpen((prev) => !prev)}
                       aria-expanded={megaOpen}
+                      aria-haspopup="true"
+                      aria-controls="mega-menu"
                     >
                       Services
                       <svg
@@ -372,180 +294,88 @@ export default function Navbar() {
         </div>
 
         {/* ════════════════════════════════════════════════════════
-            PREMIUM MEGA MENU (desktop)
+            MEGA MENU (desktop) — quiet typographic service index
             ════════════════════════════════════════════════════════ */}
         <div
-          className={`absolute left-0 right-0 top-full z-40 transition-[opacity,transform] duration-200 ease-out transform-gpu will-change-[opacity,transform] ${
+          id="mega-menu"
+          aria-hidden={!megaOpen}
+          className={`absolute left-0 right-0 top-full z-40 hidden lg:block transform-gpu transition-[opacity,transform,visibility] ${
             megaOpen
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-2 pointer-events-none"
+              ? "visible opacity-100 translate-y-0 duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              : "invisible opacity-0 -translate-y-1 pointer-events-none duration-150 ease-in"
           }`}
           onMouseEnter={openMega}
           onMouseLeave={closeMega}
         >
-          {/* Top gradient border line */}
+          {/* Top gradient rule — same device as .brand-rule */}
           <div className="h-[2px] bg-gradient-to-r from-brand via-brand to-accent" />
 
-          {/* Panel */}
-          <div className="bg-white dark:bg-gray-900 shadow-2xl border-b border-gray-200/50 dark:border-gray-700/50">
-            <div className="max-w-7xl mx-auto px-6 py-8">
-              {/* 4-column layout: 3 service cols + 1 featured/CTA */}
-              <div className="grid grid-cols-4 gap-6">
-                {/* ─── Service Columns (3) ─── */}
-                {serviceColumns.map((col, colIdx) => {
-                  const top3 = top3PerColumn[col.heading] || [];
-                  return (
-                    <div
-                      key={col.heading}
-                      className="transition-[opacity,transform] duration-300 ease-out transform-gpu"
-                      style={{
-                        transitionDelay: megaOpen ? `${colIdx * 50}ms` : "0ms",
-                        opacity: megaOpen ? 1 : 0,
-                        transform: megaOpen
-                          ? "translateY(0)"
-                          : "translateY(8px)",
-                        willChange: "opacity, transform",
-                      }}
-                    >
-                      {/* Category header image */}
-                      <div className="relative h-[100px] rounded-lg overflow-hidden mb-3 group">
-                        <Image
-                          src={categoryImages[col.heading]}
-                          alt={col.heading}
-                          fill
-                          sizes="300px"
-                          className="object-cover transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                        <h3 className="absolute bottom-3 left-3 text-white text-sm font-display font-bold tracking-wide">
-                          {col.heading}
-                        </h3>
-                      </div>
-
-                      {/* Category description */}
-                      <p className="text-xs text-gray-500 dark:text-gray-400 font-body mb-3 pl-0.5">
-                        {categoryDescriptions[col.heading]}
-                      </p>
-
-                      {/* Service links */}
-                      <ul className="space-y-0.5">
-                        {col.items.map((item) => {
-                          const isTop3 = top3.includes(item.name);
-                          const isPopular = popularServices.has(item.name);
-                          const description = serviceDescriptions[item.name];
-
-                          return (
-                            <li key={item.href}>
-                              <Link
-                                href={item.href}
-                                onClick={() => setMegaOpen(false)}
-                                onMouseEnter={() =>
-                                  setHoveredService(item.name)
-                                }
-                                onMouseLeave={() => setHoveredService(null)}
-                                className={`block border-l-2 border-transparent hover:border-brand hover:bg-brand-50/50 dark:hover:bg-brand/10 pl-3 -ml-3 py-1.5 rounded-r transition-all duration-200 ${
-                                  isActive(item.href)
-                                    ? "text-brand font-medium border-brand bg-brand-50/30 dark:bg-brand/10"
-                                    : "text-gray-700 dark:text-gray-300 hover:text-brand"
-                                }`}
-                              >
-                                <span className="flex items-center">
-                                  <span className="text-[13px] font-body leading-tight">
-                                    {item.name}
-                                  </span>
-                                  {isPopular && (
-                                    <span className="bg-accent/15 text-amber-700 dark:text-amber-400 text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded ml-2 flex-shrink-0">
-                                      Popular
-                                    </span>
-                                  )}
-                                </span>
-                                {isTop3 && description && (
-                                  <span className="block text-xs text-gray-400 dark:text-gray-500 font-body mt-0.5 leading-tight">
-                                    {description}
-                                  </span>
-                                )}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  );
-                })}
-
-                {/* ─── Fourth Column: Featured / CTA ─── */}
-                <div
-                  className="transition-[opacity,transform] duration-300 ease-out transform-gpu"
-                  style={{
-                    transitionDelay: megaOpen ? "150ms" : "0ms",
-                    opacity: megaOpen ? 1 : 0,
-                    transform: megaOpen
-                      ? "translateY(0)"
-                      : "translateY(8px)",
-                    willChange: "opacity, transform",
-                  }}
-                >
-                  {/* Featured Project header */}
-                  <p className="text-[10px] font-mono font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.15em] mb-3">
-                    Featured Project
-                  </p>
-
-                  {/* Featured project card — stacked images crossfade on hover */}
-                  <div className="relative h-[180px] rounded-lg overflow-hidden mb-4 group cursor-pointer">
-                    <div className="absolute inset-0 transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105">
-                      {allPreviewImages.map((src) => (
-                        <Image
-                          key={src}
-                          src={src}
-                          alt={src === currentFeaturedImage ? currentFeaturedTitle : ""}
-                          fill
-                          sizes="320px"
-                          className={`object-cover transition-opacity duration-300 ease-out ${
-                            src === currentFeaturedImage ? "opacity-100" : "opacity-0"
-                          }`}
-                        />
+          <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-[0_24px_48px_-20px_rgba(15,23,42,0.18)]">
+            <div className="max-w-7xl mx-auto px-6 py-10">
+              <div className="grid grid-cols-12 gap-x-10">
+                {/* ─── Service columns ─── */}
+                {serviceColumns.map((col) => (
+                  <div key={col.heading} className="col-span-3">
+                    <p className="section-label">{col.heading}</p>
+                    <div className="mt-3 mb-3 h-px bg-gray-200 dark:bg-gray-700" />
+                    <ul>
+                      {col.items.map((item) => (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            onClick={() => setMegaOpen(false)}
+                            className={`group/link block py-[7px] text-[13px] font-body leading-snug transition-colors duration-150 ${
+                              isActive(item.href)
+                                ? "text-brand font-medium"
+                                : "text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand-100"
+                            }`}
+                          >
+                            <span className="inline-block transition-transform duration-200 ease-out group-hover/link:translate-x-0.5">
+                              {item.name}
+                            </span>
+                          </Link>
+                        </li>
                       ))}
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                    {/* Location badge */}
-                    <span className="absolute top-3 left-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-[10px] font-mono font-semibold text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
-                      {currentFeaturedLocation}
-                    </span>
-
-                    {/* Project title */}
-                    <div className="absolute bottom-3 left-3 right-3">
-                      <h4 className="text-white text-sm font-display font-bold leading-snug">
-                        {currentFeaturedTitle}
-                      </h4>
-                      <p className="text-white/70 text-[11px] font-body mt-0.5">
-                        Full-scale construction project
-                      </p>
-                    </div>
+                    </ul>
                   </div>
+                ))}
 
-                  {/* Popular Services pills */}
-                  <p className="text-[10px] font-mono font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.15em] mb-2">
-                    Popular Services
+                {/* ─── Contact rail ─── */}
+                <div className="col-span-3 border-l border-gray-200 dark:border-gray-800 pl-10">
+                  <p className="section-label">Start Your Project</p>
+                  <div className="mt-3 mb-4 h-px bg-gray-200 dark:bg-gray-700" />
+
+                  <div className="relative h-[130px] rounded-lg overflow-hidden">
+                    <Image
+                      src={railImage}
+                      alt="Bonardi Construction commercial paving project"
+                      fill
+                      sizes="320px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="mt-3 text-[13px] font-body leading-relaxed text-gray-600 dark:text-gray-400">
+                    Thirty years of residential and commercial work across
+                    New York City and Long Island. Licensed and insured in
+                    NYC, Nassau &amp; Suffolk.
                   </p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {popularPills.map((pill) => (
-                      <Link
-                        key={pill.href}
-                        href={pill.href}
-                        onClick={() => setMegaOpen(false)}
-                        className="text-[11px] font-body font-medium text-brand bg-brand-50 dark:bg-brand-900/30 hover:bg-brand-100 dark:hover:bg-brand-900/50 px-2.5 py-1 rounded-full transition-colors duration-200"
-                      >
-                        {pill.name}
-                      </Link>
-                    ))}
+
+                  <div className="mt-5">
+                    <p className="font-mono text-[10px] font-medium tracking-[0.18em] uppercase text-gray-400 dark:text-gray-500 mb-1">
+                      Direct Line
+                    </p>
+                    <a
+                      href={`tel:${phoneDigits}`}
+                      className="font-display text-2xl font-bold text-brand dark:text-blue-400 hover:text-brand-dark dark:hover:text-blue-300 transition-colors duration-200"
+                    >
+                      {settings.phone}
+                    </a>
                   </div>
 
-                  {/* CTA Button */}
                   <Link
                     href="/contact-us"
                     onClick={() => setMegaOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-black py-3 rounded-lg font-body font-semibold text-sm transition-all duration-300 hover:shadow-lg"
+                    className="mt-5 flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-dark text-black py-3 rounded-lg font-body font-semibold text-sm transition-colors duration-200"
                   >
                     Get a Free Quote
                     <svg
@@ -565,16 +395,16 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* Bottom row */}
-              <div className="mt-6 pt-5 border-t border-gray-100 dark:border-gray-800">
+              {/* ─── Bottom utility row ─── */}
+              <div className="mt-8 pt-5 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
                 <Link
                   href="/services"
                   onClick={() => setMegaOpen(false)}
-                  className="inline-flex items-center gap-2 text-brand text-sm font-body font-semibold hover:text-brand-dark transition-colors duration-200 group"
+                  className="group inline-flex items-center gap-2 text-brand text-sm font-body font-semibold hover:text-brand-dark dark:hover:text-brand-100 transition-colors duration-200"
                 >
-                  View All Services
+                  View all {allServices.length} services
                   <svg
-                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                    className="w-4 h-4 transition-transform duration-200 ease-out group-hover:translate-x-1"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -587,6 +417,9 @@ export default function Navbar() {
                     />
                   </svg>
                 </Link>
+                <p className="hidden xl:block font-mono text-[10px] tracking-[0.18em] uppercase text-gray-400 dark:text-gray-500">
+                  Serving Queens &middot; Brooklyn &middot; Nassau &middot; Suffolk
+                </p>
               </div>
             </div>
           </div>
