@@ -514,7 +514,7 @@ function ContactInfoEditor({
           value={info.email || ""}
           onChange={(e) => updateField("email", e.target.value)}
           className="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-accent"
-          placeholder="info@bonardiconstruction.com"
+          placeholder="info@bonardiconst.com"
         />
       </div>
       <div>

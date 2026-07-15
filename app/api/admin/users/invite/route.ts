@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.bonardiconstruction.com';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.bonardiconst.com';
     const { data, error } = await supabase.auth.admin.inviteUserByEmail(email, {
       redirectTo: `${siteUrl.replace(/\/$/, '')}/admin/reset-password`,
       data: { role: role || 'editor' },

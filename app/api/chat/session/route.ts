@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
                 <p><strong>Phone:</strong> ${phone}</p>
                 <p><strong>Email:</strong> ${email}</p>
                 <p style="margin-top: 20px;">
-                  <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.bonardiconstruction.com'}/admin/chat"
+                  <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.bonardiconst.com'}/admin/chat"
                      style="background: #0055A5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">
                     View Chat
                   </a>

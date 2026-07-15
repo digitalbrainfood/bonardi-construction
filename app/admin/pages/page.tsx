@@ -670,7 +670,7 @@ function AdminPagesContent() {
               </div>
               <div className="flex-1 flex justify-center">
                 <div className="bg-white rounded-md px-4 py-1 text-sm text-gray-500 border">
-                  bonardiconstruction.com/{formData.slug || "page-url"}
+                  www.bonardiconst.com/{formData.slug || "page-url"}
                 </div>
               </div>
             </div>
