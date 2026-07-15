@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
       try {
         const resend = new Resend(process.env.RESEND_API_KEY);
         await resend.emails.send({
-          from: 'Bonardi Construction <onboarding@resend.dev>',
+          from: 'Bonardi Construction <no-reply@bonardiconst.com>',
           to: process.env.ADMIN_EMAIL,
           subject: 'New Chat Started - Bonardi Construction',
           html: `

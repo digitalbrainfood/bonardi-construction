@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     }
 
     await resend.emails.send({
-      from: "Bonardi Construction <onboarding@resend.dev>",
+      from: "Bonardi Construction <no-reply@bonardiconst.com>",
       to: "Info@bonardiconst.com",
       replyTo: email,
       subject: `New Quote Request — ${service || "General Inquiry"}`,
