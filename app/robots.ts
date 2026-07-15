@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin", "/admin/", "/api/", "/thank-you"],
     },
-    sitemap: "https://bonardiconst.com/sitemap.xml",
+    sitemap: "https://www.bonardiconst.com/sitemap.xml",
   };
 }

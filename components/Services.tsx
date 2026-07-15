@@ -191,7 +191,7 @@ export default function Services() {
                     <Link
                       key={service.name}
                       href={service.href}
-                      className="group relative block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover dark:hover:shadow-gray-900/20 hover:-translate-y-1 transition-all duration-300 ease-out transform-gpu will-change-transform overflow-hidden"
+                      className="group relative block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover dark:hover:shadow-gray-900/20 transition-all duration-300 ease-out overflow-hidden"
                     >
                       <div className="p-6 flex flex-col h-full">
                         <div className="flex items-start justify-between mb-4">
@@ -202,7 +202,7 @@ export default function Services() {
                             {service.icon}
                           </span>
                           <svg
-                            className="w-4 h-4 text-gray-300 group-hover:text-brand opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300"
+                            className="w-4 h-4 text-gray-300 group-hover:text-brand opacity-0 group-hover:opacity-100 transition-all duration-300"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"

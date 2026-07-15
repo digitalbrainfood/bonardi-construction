@@ -29,17 +29,17 @@ export default async function BlogPage() {
     name: "Bonardi Construction Blog",
     description:
       "Construction tips, project spotlights, and industry insights from the team at Bonardi Construction.",
-    url: "https://bonardiconst.com/blog",
+    url: "https://www.bonardiconst.com/blog",
     publisher: {
       "@type": "LocalBusiness",
-      "@id": "https://bonardiconst.com/#organization",
+      "@id": "https://www.bonardiconst.com/#organization",
       name: "Bonardi Construction, Inc.",
     },
     blogPost: posts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
       description: post.excerpt,
-      url: `https://bonardiconst.com/blog/${post.slug}`,
+      url: `https://www.bonardiconst.com/blog/${post.slug}`,
       datePublished: post.date,
       author: {
         "@type": "Organization",
@@ -116,7 +116,7 @@ export default async function BlogPage() {
                 <p className="font-body text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">{posts[0].excerpt}</p>
                 <div className="flex items-center gap-2 text-brand text-sm font-body font-medium">
                   Read article
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
@@ -153,7 +153,7 @@ export default async function BlogPage() {
                   <div className="mt-6 flex items-center justify-between">
                     <span className="text-gray-400 dark:text-gray-500 text-xs font-body">{post.date}</span>
                     <svg
-                      className="w-4 h-4 text-brand -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                      className="w-4 h-4 text-brand opacity-0 group-hover:opacity-100 transition-all duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

@@ -79,12 +79,12 @@ export default async function AreasWeServePage() {
                 <Link
                   key={area.slug}
                   href={`/areas-we-serve/${area.slug}`}
-                  className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ease-out transform-gpu will-change-transform p-8 flex flex-col"
+                  className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover transition-all duration-300 ease-out p-8 flex flex-col"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-2 h-2 bg-brand rotate-45 mt-1.5" />
                     <svg
-                      className="w-4 h-4 text-gray-400 group-hover:text-brand opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
+                      className="w-4 h-4 text-gray-400 group-hover:text-brand opacity-0 group-hover:opacity-100 transition-all duration-300"
                       fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -114,12 +114,12 @@ export default async function AreasWeServePage() {
                 <Link
                   key={area.slug}
                   href={`/areas-we-serve/${area.slug}`}
-                  className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ease-out transform-gpu will-change-transform p-8 flex flex-col"
+                  className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover transition-all duration-300 ease-out p-8 flex flex-col"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-2 h-2 bg-brand-dark rotate-45 mt-1.5" />
                     <svg
-                      className="w-4 h-4 text-gray-400 group-hover:text-brand opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
+                      className="w-4 h-4 text-gray-400 group-hover:text-brand opacity-0 group-hover:opacity-100 transition-all duration-300"
                       fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

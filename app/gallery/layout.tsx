@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "Project Gallery — Bonardi Construction",
     description:
       "Browse completed construction projects across Queens, Brooklyn, Nassau & Suffolk County.",
-    url: "https://bonardiconst.com/gallery",
+    url: "https://www.bonardiconst.com/gallery",
     siteName: "Bonardi Construction",
     type: "website",
   },
@@ -28,10 +28,10 @@ export default function GalleryLayout({
     name: "Bonardi Construction Project Gallery",
     description:
       "Photos of completed construction projects by Bonardi Construction across Queens, Brooklyn, and Long Island.",
-    url: "https://bonardiconst.com/gallery",
+    url: "https://www.bonardiconst.com/gallery",
     publisher: {
       "@type": "LocalBusiness",
-      "@id": "https://bonardiconst.com/#organization",
+      "@id": "https://www.bonardiconst.com/#organization",
       name: "Bonardi Construction, Inc.",
     },
   };

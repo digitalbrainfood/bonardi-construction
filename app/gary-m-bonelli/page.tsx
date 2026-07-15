@@ -25,10 +25,10 @@ export default async function GaryBonelliPage() {
     "@type": "Person",
     name: "Gary M. Bonelli",
     jobTitle: "Owner & Principal Contractor",
-    url: "https://bonardiconst.com/gary-m-bonelli",
+    url: "https://www.bonardiconst.com/gary-m-bonelli",
     worksFor: {
       "@type": "LocalBusiness",
-      "@id": "https://bonardiconst.com/#organization",
+      "@id": "https://www.bonardiconst.com/#organization",
       name: "Bonardi Construction, Inc.",
     },
     knowsAbout: [

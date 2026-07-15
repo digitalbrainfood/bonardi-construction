@@ -234,7 +234,7 @@ export default function Hero() {
               >
                 Request a Free Quote
                 <svg
-                  className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                  className="w-4 h-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

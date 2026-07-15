@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "Contact Bonardi Construction — Free Quote",
     description:
       "Call 718.762.3400 or request a free quote online. Licensed general contractor serving Queens, Brooklyn, Nassau & Suffolk County.",
-    url: "https://bonardiconst.com/contact-us",
+    url: "https://www.bonardiconst.com/contact-us",
     siteName: "Bonardi Construction",
     type: "website",
   },
@@ -26,10 +26,10 @@ export default function ContactLayout({
     "@context": "https://schema.org",
     "@type": "ContactPage",
     name: "Contact Bonardi Construction",
-    url: "https://bonardiconst.com/contact-us",
+    url: "https://www.bonardiconst.com/contact-us",
     mainEntity: {
       "@type": "LocalBusiness",
-      "@id": "https://bonardiconst.com/#organization",
+      "@id": "https://www.bonardiconst.com/#organization",
       name: "Bonardi Construction, Inc.",
       telephone: "+1-718-762-3400",
       faxNumber: "+1-718-762-8606",

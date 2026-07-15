@@ -6,26 +6,26 @@ Bonardi Construction handles projects end to end: estimates, DOB permits, constr
 
 ## Company
 
-- [About](https://bonardiconst.com/about): Company history, values, and approach
-- [Gary M. Bonelli](https://bonardiconst.com/gary-m-bonelli): Owner and founder profile
-- [Contact](https://bonardiconst.com/contact-us): Request a free quote — 718.762.3400
-- [Areas We Serve](https://bonardiconst.com/areas-we-serve): Queens, Brooklyn, Nassau County, and Suffolk County service areas
+- [About](https://www.bonardiconst.com/about): Company history, values, and approach
+- [Gary M. Bonelli](https://www.bonardiconst.com/gary-m-bonelli): Owner and founder profile
+- [Contact](https://www.bonardiconst.com/contact-us): Request a free quote — 718.762.3400
+- [Areas We Serve](https://www.bonardiconst.com/areas-we-serve): Queens, Brooklyn, Nassau County, and Suffolk County service areas
 
 ## Services
 
-- [All Services](https://bonardiconst.com/services): Full directory of residential, exterior/site work, and commercial services
-- [Asphalt Services](https://bonardiconst.com/services/asphalt): Paving, milling, and sealcoating for driveways and parking lots
-- [Masonry & Brick Pointing](https://bonardiconst.com/services/masonry-brick-pointing): Tuckpointing, restoration, and repair
-- [Roofing Services](https://bonardiconst.com/services/roofing-services): Installation, repair, and replacement
-- [Concrete & Blacktop](https://bonardiconst.com/services/concrete): Foundations, driveways, and walkways
-- [Home Additions & Extensions](https://bonardiconst.com/services/home-additions-extensions): Custom additions, dormers, and extensions
-- [Kitchen Remodeling](https://bonardiconst.com/services/kitchen-remodeling): Full-service kitchen renovations
-- [Construction Management](https://bonardiconst.com/services/construction-management): End-to-end commercial project oversight
-- [Demolition](https://bonardiconst.com/services/demolition): Selective and full-site demolition
-- [Fire Damage Restoration](https://bonardiconst.com/services/fire-damage-restoration): Assessment, demolition, and rebuild after fire damage
+- [All Services](https://www.bonardiconst.com/services): Full directory of residential, exterior/site work, and commercial services
+- [Asphalt Services](https://www.bonardiconst.com/services/asphalt): Paving, milling, and sealcoating for driveways and parking lots
+- [Masonry & Brick Pointing](https://www.bonardiconst.com/services/masonry-brick-pointing): Tuckpointing, restoration, and repair
+- [Roofing Services](https://www.bonardiconst.com/services/roofing-services): Installation, repair, and replacement
+- [Concrete & Blacktop](https://www.bonardiconst.com/services/concrete): Foundations, driveways, and walkways
+- [Home Additions & Extensions](https://www.bonardiconst.com/services/home-additions-extensions): Custom additions, dormers, and extensions
+- [Kitchen Remodeling](https://www.bonardiconst.com/services/kitchen-remodeling): Full-service kitchen renovations
+- [Construction Management](https://www.bonardiconst.com/services/construction-management): End-to-end commercial project oversight
+- [Demolition](https://www.bonardiconst.com/services/demolition): Selective and full-site demolition
+- [Fire Damage Restoration](https://www.bonardiconst.com/services/fire-damage-restoration): Assessment, demolition, and rebuild after fire damage
 
 ## Resources
 
-- [Project Gallery](https://bonardiconst.com/gallery): Photos of completed residential and commercial work
-- [Blog](https://bonardiconst.com/blog): Construction tips, maintenance guides, and local industry news
-- [Sitemap](https://bonardiconst.com/sitemap.xml): Full XML index of all public pages
+- [Project Gallery](https://www.bonardiconst.com/gallery): Photos of completed residential and commercial work
+- [Blog](https://www.bonardiconst.com/blog): Construction tips, maintenance guides, and local industry news
+- [Sitemap](https://www.bonardiconst.com/sitemap.xml): Full XML index of all public pages

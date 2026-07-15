@@ -1,6 +1,6 @@
 import { defaultSettings } from "@/lib/settings";
 
-const SITE_URL = "https://bonardiconst.com";
+const SITE_URL = "https://www.bonardiconst.com";
 
 // Format a 10-digit US number as +1-XXX-XXX-XXXX for schema.org output.
 function schemaPhone(value: string): string {

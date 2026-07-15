@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://bonardiconst.com/blog/${post.slug}`,
+      url: `https://www.bonardiconst.com/blog/${post.slug}`,
       type: "article",
       publishedTime: post.date,
       authors: ["Bonardi Construction, Inc."],
@@ -64,7 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    url: `https://bonardiconst.com/blog/${post.slug}`,
+    url: `https://www.bonardiconst.com/blog/${post.slug}`,
     datePublished: post.date,
     dateModified: post.date,
     image: post.image,
@@ -72,20 +72,20 @@ export default async function BlogPostPage({ params }: Props) {
       "@type": "Person",
       name: "Gary M. Bonelli",
       jobTitle: "Owner & Principal Contractor",
-      url: "https://bonardiconst.com/gary-m-bonelli",
+      url: "https://www.bonardiconst.com/gary-m-bonelli",
     },
     publisher: {
       "@type": "Organization",
-      "@id": "https://bonardiconst.com/#organization",
+      "@id": "https://www.bonardiconst.com/#organization",
       name: "Bonardi Construction, Inc.",
       logo: {
         "@type": "ImageObject",
-        url: "https://bonardiconst.com/logo.png",
+        url: "https://www.bonardiconst.com/logo.png",
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://bonardiconst.com/blog/${post.slug}`,
+      "@id": `https://www.bonardiconst.com/blog/${post.slug}`,
     },
   };
 
@@ -299,7 +299,7 @@ export default async function BlogPostPage({ params }: Props) {
                       {related.date}
                     </span>
                     <svg
-                      className="w-4 h-4 text-brand -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                      className="w-4 h-4 text-brand opacity-0 group-hover:opacity-100 transition-all duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

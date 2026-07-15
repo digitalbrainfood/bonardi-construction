@@ -29,7 +29,7 @@ const dmMono = DM_Mono({
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
   return {
-    metadataBase: new URL("https://bonardiconst.com"),
+    metadataBase: new URL("https://www.bonardiconst.com"),
     title: {
       default: settings.defaultMetaTitle,
       template: "%s | Bonardi Construction",

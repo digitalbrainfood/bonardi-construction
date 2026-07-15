@@ -247,7 +247,7 @@ export default function ServicesPage() {
       "@type": "ListItem",
       position: index + 1,
       name: service.name,
-      url: `https://bonardiconst.com/services/${service.slug}`,
+      url: `https://www.bonardiconst.com/services/${service.slug}`,
     })),
   };
 
@@ -302,7 +302,7 @@ export default function ServicesPage() {
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}`}
-                    className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ease-out transform-gpu will-change-transform p-8 flex flex-col"
+                    className="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-card dark:shadow-none hover:shadow-card-hover transition-all duration-300 ease-out p-8 flex flex-col"
                   >
                     <div className="flex items-start justify-between mb-5">
                       <div className="flex flex-wrap gap-1.5">
@@ -313,7 +313,7 @@ export default function ServicesPage() {
                         ))}
                       </div>
                       <svg
-                        className="w-4 h-4 text-gray-400 group-hover:text-brand -translate-x-1 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex-shrink-0 ml-2 mt-1"
+                        className="w-4 h-4 text-gray-400 group-hover:text-brand opacity-0 group-hover:opacity-100 transition-all duration-300 flex-shrink-0 ml-2 mt-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

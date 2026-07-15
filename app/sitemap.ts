@@ -18,7 +18,7 @@ async function getPublishedDynamicPages(): Promise<{ slug: string; updated_at: s
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "https://bonardiconst.com";
+  const base = "https://www.bonardiconst.com";
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: base, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
